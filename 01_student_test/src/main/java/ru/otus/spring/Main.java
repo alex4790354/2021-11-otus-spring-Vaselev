@@ -14,15 +14,9 @@ public class Main {
 
     public static void main(String[] args) throws IOException {
 
-        //QuestionsFromResFile questionsFromResFile = new QuestionsFromResFile("csv/test-quastions.csv");
         ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("/spring-context.xml");
-
-        // Should get service but getting an Error:  No default constructor found;
-        //QuestionsService service = context.getBean(QuestionsService.class);
-        //ArrayList<Question> questions = service.getQuestions();
-
-        QuestionsDao questionsDao = context.getBean(QuestionsDao.class);
-        List<Question> questions = questionsDao.getQuestions();
+        QuestionsService service = context.getBean(QuestionsService.class);
+        ArrayList<Question> questions = service.getQuestions();
 
         for (Question question : questions) {
             System.out.println(question);
