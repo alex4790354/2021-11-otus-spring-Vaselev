@@ -1,6 +1,7 @@
 package ru.otus.spring.dao;
 
 import ru.otus.spring.domain.Question;
+import ru.otus.spring.utils.Convert;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -29,7 +30,7 @@ public class QuestionsFromResFile implements QuestionsDao {
                 String line;
                 Question question;
                 while ((line = reader.readLine()) != null) {
-                    question = new Question(line.split(","));
+                    question = Convert.getQuestionFromCsvLine(line);
                     this.questions.add(question);
                     System.out.println(question.getQuestionText());
                 }
