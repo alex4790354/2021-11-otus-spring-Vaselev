@@ -1,9 +1,9 @@
 package ru.otus.spring.domain;
 
 public class Question {
-    int id;
-    String questionText;
-    String answer;
+    private int id;
+    private String questionText;
+    private String answer;
 
     public Question(int id, String questionText, String answer) {
         this.id = id;

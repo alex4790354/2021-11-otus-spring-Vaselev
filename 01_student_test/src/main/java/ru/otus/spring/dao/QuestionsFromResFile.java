@@ -33,7 +33,9 @@ public class QuestionsFromResFile implements QuestionsDao {
                     this.questions.add(question);
                     System.out.println(question);
                 }
-            } catch (IOException e) {
+            }
+            // TODO:  Исключения лучше не подавлять, а заворачивать в свои бизнес исключения (например, QuestionsLoadingException)
+            catch (IOException e) {
                 e.printStackTrace();
             }
         }
