@@ -20,9 +20,27 @@ public class Question {
         }
     }
 
-    @Override
-    public String toString() {
-        return String.format("Question id: %s, questionText: %s, answer: %s", this.id, this.questionText, this.answer);
+    public int getId() {
+        return id;
     }
 
+    public String getQuestionText() {
+        return questionText;
+    }
+
+    public String getAnswer() {
+        return answer;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public void setQuestionText(String questionText) {
+        this.questionText = questionText;
+    }
+
+    public void setAnswer(String answer) {
+        this.answer = answer;
+    }
 }

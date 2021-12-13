@@ -31,7 +31,7 @@ public class QuestionsFromResFile implements QuestionsDao {
                 while ((line = reader.readLine()) != null) {
                     question = new Question(line.split(","));
                     this.questions.add(question);
-                    System.out.println(question);
+                    System.out.println(question.getQuestionText());
                 }
             }
             // TODO:  Исключения лучше не подавлять, а заворачивать в свои бизнес исключения (например, QuestionsLoadingException)
