@@ -8,11 +8,12 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
+import java.util.List;
 
 
 public class QuestionsFromResFile implements QuestionsDao {
 
-    ArrayList<Question> questions;
+    private final List<Question> questions;
 
     public QuestionsFromResFile(String fileName) {
         this.questions = new ArrayList<>();
@@ -28,7 +29,9 @@ public class QuestionsFromResFile implements QuestionsDao {
                 String line;
                 Question question;
                 while ((line = reader.readLine()) != null) {
-                    this.questions.add(new Question(line.split(",")));
+                    question = new Question(line.split(","));
+                    this.questions.add(question);
+                    System.out.println(question);
                 }
             } catch (IOException e) {
                 e.printStackTrace();
@@ -36,12 +39,8 @@ public class QuestionsFromResFile implements QuestionsDao {
         }
     }
 
-    public ArrayList<Question> getQuestions() {
+    public List<Question> getQuestions() {
         return questions;
     }
-
-    // get a file from the resources folder
-    // works everywhere, IDEA, unit test and JAR file.
-    // private InputStream getFileFromResourceAsStream(String fileName) {
 
 }

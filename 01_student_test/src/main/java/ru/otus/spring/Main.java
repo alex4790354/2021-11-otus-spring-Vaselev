@@ -4,7 +4,7 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 import ru.otus.spring.domain.Question;
 import ru.otus.spring.service.QuestionsService;
 import java.io.*;
-import java.util.ArrayList;
+import java.util.List;
 
 
 public class Main {
@@ -13,15 +13,7 @@ public class Main {
 
         ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("/spring-context.xml");
         QuestionsService service = context.getBean(QuestionsService.class);
-        ArrayList<Question> questions = service.getQuestions();
-
-        for (Question question : questions) {
-            System.out.println(question);
-        }
-
         context.close();
 
     }
-
-
 }

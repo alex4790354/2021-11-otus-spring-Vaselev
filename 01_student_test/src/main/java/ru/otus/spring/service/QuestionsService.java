@@ -2,10 +2,10 @@ package ru.otus.spring.service;
 
 import ru.otus.spring.domain.Question;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public interface QuestionsService {
 
-    ArrayList<Question> getQuestions();
+    List<Question> getQuestions();
 
 }
