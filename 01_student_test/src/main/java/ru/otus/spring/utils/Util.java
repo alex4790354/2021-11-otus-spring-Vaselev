@@ -2,11 +2,12 @@ package ru.otus.spring.utils;
 
 import ru.otus.spring.domain.Question;
 
-public class Convert {
+public class Util {
 
-    public static Question getQuestionFromCsvLine(String csvLine) {
+    public static Question convertCsvLineToQuestion(String csvLine) {
         Question question = null;
 
+        // TODO: convert stipping to library.
         String[] stringArray = csvLine.split(",");
         if (stringArray.length > 2) {
             // TODO: catch not Integer in stringArray[0]
@@ -15,9 +16,9 @@ public class Convert {
             String answer = stringArray[2];
             question = new Question(id, questionText, answer);
         }
-
-
         return question;
     }
+
+    
 
 }

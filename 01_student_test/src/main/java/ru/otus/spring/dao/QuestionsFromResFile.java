@@ -1,7 +1,8 @@
 package ru.otus.spring.dao;
 
+import ru.otus.spring.customExceptions.QuestionsLoadingException;
 import ru.otus.spring.domain.Question;
-import ru.otus.spring.utils.Convert;
+import ru.otus.spring.utils.Util;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -14,14 +15,10 @@ import java.util.List;
 
 public class QuestionsFromResFile implements QuestionsDao {
 
-    private final List<Question> questions;
-
-    public QuestionsFromResFile(String fileName) {
-        this.questions = new ArrayList<>();
+    public QuestionsFromResFile(String fileName) throws QuestionsLoadingException {
         ClassLoader classLoader = getClass().getClassLoader();
         InputStream inputStream = classLoader.getResourceAsStream(fileName);
 
-        // the stream holding the file content
         if (inputStream == null) {
             throw new IllegalArgumentException("file not found! " + fileName);
         } else {
@@ -30,20 +27,14 @@ public class QuestionsFromResFile implements QuestionsDao {
                 String line;
                 Question question;
                 while ((line = reader.readLine()) != null) {
-                    question = Convert.getQuestionFromCsvLine(line);
-                    this.questions.add(question);
+                    question = Util.convertCsvLineToQuestion(line);
                     System.out.println(question.getQuestionText());
                 }
             }
-            // TODO:  Исключения лучше не подавлять, а заворачивать в свои бизнес исключения (например, QuestionsLoadingException)
-            catch (IOException e) {
-                e.printStackTrace();
+            catch (IOException exc) {
+                throw new QuestionsLoadingException ("Wasn't able to find a file " + fileName);
             }
         }
-    }
-
-    public List<Question> getQuestions() {
-        return questions;
     }
 
 }
