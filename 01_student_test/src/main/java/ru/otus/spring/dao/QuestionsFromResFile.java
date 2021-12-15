@@ -28,7 +28,7 @@ public class QuestionsFromResFile implements QuestionsDao {
                 Question question;
                 while ((line = reader.readLine()) != null) {
                     question = Util.convertCsvLineToQuestion(line);
-                    System.out.println(question.getQuestionText());
+                    Util.SendMessage("Screen", question.getQuestionText());
                 }
             }
             catch (IOException exc) {

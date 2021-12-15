@@ -11,8 +11,4 @@ public class QuestionsImpl implements QuestionsService {
         this.dao = dao;
     }
 
-    @Override
-    public List<Question> getQuestions() {
-        return dao.getQuestions();
-    }
 }

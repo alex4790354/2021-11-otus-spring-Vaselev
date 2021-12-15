@@ -2,6 +2,7 @@ package ru.otus.spring.utils;
 
 import ru.otus.spring.domain.Question;
 
+
 public class Util {
 
     public static Question convertCsvLineToQuestion(String csvLine) {
@@ -19,6 +20,14 @@ public class Util {
         return question;
     }
 
-    
+    // Static Method for writing output
+    public static boolean SendMessage(String outputType, String message) {
+        if (outputType.equals("Screen")) {
+            System.out.println(message);
+            return true;
+        } else {
+            return false;
+        }
+    }
 
 }
