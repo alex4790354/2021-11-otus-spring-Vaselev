@@ -16,12 +16,10 @@ public class QuestionsFromResFile implements QuestionsDao {
     public QuestionsFromResFile(String fileName) throws QuestionsLoadingException {
 
         try {
-            CsvSchema bootstrapSchema = CsvSchema.emptySchema().withHeader();
+            CsvSchema csvSchema = CsvSchema.emptySchema().withHeader();
             CsvMapper mapper = new CsvMapper();
             File file = new ClassPathResource(fileName).getFile();
-            MappingIterator<Question> readValues =
-                    mapper.reader(Question.class).with(bootstrapSchema).readValues(file);
-            //List<Question> questions = readValues.readAll();
+            MappingIterator<Question> readValues = mapper.reader(Question.class).with(csvSchema).readValues(file);
             for (Question question : readValues.readAll()) {
                 Util.SendMessage("Screen", question.getQuestionText());
             }
