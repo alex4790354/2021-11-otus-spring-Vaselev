@@ -1,6 +1,5 @@
-package ru.otus.spring.customExceptions;
+package ru.otus.spring.myExceptions;
 
-import java.io.FileNotFoundException;
 import java.io.IOException;
 
 public class QuestionsLoadingException extends IOException {
