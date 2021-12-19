@@ -5,19 +5,17 @@ public class Question {
     String questionText;
     String answer;
 
-    public Question(int id, String questionText, String answer) {
-        this.id = id;
+    public Question(String id, String questionText, String answer) {
+        this.id = Integer.parseInt(id);
         this.questionText = questionText;
         this.answer = answer;
     }
 
-    public Question(String[] stringArray) {
-        if (stringArray.length > 2) {
-            // TODO: catch not Integer in stringArray[0]
-            this.id = Integer.parseInt(stringArray[0]);
-            this.questionText = stringArray[1];
-            this.answer = stringArray[2];
-        }
+    // Why do I need it?
+    public Question() {
+        this.id = 0;
+        this.questionText = "questionText ???";
+        this.answer = "answer ???";
     }
 
     @Override
@@ -28,4 +26,13 @@ public class Question {
     public String getAnswer() {
         return answer;
     }
+
+    public int getId() {
+        return id;
+    }
+
+    public String getQuestionText() {
+        return questionText;
+    }
+
 }

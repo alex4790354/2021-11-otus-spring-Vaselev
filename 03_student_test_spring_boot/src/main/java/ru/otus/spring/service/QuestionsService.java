@@ -6,6 +6,4 @@ import java.util.ArrayList;
 
 public interface QuestionsService {
 
-    ArrayList<Question> getQuestions();
-
 }
