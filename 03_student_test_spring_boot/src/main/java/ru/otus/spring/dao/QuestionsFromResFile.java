@@ -3,27 +3,29 @@ package ru.otus.spring.dao;
 import com.fasterxml.jackson.databind.MappingIterator;
 import com.fasterxml.jackson.dataformat.csv.CsvMapper;
 import com.fasterxml.jackson.dataformat.csv.CsvSchema;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Component;
 import ru.otus.spring.Util.QuestionsLoadingException;
 import ru.otus.spring.Util.Util;
-import ru.otus.spring.config.TestConfig;
 import ru.otus.spring.domain.Question;
 
 import java.io.*;
-import java.util.ArrayList;
 
 
 @Component
 public class QuestionsFromResFile implements QuestionsDao {
 
-    private final String fileName;
+    private final Util util;
 
-    //public QuestionsFromResFile(String fileName) {
-    public QuestionsFromResFile(TestConfig testCofig) throws QuestionsLoadingException {
+    @Autowired
+    public QuestionsFromResFile(Util util) throws QuestionsLoadingException {
 
-        this.fileName = testCofig.getFileName();
-        System.out.println("this.fileName2: " + this.fileName);
+        /*this.fileName = testCofig.getFileName();
+        System.out.println("this.fileName2: " + this.fileName);*/
+        this.util = util;
+        String fileName = this.util.getExamPropertiesValue("exam.file-name");
+        System.out.println("file name from UTIL: " + fileName);
 
         try {
             CsvSchema csvSchema = CsvSchema.emptySchema().withHeader();
@@ -34,8 +36,8 @@ public class QuestionsFromResFile implements QuestionsDao {
             MappingIterator<Question> readValues = mapper.reader(Question.class).with(csvSchema).readValues(file);
 
             for (Question question : readValues.readAll()) {
-                Util.SendMessage("Screen", question.getQuestionText());
-                studentAnswer = Util.ReadMessage("Screen");
+                this.util.SendMessage("Screen", question.getQuestionText());
+                studentAnswer = this.util.ReadMessage("Screen");
                 if (question.getAnswer().equals(studentAnswer)) {
                     correctAnswers++;
                 }
@@ -50,6 +52,11 @@ public class QuestionsFromResFile implements QuestionsDao {
         }
 
 
+        /**
+        *
+        *  Alternative unused example of csv file reading with manual object extraction.
+        *
+        **/
         /*ClassLoader classLoader = getClass().getClassLoader();
         InputStream inputStream = classLoader.getResourceAsStream(fileName);
         if (inputStream == null) {
