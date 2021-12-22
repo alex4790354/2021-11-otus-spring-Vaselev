@@ -21,7 +21,7 @@ public class Util {
 
     public boolean SendMessage(String outputType, String message) {
         if (outputType.equals("Screen")) {
-            System.out.println("Util: " + message);
+            System.out.println(message);
             return true;
         } else {
             return false;
@@ -42,4 +42,7 @@ public class Util {
         return examSource.getMessage(key, obj, this.locale);                    //new Object[]{"any text"},
     }
 
+    public void setLocale(Locale locale) {
+        this.locale = locale;
+    }
 }

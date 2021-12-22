@@ -3,9 +3,7 @@ package ru.otus.spring;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
-import ru.otus.spring.Util.ExamConfig;
 import ru.otus.spring.Util.QuestionsLoadingException;
-import ru.otus.spring.dao.QuestionsDao;
 import ru.otus.spring.service.QuestionsService;
 
 

@@ -2,7 +2,7 @@ package ru.otus.spring.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import ru.otus.spring.Util.ExamConfig;
+import ru.otus.spring.config.ExamConfig;
 import ru.otus.spring.Util.QuestionsLoadingException;
 import ru.otus.spring.Util.Util;
 import ru.otus.spring.dao.QuestionsDao;
@@ -30,6 +30,7 @@ public class QuestionsImpl implements QuestionsService {
         int correctAnswers = 0;
         String studentAnswer;
 
+        this.util.SendMessage("Screen", this.util.getExamPropertiesValue(null, "exam.wellcome"));
         List<Question> questions = dao.takeExam();
         for (Question question : questions) {
             this.util.SendMessage("Screen", question.getQuestionText());
@@ -39,9 +40,9 @@ public class QuestionsImpl implements QuestionsService {
             }
         }
         if (correctAnswers >= examConfig.getCorrectAnswersToPass()) {
-            this.util.SendMessage("Screen", "You pass");
+            this.util.SendMessage("Screen", this.util.getExamPropertiesValue(null, "exam.pass"));
         } else {
-            this.util.SendMessage("Screen", "You didn't pass");
+            this.util.SendMessage("Screen", this.util.getExamPropertiesValue(null, "exam.fail"));
         }
     }
 
