@@ -21,11 +21,8 @@ public class QuestionsFromResFile implements QuestionsDao {
     @Autowired
     public QuestionsFromResFile(Util util) throws QuestionsLoadingException {
 
-        /*this.fileName = testCofig.getFileName();
-        System.out.println("this.fileName2: " + this.fileName);*/
         this.util = util;
         String fileName = this.util.getExamPropertiesValue("exam.file-name");
-        System.out.println("file name from UTIL: " + fileName);
 
         try {
             CsvSchema csvSchema = CsvSchema.emptySchema().withHeader();

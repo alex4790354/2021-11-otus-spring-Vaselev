@@ -3,9 +3,9 @@ package ru.otus.spring.Util;
 
 import org.springframework.context.support.ReloadableResourceBundleMessageSource;
 import org.springframework.stereotype.Component;
-
 import java.util.Locale;
 import java.util.Scanner;
+
 
 @Component
 public class Util {
@@ -16,10 +16,9 @@ public class Util {
     public Util() {
         this.locale = new Locale("ru", "RU");;
         this.examSource = new ReloadableResourceBundleMessageSource();
-        this.examSource.setBasename("classpath:exam");
+        this.examSource.setBasename("classpath:i18n/exam");
     }
 
-    // Static Method for writing output
     public boolean SendMessage(String outputType, String message) {
         if (outputType.equals("Screen")) {
             System.out.println("Util: " + message);
