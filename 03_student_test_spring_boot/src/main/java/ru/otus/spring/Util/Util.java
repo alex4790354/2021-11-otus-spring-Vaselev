@@ -38,10 +38,8 @@ public class Util {
         }
     }
 
-    public String getExamPropertiesValue(String key) {
-        return examSource.getMessage(key,
-                null,                                               //new Object[]{"any text"},
-                this.locale);
+    public String getExamPropertiesValue(Object[] obj, String key) {
+        return examSource.getMessage(key, obj, this.locale);                    //new Object[]{"any text"},
     }
 
 }

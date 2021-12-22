@@ -9,14 +9,14 @@ import org.springframework.stereotype.Component;
 @Component
 public class ExamConfig {
 
-    private String correctAnswersToPass;
+    private Integer correctAnswersToPass;
 
-    public String getCorrectAnswersToPass() {
+    public Integer getCorrectAnswersToPass() {
         return correctAnswersToPass;
     }
 
     public void setCorrectAnswersToPass(String correctAnswersToPass) {
-        this.correctAnswersToPass = correctAnswersToPass;
+        this.correctAnswersToPass = Integer.parseInt(correctAnswersToPass);
     }
 
 }

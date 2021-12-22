@@ -11,6 +11,8 @@ import ru.otus.spring.Util.Util;
 import ru.otus.spring.domain.Question;
 
 import java.io.*;
+import java.util.ArrayList;
+import java.util.List;
 
 
 @Component
@@ -19,34 +21,33 @@ public class QuestionsFromResFile implements QuestionsDao {
     private final Util util;
 
     @Autowired
-    public QuestionsFromResFile(Util util) throws QuestionsLoadingException {
-
+    public QuestionsFromResFile(Util util) {
         this.util = util;
-        String fileName = this.util.getExamPropertiesValue("exam.file-name");
+    }
 
+    public List<Question> takeExam() throws QuestionsLoadingException {
+
+        List<Question> questions = new ArrayList<>();
+        String fileName = this.util.getExamPropertiesValue(null, "exam.file-name");
         try {
             CsvSchema csvSchema = CsvSchema.emptySchema().withHeader();
             CsvMapper mapper = new CsvMapper();
             File file = new ClassPathResource(fileName).getFile();
-            String studentAnswer;
-            int correctAnswers = 0;
             MappingIterator<Question> readValues = mapper.reader(Question.class).with(csvSchema).readValues(file);
-
             for (Question question : readValues.readAll()) {
-                this.util.SendMessage("Screen", question.getQuestionText());
-                studentAnswer = this.util.ReadMessage("Screen");
-                if (question.getAnswer().equals(studentAnswer)) {
-                    correctAnswers++;
-                }
+                questions.add(question);
             }
-            System.out.println("Total correct answers: " + correctAnswers);
-
         } catch (Exception e) {
             if (e.getClass().toString().contains("FileNotFoundException")) {
                 throw new QuestionsLoadingException("Exception: wasn't able to find file " + fileName);
             }
             e.printStackTrace();
         }
+        return questions;
+    }
+}
+
+
 
 
         /**
@@ -70,6 +71,4 @@ public class QuestionsFromResFile implements QuestionsDao {
                 e.printStackTrace();
             }
         }*/
-    }
 
-}
