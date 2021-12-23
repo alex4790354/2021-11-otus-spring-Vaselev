@@ -9,7 +9,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 @DisplayName("Test class Question")
 class QuestionTest {
 
-    @DisplayName("Should Have Correct Constructor")
+    @DisplayName("Question Should Have Correct Constructor")
     @Test
     void shouldHaveCorrectConstructor() {
         Question question = new Question(25, "Who are you?", "3");

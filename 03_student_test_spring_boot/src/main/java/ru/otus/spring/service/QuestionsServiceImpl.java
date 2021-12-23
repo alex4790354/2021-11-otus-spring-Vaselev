@@ -3,23 +3,22 @@ package ru.otus.spring.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ru.otus.spring.config.ExamConfig;
-import ru.otus.spring.Util.QuestionsLoadingException;
-import ru.otus.spring.Util.Util;
+import ru.otus.spring.util.QuestionsLoadingException;
+import ru.otus.spring.util.Util;
 import ru.otus.spring.dao.QuestionsDao;
 import ru.otus.spring.domain.Question;
-
 import java.util.List;
 
 
 @Service
-public class QuestionsImpl implements QuestionsService {
+public class QuestionsServiceImpl implements QuestionsService {
 
     private final QuestionsDao dao;
     private final Util util;
     private final ExamConfig examConfig;
 
     @Autowired
-    public QuestionsImpl(QuestionsDao dao, Util util, ExamConfig examConfig) {
+    public QuestionsServiceImpl(QuestionsDao dao, Util util, ExamConfig examConfig) {
         this.dao = dao;
         this.util = util;
         this.examConfig = examConfig;

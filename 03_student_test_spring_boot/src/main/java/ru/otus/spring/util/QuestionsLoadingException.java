@@ -1,4 +1,4 @@
-package ru.otus.spring.Util;
+package ru.otus.spring.util;
 
 import java.io.IOException;
 

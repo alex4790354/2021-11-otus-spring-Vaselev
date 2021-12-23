@@ -1,4 +1,4 @@
-package ru.otus.spring.Util;
+package ru.otus.spring.util;
 
 
 import org.springframework.context.support.ReloadableResourceBundleMessageSource;
@@ -14,17 +14,15 @@ public class Util {
     private ReloadableResourceBundleMessageSource examSource;
 
     public Util() {
-        this.locale = new Locale("ru", "RU");;
+        //this.locale = Locale.ENGLISH;
+        this.locale = new Locale("ru", "RU");
         this.examSource = new ReloadableResourceBundleMessageSource();
         this.examSource.setBasename("classpath:i18n/exam");
     }
 
-    public boolean SendMessage(String outputType, String message) {
+    public void SendMessage(String outputType, String message) {
         if (outputType.equals("Screen")) {
             System.out.println(message);
-            return true;
-        } else {
-            return false;
         }
     }
 

@@ -1,5 +1,6 @@
 package ru.otus.spring.config;
 
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringBootConfiguration;
@@ -8,6 +9,7 @@ import org.springframework.context.annotation.ComponentScan;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+@DisplayName("Test class ExamConfigTest")
 @ComponentScan({"ru.otus.spring.config.ExamConfig"})
 @SpringBootTest
 class ExamConfigTest {

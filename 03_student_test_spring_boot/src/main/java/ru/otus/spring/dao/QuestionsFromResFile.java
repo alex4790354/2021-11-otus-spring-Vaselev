@@ -6,8 +6,8 @@ import com.fasterxml.jackson.dataformat.csv.CsvSchema;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Component;
-import ru.otus.spring.Util.QuestionsLoadingException;
-import ru.otus.spring.Util.Util;
+import ru.otus.spring.util.QuestionsLoadingException;
+import ru.otus.spring.util.Util;
 import ru.otus.spring.domain.Question;
 
 import java.io.*;
