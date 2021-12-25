@@ -6,6 +6,7 @@ import com.fasterxml.jackson.dataformat.csv.CsvSchema;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Component;
+import ru.otus.spring.config.ExamConfig;
 import ru.otus.spring.util.QuestionsLoadingException;
 import ru.otus.spring.util.Util;
 import ru.otus.spring.domain.Question;
@@ -16,19 +17,19 @@ import java.util.List;
 
 
 @Component
-public class QuestionsFromResFile implements QuestionsDao {
+public class QuestionsFromCsvFile implements QuestionsDao {
 
-    private final Util util;
-
+    private final ExamConfig config;
     @Autowired
-    public QuestionsFromResFile(Util util) {
-        this.util = util;
+    public QuestionsFromCsvFile(ExamConfig examConfig) {
+        this.config = examConfig;
     }
 
-    public List<Question> takeExam() throws QuestionsLoadingException {
+    public List<Question> takeExamQuestionsList() throws QuestionsLoadingException {
 
         List<Question> questions = new ArrayList<>();
-        String fileName = this.util.getExamPropertiesValue(null, "exam.file-name");
+        //Util.setExamSource("classpath:i18n/exam");
+        String fileName = config.getExamPropertiesValue(null, "exam.file-name");
         try {
             CsvSchema csvSchema = CsvSchema.emptySchema().withHeader();
             CsvMapper mapper = new CsvMapper();

@@ -13,15 +13,15 @@ import java.util.List;
 @Service
 public class QuestionsServiceImpl implements QuestionsService {
 
+    private final ExamConfig config;
     private final QuestionsDao dao;
-    private final Util util;
-    private final ExamConfig examConfig;
+    //private final Util util;
 
     @Autowired
-    public QuestionsServiceImpl(QuestionsDao dao, Util util, ExamConfig examConfig) {
+    public QuestionsServiceImpl(QuestionsDao dao, ExamConfig examConfig) throws QuestionsLoadingException {
         this.dao = dao;
-        this.util = util;
-        this.examConfig = examConfig;
+        this.config = examConfig;
+        takeExam();
     }
 
     @Override
@@ -29,19 +29,19 @@ public class QuestionsServiceImpl implements QuestionsService {
         int correctAnswers = 0;
         String studentAnswer;
 
-        this.util.SendMessage("Screen", this.util.getExamPropertiesValue(null, "exam.wellcome"));
-        List<Question> questions = dao.takeExam();
+        Util.SendMessage("Screen", config.getExamPropertiesValue(null, "exam.wellcome"));
+        List<Question> questions = dao.takeExamQuestionsList();
         for (Question question : questions) {
-            this.util.SendMessage("Screen", question.getQuestionText());
-            studentAnswer = this.util.ReadMessage("Screen");
+            Util.SendMessage("Screen", question.getQuestionText());
+            studentAnswer = Util.ReadMessage("Screen");
             if (question.getAnswer().equals(studentAnswer)) {
                 correctAnswers++;
             }
         }
-        if (correctAnswers >= examConfig.getCorrectAnswersToPass()) {
-            this.util.SendMessage("Screen", this.util.getExamPropertiesValue(null, "exam.pass"));
+        if (correctAnswers >= config.getCorrectAnswersToPass()) {
+            Util.SendMessage("Screen", config.getExamPropertiesValue(null, "exam.pass"));
         } else {
-            this.util.SendMessage("Screen", this.util.getExamPropertiesValue(null, "exam.fail"));
+            Util.SendMessage("Screen", config.getExamPropertiesValue(null, "exam.fail"));
         }
     }
 

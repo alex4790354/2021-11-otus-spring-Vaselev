@@ -4,7 +4,10 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.context.annotation.ComponentScan;
+import ru.otus.spring.config.ExamConfig;
+import ru.otus.spring.service.QuestionsService;
 
 import java.util.Locale;
 
@@ -12,9 +15,16 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 
 @DisplayName("Test class UtilTest")
-@ComponentScan({"ru.otus.spring.config.util.Util"})
+@ComponentScan({"ru.otus.spring.config.ExamConfig"})
 @SpringBootTest
 class UtilTest {
+
+    // Why do I have to Mock  QuestionsService ??
+    @MockBean
+    private QuestionsService questionsService;
+
+    @Autowired
+    private ExamConfig examConfig;
 
     private static final String EXAM_FILE_NAME_EN = "csv/exam-quastions-en.csv";
     private static final String EXAM_WELLCOME_EN = "Welcome to the chemistry test";
@@ -26,27 +36,23 @@ class UtilTest {
     private static final String EXAM_PASS_RU = "Russian: Congratulations, you passed the test.";
     private static final String EXAM_FAIL_RU = "Russian: You fail the test today, but you can retake it later.";
 
-
-    @Autowired
-    private Util util;
-
     @DisplayName("getExamPropertiesValue should get correct i18n values for EN_US locale:")
     @Test
     void getExamPropertiesValueForEnLocale() {
-        this.util.setLocale(Locale.ENGLISH);
-        assertEquals(this.util.getExamPropertiesValue(null, "exam.file-name"), EXAM_FILE_NAME_EN);
-        assertEquals(this.util.getExamPropertiesValue(null, "exam.wellcome"), EXAM_WELLCOME_EN);
-        assertEquals(this.util.getExamPropertiesValue(null, "exam.pass"), EXAM_PASS_EN);
-        assertEquals(this.util.getExamPropertiesValue(null, "exam.fail"), EXAM_FAIL_EN);
+        Util.setLocale(Locale.ENGLISH);
+        assertEquals(examConfig.getExamPropertiesValue(null, "exam.file-name"), EXAM_FILE_NAME_EN);
+        assertEquals(examConfig.getExamPropertiesValue(null, "exam.wellcome"), EXAM_WELLCOME_EN);
+        assertEquals(examConfig.getExamPropertiesValue(null, "exam.pass"), EXAM_PASS_EN);
+        assertEquals(examConfig.getExamPropertiesValue(null, "exam.fail"), EXAM_FAIL_EN);
     }
 
     @DisplayName("getExamPropertiesValue should get correct i18n values for ru_RU locale:")
     @Test
     void getExamPropertiesValueForRuLocale() {
-        this.util.setLocale(new Locale("ru", "RU"));
-        assertEquals(this.util.getExamPropertiesValue(null, "exam.file-name"), EXAM_FILE_NAME_RU);
-        assertEquals(this.util.getExamPropertiesValue(null, "exam.wellcome"), EXAM_WELLCOME_RU);
-        assertEquals(this.util.getExamPropertiesValue(null, "exam.pass"), EXAM_PASS_RU);
-        assertEquals(this.util.getExamPropertiesValue(null, "exam.fail"), EXAM_FAIL_RU);
+        Util.setLocale(new Locale("ru", "RU"));
+        assertEquals(examConfig.getExamPropertiesValue(null, "exam.file-name"), EXAM_FILE_NAME_RU);
+        assertEquals(examConfig.getExamPropertiesValue(null, "exam.wellcome"), EXAM_WELLCOME_RU);
+        assertEquals(examConfig.getExamPropertiesValue(null, "exam.pass"), EXAM_PASS_RU);
+        assertEquals(examConfig.getExamPropertiesValue(null, "exam.fail"), EXAM_FAIL_RU);
     }
 }

@@ -1,3 +1,8 @@
+spring:
+  exmam:
+    basename: i18n/exam
+  messages:
+    basename: i18n/exam
 exam:
   correct-answers-to-pass: 4
 

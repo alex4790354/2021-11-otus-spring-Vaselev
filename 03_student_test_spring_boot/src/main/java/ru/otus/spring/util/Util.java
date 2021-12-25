@@ -2,31 +2,38 @@ package ru.otus.spring.util;
 
 
 import org.springframework.context.support.ReloadableResourceBundleMessageSource;
-import org.springframework.stereotype.Component;
+//import org.springframework.stereotype.Component;
 import java.util.Locale;
 import java.util.Scanner;
 
 
-@Component
+
 public class Util {
 
-    private Locale locale;
-    private ReloadableResourceBundleMessageSource examSource;
+    private static Locale locale = new Locale("ru", "RU");
+    //private static ReloadableResourceBundleMessageSource examSource = new ReloadableResourceBundleMessageSource();
 
-    public Util() {
+    /*public static void setExamSource(String path) {
         //this.locale = Locale.ENGLISH;
-        this.locale = new Locale("ru", "RU");
-        this.examSource = new ReloadableResourceBundleMessageSource();
-        this.examSource.setBasename("classpath:i18n/exam");
-    }
+        //locale = new Locale("ru", "RU");
+        //examSource = new ReloadableResourceBundleMessageSource();
+        examSource.setBasename(path);
+    }*/
 
-    public void SendMessage(String outputType, String message) {
+    /*static {
+        //this.locale = Locale.ENGLISH;
+        //locale = new Locale("ru", "RU");
+        //examSource = new ReloadableResourceBundleMessageSource();
+        examSource.setBasename("classpath:i18n/exam");
+    }*/
+
+    public static void SendMessage(String outputType, String message) {
         if (outputType.equals("Screen")) {
             System.out.println(message);
         }
     }
 
-    public String ReadMessage(String sourceType) {
+    public static String ReadMessage(String sourceType) {
         if (sourceType.equals("Screen")) {
             Scanner console = new Scanner(System.in);
             String input = console.nextLine();
@@ -36,11 +43,16 @@ public class Util {
         }
     }
 
-    public String getExamPropertiesValue(Object[] obj, String key) {
-        return examSource.getMessage(key, obj, this.locale);                    //new Object[]{"any text"},
+    /*public static String getExamPropertiesValue(Object[] obj, String key) {
+        //examSource.setBasename("classpath:i18n/exam");
+        return examSource.getMessage(key, obj, locale);                    //new Object[]{"any text"},
+    }*/
+
+    public static void setLocale(Locale newLocale) {
+        locale = newLocale;
     }
 
-    public void setLocale(Locale locale) {
-        this.locale = locale;
+    public static Locale getLocale() {
+        return locale;
     }
 }

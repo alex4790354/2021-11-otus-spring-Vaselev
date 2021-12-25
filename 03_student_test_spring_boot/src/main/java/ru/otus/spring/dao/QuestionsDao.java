@@ -8,6 +8,6 @@ import java.util.List;
 
 public interface QuestionsDao {
 
-    List<Question> takeExam() throws QuestionsLoadingException;
+    List<Question> takeExamQuestionsList() throws QuestionsLoadingException;
 
 }
