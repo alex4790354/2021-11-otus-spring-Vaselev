@@ -1,4 +1,4 @@
-package ru.otus.spring.service.interfaces;
+package ru.otus.ioservice.example.api;
 
 public interface IOService {
     void out(String message);
