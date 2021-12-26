@@ -4,8 +4,6 @@ package ru.otus.spring.config;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.support.ReloadableResourceBundleMessageSource;
 import org.springframework.stereotype.Component;
-import ru.otus.spring.util.Util;
-
 import java.util.Locale;
 
 
@@ -19,7 +17,7 @@ public class ExamConfig {
 
     public ExamConfig() {
         this.examSource = new ReloadableResourceBundleMessageSource();
-        this.examSource.setBasename("classpath:i18n/exam");
+        this.examSource.setBasename("classpath:i18n/message");
         this.locale = new Locale("ru", "RU");
     }
 
@@ -31,9 +29,9 @@ public class ExamConfig {
         return correctAnswersToPass;
     }
 
-    /*public void setCorrectAnswersToPass(String correctAnswersToPass) {
+    public void setCorrectAnswersToPass(String correctAnswersToPass) {
         this.correctAnswersToPass = Integer.parseInt(correctAnswersToPass);
-    }*/
+    }
 
     public Locale getLocale() {
         return locale;

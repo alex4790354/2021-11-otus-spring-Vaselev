@@ -1,8 +1,8 @@
-package ru.otus.ioservice.example.poll;
+package ru.otus.spring.service;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import ru.otus.ioservice.example.api.IOService;
+import ru.otus.spring.service.interfaces.IOService;
 
 @RequiredArgsConstructor
 @Service

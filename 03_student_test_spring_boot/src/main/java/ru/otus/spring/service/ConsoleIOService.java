@@ -1,10 +1,9 @@
-package ru.otus.ioservice.example.console;
+package ru.otus.spring.service;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.stereotype.Service;
-import ru.otus.ioservice.example.api.IOService;
-
+import ru.otus.spring.service.interfaces.IOService;
 import java.io.InputStream;
 import java.io.PrintStream;
 import java.util.Scanner;

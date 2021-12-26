@@ -13,12 +13,12 @@ import java.io.PrintStream;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class IOServiceOpenConsoleTest {
-/*
     private static final String TEXT_TO_PRINT1 = "Hello world";
     private static final String TEXT_TO_PRINT2 = "How are you?";
 
     private PrintStream backup;
-    private ByteArrayOutputStream bos;;
+    private ByteArrayOutputStream bos;
+    ;
     private IOService ioService;
 
     @BeforeEach
@@ -26,7 +26,7 @@ class IOServiceOpenConsoleTest {
         System.out.println(Thread.currentThread().getName());
         backup = System.out;
         bos = new ByteArrayOutputStream();
-        ioService = new IOServiceOpenConsole(System.in, new PrintStream(bos));
+        ioService = new ConsoleIOService(new PrintStream(bos), System.in);
     }
 
     @AfterEach
@@ -49,5 +49,5 @@ class IOServiceOpenConsoleTest {
     void shouldPrintOnlySecondLine() {
         ioService.out(TEXT_TO_PRINT2);
         assertEquals(bos.toString(), TEXT_TO_PRINT2 + System.lineSeparator());
-    }*/
+    }
 }
