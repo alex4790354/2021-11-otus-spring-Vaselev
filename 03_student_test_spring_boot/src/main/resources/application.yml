@@ -1,8 +1,8 @@
 spring:
-  exmam:
-    basename: i18n/exam
   messages:
     basename: i18n/exam
+    fallback-to-system-locale: false
 exam:
   correct-answers-to-pass: 3
+#use.console: true
 

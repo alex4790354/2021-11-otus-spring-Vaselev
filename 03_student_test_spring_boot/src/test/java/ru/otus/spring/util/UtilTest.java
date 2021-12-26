@@ -7,7 +7,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.context.annotation.ComponentScan;
 import ru.otus.spring.config.ExamConfig;
-import ru.otus.spring.service.QuestionsService;
+import ru.otus.spring.service.interfaces.QuestionsService;
 
 import java.util.Locale;
 
@@ -36,23 +36,24 @@ class UtilTest {
     private static final String EXAM_PASS_RU = "Russian: Congratulations, you passed the test.";
     private static final String EXAM_FAIL_RU = "Russian: You fail the test today, but you can retake it later.";
 
+    @DisplayName("getExamPropertiesValue should get correct i18n values for ru_RU locale:")
+    @Test
+    void getExamPropertiesValueForRusLocale() {
+        examConfig.setLocale(new Locale("ru", "RU"));
+        assertEquals(examConfig.getExamPropertiesValue(null, "exam.file-name"), EXAM_FILE_NAME_RU);
+        assertEquals(examConfig.getExamPropertiesValue(null, "exam.wellcome"), EXAM_WELLCOME_RU);
+        assertEquals(examConfig.getExamPropertiesValue(null, "exam.pass"), EXAM_PASS_RU);
+        assertEquals(examConfig.getExamPropertiesValue(null, "exam.fail"), EXAM_FAIL_RU);
+    }
+
     @DisplayName("getExamPropertiesValue should get correct i18n values for EN_US locale:")
     @Test
-    void getExamPropertiesValueForEnLocale() {
-        Util.setLocale(Locale.ENGLISH);
+    void getExamPropertiesValueForEngLocale() {
+        examConfig.setLocale(Locale.ENGLISH);
         assertEquals(examConfig.getExamPropertiesValue(null, "exam.file-name"), EXAM_FILE_NAME_EN);
         assertEquals(examConfig.getExamPropertiesValue(null, "exam.wellcome"), EXAM_WELLCOME_EN);
         assertEquals(examConfig.getExamPropertiesValue(null, "exam.pass"), EXAM_PASS_EN);
         assertEquals(examConfig.getExamPropertiesValue(null, "exam.fail"), EXAM_FAIL_EN);
     }
 
-    @DisplayName("getExamPropertiesValue should get correct i18n values for ru_RU locale:")
-    @Test
-    void getExamPropertiesValueForRuLocale() {
-        Util.setLocale(new Locale("ru", "RU"));
-        assertEquals(examConfig.getExamPropertiesValue(null, "exam.file-name"), EXAM_FILE_NAME_RU);
-        assertEquals(examConfig.getExamPropertiesValue(null, "exam.wellcome"), EXAM_WELLCOME_RU);
-        assertEquals(examConfig.getExamPropertiesValue(null, "exam.pass"), EXAM_PASS_RU);
-        assertEquals(examConfig.getExamPropertiesValue(null, "exam.fail"), EXAM_FAIL_RU);
-    }
 }

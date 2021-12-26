@@ -1,8 +1,9 @@
 package ru.otus.spring.domain;
 
 public class Question {
-    long id;
-    String questionText;
+
+    private long id;
+    private String questionText;
     String answer;
 
     public Question() {

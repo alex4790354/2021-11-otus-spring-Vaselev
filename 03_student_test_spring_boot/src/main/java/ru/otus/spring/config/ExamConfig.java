@@ -6,29 +6,40 @@ import org.springframework.context.support.ReloadableResourceBundleMessageSource
 import org.springframework.stereotype.Component;
 import ru.otus.spring.util.Util;
 
+import java.util.Locale;
+
 
 @ConfigurationProperties(prefix = "exam")
 @Component
 public class ExamConfig {
 
+    private final ReloadableResourceBundleMessageSource examSource;
     private Integer correctAnswersToPass;
-    private ReloadableResourceBundleMessageSource examSource;
+    private Locale locale;
 
     public ExamConfig() {
-        examSource = new ReloadableResourceBundleMessageSource();
-        examSource.setBasename("classpath:i18n/exam");
+        this.examSource = new ReloadableResourceBundleMessageSource();
+        this.examSource.setBasename("classpath:i18n/exam");
+        this.locale = new Locale("ru", "RU");
     }
 
     public String getExamPropertiesValue(Object[] obj, String key) {
-        return examSource.getMessage(key, obj, Util.getLocale());                    //new Object[]{"any text"},
+        return examSource.getMessage(key, obj, this.locale);                    //new Object[]{"any text"},
     }
 
     public Integer getCorrectAnswersToPass() {
         return correctAnswersToPass;
     }
 
-    public void setCorrectAnswersToPass(String correctAnswersToPass) {
+    /*public void setCorrectAnswersToPass(String correctAnswersToPass) {
         this.correctAnswersToPass = Integer.parseInt(correctAnswersToPass);
+    }*/
+
+    public Locale getLocale() {
+        return locale;
     }
 
+    public void setLocale(Locale locale) {
+        this.locale = locale;
+    }
 }

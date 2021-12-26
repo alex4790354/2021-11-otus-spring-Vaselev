@@ -1,4 +1,4 @@
-package ru.otus.spring.service;
+package ru.otus.spring.service.interfaces;
 
 
 import ru.otus.spring.util.QuestionsLoadingException;

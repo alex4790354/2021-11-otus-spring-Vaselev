@@ -20,6 +20,7 @@ import java.util.List;
 public class QuestionsFromCsvFile implements QuestionsDao {
 
     private final ExamConfig config;
+
     @Autowired
     public QuestionsFromCsvFile(ExamConfig examConfig) {
         this.config = examConfig;

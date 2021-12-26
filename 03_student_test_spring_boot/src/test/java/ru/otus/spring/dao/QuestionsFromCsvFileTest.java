@@ -7,7 +7,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.context.annotation.ComponentScan;
 import ru.otus.spring.domain.Question;
-import ru.otus.spring.service.QuestionsService;
+import ru.otus.spring.service.interfaces.QuestionsService;
 import ru.otus.spring.util.QuestionsLoadingException;
 import ru.otus.spring.util.Util;
 import java.util.List;
@@ -33,7 +33,6 @@ class QuestionsFromCsvFileTest {
     @DisplayName("Should get 4 records for exam with Russian locale")
     @Test
     void shouldGet4RecordsForRussianLocale() throws QuestionsLoadingException {
-        Util.setLocale(new Locale("ru", "RU"));
         List<Question> questionList = questionsDao.takeExamQuestionsList();
         assertEquals(questionList.size(), QUASTIONS_AMOUNT_EXAM_RU);
     }
@@ -41,7 +40,7 @@ class QuestionsFromCsvFileTest {
     @DisplayName("Should get 5 records for exam with English locale")
     @Test
     void shouldGet4RecordsForEnglishLocale() throws QuestionsLoadingException {
-        Util.setLocale(Locale.ENGLISH);
+        //Util.setLocale(Locale.ENGLISH);
         List<Question> questionList = questionsDao.takeExamQuestionsList();
         assertEquals(questionList.size(), QUASTIONS_AMOUNT_EXAM_EN);
     }
