@@ -14,6 +14,7 @@ public class ExamConfig {
     private Integer correctAnswersToPass;
     private String localeLanguage;
     private String localeCountry;
+    private String examFileNameCsv;
 
     public Integer getCorrectAnswersToPass() {
         return correctAnswersToPass;
@@ -37,5 +38,13 @@ public class ExamConfig {
 
     public void setLocaleCountry(String localeCountry) {
         this.localeCountry = localeCountry;
+    }
+
+    public String getExamFileNameCsv() {
+        return String.format("%s-%s.csv", examFileNameCsv, localeLanguage);
+    }
+
+    public void setExamFileNameCsv(String examFileNameCsv) {
+        this.examFileNameCsv = examFileNameCsv;
     }
 }

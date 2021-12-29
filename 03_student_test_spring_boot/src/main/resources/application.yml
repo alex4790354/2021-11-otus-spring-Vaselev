@@ -1,10 +1,10 @@
 spring:
   messages:
     basename: i18n/messages
-    csv-exam-file-name:
     fallback-to-system-locale: false
 
 exam:
   correct-answers-to-pass: 3
   locale-language: ru
   locale-country: RU
+  exam-file-name-csv: csv/exam-quastions

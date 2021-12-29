@@ -24,7 +24,8 @@ public class Util {
     }
 
     public String getCsvExamFileName() {
-        return getExamPropertiesValue(null, "exam.file-name");
+        //return getExamPropertiesValue(null, "exam.file-name");
+        return config.getExamFileNameCsv();
     }
 
     public String getExamPropertiesValue(Object[] obj, String key) {

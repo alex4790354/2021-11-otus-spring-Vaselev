@@ -32,6 +32,7 @@ public class QuestionsServiceCsv implements QuestionsService {
     public void takeExam() throws QuestionsLoadingException {
         int correctAnswers = 0;
         String studentAnswer;
+        System.out.println("file-name: " + config.getExamFileNameCsv());
         ioService.out(util.getExamPropertiesValue(null, "exam.ask-name"));
         String userName = ioService.readString();
         ioService.out(util.getExamPropertiesValue(new Object[] {userName}, "exam.welcome"));

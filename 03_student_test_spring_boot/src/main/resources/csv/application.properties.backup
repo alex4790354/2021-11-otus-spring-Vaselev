@@ -1,7 +1,0 @@
-spring.messages.fallback-to-system-locale=false
-spring.messages.basename=i18n/messages
-#    basename:
-#
-exam.correct-answers-to-pass=3
-exam.locale-language=ru
-exam.locale-country=RU
