@@ -6,12 +6,12 @@ import java.io.PrintStream;
 import java.util.Scanner;
 
 @Service
-public class ClosedConsoleIOService implements IOService {
+public class IOServClosedConsole implements IOService {
     private final PrintStream out;
     private final Scanner sc;
 
 
-    public ClosedConsoleIOService() {
+    public IOServClosedConsole() {
         this.out = System.out;
         this.sc = new Scanner(System.in);
     }

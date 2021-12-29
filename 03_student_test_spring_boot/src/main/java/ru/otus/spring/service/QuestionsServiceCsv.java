@@ -3,6 +3,7 @@ package ru.otus.spring.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ru.otus.spring.config.ExamConfig;
+import ru.otus.spring.service.interfaces.IOService;
 import ru.otus.spring.service.interfaces.QuestionsService;
 import ru.otus.spring.util.QuestionsLoadingException;
 import ru.otus.spring.util.Util;
@@ -16,32 +17,36 @@ public class QuestionsServiceCsv implements QuestionsService {
 
     private final ExamConfig config;
     private final QuestionsDao dao;
+    private final Util util;
+    private IOService ioService;
 
     @Autowired
-    public QuestionsServiceCsv(QuestionsDao dao, ExamConfig examConfig) throws QuestionsLoadingException {
+    public QuestionsServiceCsv(ExamConfig config, QuestionsDao dao, Util util, IOService ioService) {
+        this.config = config;
         this.dao = dao;
-        this.config = examConfig;
-        takeExam();
+        this.util = util;
+        this.ioService = ioService;
     }
 
     @Override
     public void takeExam() throws QuestionsLoadingException {
         int correctAnswers = 0;
         String studentAnswer;
-
-        Util.SendMessage("Screen", config.getExamPropertiesValue(null, "exam.wellcome"));
+        ioService.out(util.getExamPropertiesValue(null, "exam.ask-name"));
+        String userName = ioService.readString();
+        ioService.out(util.getExamPropertiesValue(new Object[] {userName}, "exam.welcome"));
         List<Question> questions = dao.takeExamQuestionsList();
         for (Question question : questions) {
-            Util.SendMessage("Screen", question.getQuestionText());
-            studentAnswer = Util.ReadMessage("Screen");
+            ioService.out(question.getQuestionText());
+            studentAnswer = ioService.readString();
             if (question.getAnswer().equals(studentAnswer)) {
                 correctAnswers++;
             }
         }
         if (correctAnswers >= config.getCorrectAnswersToPass()) {
-            Util.SendMessage("Screen", config.getExamPropertiesValue(null, "exam.pass"));
+            ioService.out(util.getExamPropertiesValue(null, "exam.pass"));
         } else {
-            Util.SendMessage("Screen", config.getExamPropertiesValue(null, "exam.fail"));
+            ioService.out(util.getExamPropertiesValue(null, "exam.fail"));
         }
     }
 

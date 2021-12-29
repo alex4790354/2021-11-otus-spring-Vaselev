@@ -10,13 +10,13 @@ import java.util.Scanner;
 
 @ConditionalOnProperty(name = "use.console", havingValue = "true")
 @Service
-public class ConsoleIOService implements IOService {
+public class IOServOpenConsole implements IOService {
     private final PrintStream out;
     private final Scanner sc;
 
 
-    public ConsoleIOService(@Value("#{T(java.lang.System).out}") PrintStream out,
-                            @Value("#{T(java.lang.System).in}") InputStream in) {
+    public IOServOpenConsole(@Value("#{T(java.lang.System).out}") PrintStream out,
+                             @Value("#{T(java.lang.System).in}") InputStream in) {
         this.out = out;
         this.sc = new Scanner(in);
     }

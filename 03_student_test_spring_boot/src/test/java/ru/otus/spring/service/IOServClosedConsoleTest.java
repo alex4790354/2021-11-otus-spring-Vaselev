@@ -5,8 +5,6 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.parallel.Execution;
-import org.junit.jupiter.api.parallel.ExecutionMode;
 import ru.otus.spring.service.interfaces.IOService;
 
 import java.io.ByteArrayOutputStream;
@@ -14,12 +12,12 @@ import java.io.PrintStream;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-@Execution(ExecutionMode.CONCURRENT)
-@DisplayName("Тест ClosedIOService")
-class IOServiceClosedConsoleTest {
+//@Execution(ExecutionMode.CONCURRENT)
+@DisplayName("Тест IOServiceClosedConsole")
+class IOServClosedConsoleTest {
 
-    private static final String TEXT_TO_PRINT1 = "Ничто не истинно";
-    private static final String TEXT_TO_PRINT2 = "Все дозволено";
+    private static final String TEXT_TO_PRINT1 = "Hello world 108";
+    private static final String TEXT_TO_PRINT2 = "How are you?";
 
     private PrintStream backup;
     private ByteArrayOutputStream bos;
@@ -31,7 +29,7 @@ class IOServiceClosedConsoleTest {
         backup = System.out;
         bos = new ByteArrayOutputStream();
         System.setOut(new PrintStream(bos));
-        ioService = new ClosedConsoleIOService();
+        ioService = new IOServClosedConsole();
     }
 
     @AfterEach

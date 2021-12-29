@@ -12,8 +12,9 @@ import java.io.PrintStream;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-class IOServiceOpenConsoleTest {
-    private static final String TEXT_TO_PRINT1 = "Hello world";
+@DisplayName("Тест IOServiceOpenConsole")
+class IOServOpenConsoleTest {
+    private static final String TEXT_TO_PRINT1 = "Hello world 108";
     private static final String TEXT_TO_PRINT2 = "How are you?";
 
     private PrintStream backup;
@@ -26,7 +27,7 @@ class IOServiceOpenConsoleTest {
         System.out.println(Thread.currentThread().getName());
         backup = System.out;
         bos = new ByteArrayOutputStream();
-        ioService = new ConsoleIOService(new PrintStream(bos), System.in);
+        ioService = new IOServOpenConsole(new PrintStream(bos), System.in);
     }
 
     @AfterEach

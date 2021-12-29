@@ -8,8 +8,8 @@ import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Component;
 import ru.otus.spring.config.ExamConfig;
 import ru.otus.spring.util.QuestionsLoadingException;
-import ru.otus.spring.util.Util;
 import ru.otus.spring.domain.Question;
+import ru.otus.spring.util.Util;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -19,18 +19,17 @@ import java.util.List;
 @Component
 public class QuestionsFromCsvFile implements QuestionsDao {
 
-    private final ExamConfig config;
+    private final Util util;
 
     @Autowired
-    public QuestionsFromCsvFile(ExamConfig examConfig) {
-        this.config = examConfig;
+    public QuestionsFromCsvFile(Util util) {
+        this.util = util;
     }
 
     public List<Question> takeExamQuestionsList() throws QuestionsLoadingException {
 
         List<Question> questions = new ArrayList<>();
-        //Util.setExamSource("classpath:i18n/exam");
-        String fileName = config.getExamPropertiesValue(null, "exam.file-name");
+        String fileName = util.getCsvExamFileName();
         try {
             CsvSchema csvSchema = CsvSchema.emptySchema().withHeader();
             CsvMapper mapper = new CsvMapper();

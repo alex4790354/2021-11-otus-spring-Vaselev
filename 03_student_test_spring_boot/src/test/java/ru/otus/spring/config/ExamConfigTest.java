@@ -7,6 +7,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.context.annotation.ComponentScan;
 import ru.otus.spring.service.interfaces.QuestionsService;
+import ru.otus.spring.util.Util;
 
 import java.util.Locale;
 
@@ -25,9 +26,12 @@ class ExamConfigTest {
     @Autowired
     private ExamConfig examConfig;
 
+    @Autowired
+    private Util util;
+
     @Test
     void DefaultLocaleShouldBeRuRu() {
-        assertEquals(examConfig.getLocale(), new Locale("ru", "RU"));
+        assertEquals(util.getLocale(), new Locale("ru", "RU"));
     }
 
     // This test fail. Why does it trying to Autowere QuestionServiceImpl?

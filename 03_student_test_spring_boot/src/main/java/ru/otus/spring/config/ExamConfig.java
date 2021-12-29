@@ -11,33 +11,31 @@ import java.util.Locale;
 @Component
 public class ExamConfig {
 
-    private final ReloadableResourceBundleMessageSource examSource;
     private Integer correctAnswersToPass;
-    private Locale locale;
-
-    public ExamConfig() {
-        this.examSource = new ReloadableResourceBundleMessageSource();
-        this.examSource.setBasename("classpath:i18n/message");
-        this.locale = new Locale("ru", "RU");
-    }
-
-    public String getExamPropertiesValue(Object[] obj, String key) {
-        return examSource.getMessage(key, obj, this.locale);                    //new Object[]{"any text"},
-    }
+    private String localeLanguage;
+    private String localeCountry;
 
     public Integer getCorrectAnswersToPass() {
         return correctAnswersToPass;
     }
 
-    public void setCorrectAnswersToPass(String correctAnswersToPass) {
-        this.correctAnswersToPass = Integer.parseInt(correctAnswersToPass);
+    public void setCorrectAnswersToPass(Integer correctAnswersToPass) {
+        this.correctAnswersToPass = correctAnswersToPass;
     }
 
-    public Locale getLocale() {
-        return locale;
+    public String getLocaleLanguage() {
+        return localeLanguage;
     }
 
-    public void setLocale(Locale locale) {
-        this.locale = locale;
+    public void setLocaleLanguage(String localeLanguage) {
+        this.localeLanguage = localeLanguage;
+    }
+
+    public String getLocaleCountry() {
+        return localeCountry;
+    }
+
+    public void setLocaleCountry(String localeCountry) {
+        this.localeCountry = localeCountry;
     }
 }

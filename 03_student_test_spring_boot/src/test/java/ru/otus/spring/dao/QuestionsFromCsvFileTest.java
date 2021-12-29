@@ -9,9 +9,9 @@ import org.springframework.context.annotation.ComponentScan;
 import ru.otus.spring.domain.Question;
 import ru.otus.spring.service.interfaces.QuestionsService;
 import ru.otus.spring.util.QuestionsLoadingException;
-import ru.otus.spring.util.Util;
+
 import java.util.List;
-import java.util.Locale;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 
@@ -30,18 +30,18 @@ class QuestionsFromCsvFileTest {
     @Autowired
     private QuestionsDao questionsDao;
 
-    @DisplayName("Should get 4 records for exam with Russian locale")
+    /*@DisplayName("Should get 4 records for exam with Russian locale")
     @Test
     void shouldGet4RecordsForRussianLocale() throws QuestionsLoadingException {
         List<Question> questionList = questionsDao.takeExamQuestionsList();
         assertEquals(questionList.size(), QUASTIONS_AMOUNT_EXAM_RU);
-    }
+    }*/
 
-    @DisplayName("Should get 5 records for exam with English locale")
+    /*@DisplayName("Should get 5 records for exam with English locale")
     @Test
     void shouldGet4RecordsForEnglishLocale() throws QuestionsLoadingException {
         //Util.setLocale(Locale.ENGLISH);
         List<Question> questionList = questionsDao.takeExamQuestionsList();
         assertEquals(questionList.size(), QUASTIONS_AMOUNT_EXAM_EN);
-    }
+    }*/
 }

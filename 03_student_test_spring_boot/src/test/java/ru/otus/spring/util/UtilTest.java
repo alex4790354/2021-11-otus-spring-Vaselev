@@ -26,34 +26,37 @@ class UtilTest {
     @Autowired
     private ExamConfig examConfig;
 
+    @Autowired
+    private Util util;
+
     private static final String EXAM_FILE_NAME_EN = "csv/exam-quastions-en.csv";
-    private static final String EXAM_WELLCOME_EN = "Welcome to the chemistry test";
+    private static final String EXAM_WELCOME_EN = "Welcome to the chemistry test";
     private static final String EXAM_PASS_EN = "Congratulations, you passed the test.";
     private static final String EXAM_FAIL_EN = "You fail the test today, but you can retake it later.";
 
     private static final String EXAM_FILE_NAME_RU = "csv/exam-quastions-ru.csv";
-    private static final String EXAM_WELLCOME_RU = "Russian: Welcome to the chemistry test";
+    private static final String EXAM_WELCOME_RU = "Russian: Welcome to the chemistry test";
     private static final String EXAM_PASS_RU = "Russian: Congratulations, you passed the test.";
     private static final String EXAM_FAIL_RU = "Russian: You fail the test today, but you can retake it later.";
 
     @DisplayName("getExamPropertiesValue should get correct i18n values for ru_RU locale:")
     @Test
     void getExamPropertiesValueForRusLocale() {
-        examConfig.setLocale(new Locale("ru", "RU"));
-        assertEquals(examConfig.getExamPropertiesValue(null, "exam.file-name"), EXAM_FILE_NAME_RU);
-        assertEquals(examConfig.getExamPropertiesValue(null, "exam.wellcome"), EXAM_WELLCOME_RU);
-        assertEquals(examConfig.getExamPropertiesValue(null, "exam.pass"), EXAM_PASS_RU);
-        assertEquals(examConfig.getExamPropertiesValue(null, "exam.fail"), EXAM_FAIL_RU);
+        util.setLocale(new Locale("ru", "RU"));
+        assertEquals(util.getExamPropertiesValue(null, "exam.file-name"), EXAM_FILE_NAME_RU);
+        assertEquals(util.getExamPropertiesValue(null, "exam.welcome"), EXAM_WELCOME_RU);
+        assertEquals(util.getExamPropertiesValue(null, "exam.pass"), EXAM_PASS_RU);
+        assertEquals(util.getExamPropertiesValue(null, "exam.fail"), EXAM_FAIL_RU);
     }
 
     @DisplayName("getExamPropertiesValue should get correct i18n values for EN_US locale:")
     @Test
     void getExamPropertiesValueForEngLocale() {
-        examConfig.setLocale(Locale.ENGLISH);
-        assertEquals(examConfig.getExamPropertiesValue(null, "exam.file-name"), EXAM_FILE_NAME_EN);
-        assertEquals(examConfig.getExamPropertiesValue(null, "exam.wellcome"), EXAM_WELLCOME_EN);
-        assertEquals(examConfig.getExamPropertiesValue(null, "exam.pass"), EXAM_PASS_EN);
-        assertEquals(examConfig.getExamPropertiesValue(null, "exam.fail"), EXAM_FAIL_EN);
+        util.setLocale(Locale.ENGLISH);
+        assertEquals(util.getExamPropertiesValue(null, "exam.file-name"), EXAM_FILE_NAME_EN);
+        assertEquals(util.getExamPropertiesValue(null, "exam.welcome"), EXAM_WELCOME_EN);
+        assertEquals(util.getExamPropertiesValue(null, "exam.pass"), EXAM_PASS_EN);
+        assertEquals(util.getExamPropertiesValue(null, "exam.fail"), EXAM_FAIL_EN);
     }
 
 }

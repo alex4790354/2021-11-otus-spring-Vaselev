@@ -5,4 +5,7 @@ spring:
     basename: i18n/exam
 exam:
   correct-answers-to-pass: 4
+  locale:
+    language: ru
+    countr: RU
 
