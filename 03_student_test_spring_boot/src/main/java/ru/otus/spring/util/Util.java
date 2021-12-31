@@ -10,33 +10,20 @@ import java.util.Locale;
 @Component
 public class Util {
 
-    ExamConfig config;
-    private Locale locale;
-    MessageSource msg;                      //alterantive:  private ReloadableResourceBundleMessageSource msg;
-                                            //              this.msg = new ReloadableResourceBundleMessageSource();
-                                            //              this.msg.setBasename("classpath:i18n/message");
+    //private Locale locale;
+    private final ExamConfig config;
+    private final MessageSource msg;                        // alterantive:     private ReloadableResourceBundleMessageSource msg;
+                                                            //                  this.msg = new ReloadableResourceBundleMessageSource();
+                                                            //                  this.msg.setBasename("classpath:i18n/message");
 
     @Autowired
-    public Util(MessageSource messageSource, ExamConfig examConfig) {
-        this.config = examConfig;
-        this.msg = messageSource;
-        this.locale = Locale.forLanguageTag(config.getLocaleLanguage() + "-" + config.getLocaleCountry());
-    }
-
-    public String getCsvExamFileName() {
-        //return getExamPropertiesValue(null, "exam.file-name");
-        return config.getExamFileNameCsv();
+    public Util(ExamConfig config, MessageSource msg) {
+        this.config = config;
+        this.msg = msg;
     }
 
     public String getExamPropertiesValue(Object[] obj, String key) {
-        return msg.getMessage(key, obj, this.locale);                               //new Object[]{"any text"},
+        return msg.getMessage(key, obj, Locale.forLanguageTag(config.getLocaleLanguage() + "-" + config.getLocaleCountry()));                               //new Object[]{"any text"},
     }
 
-    public Locale getLocale() {
-        return locale;
-    }
-
-    public void setLocale(Locale locale) {
-        this.locale = locale;
-    }
 }

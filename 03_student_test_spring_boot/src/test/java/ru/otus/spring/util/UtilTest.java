@@ -29,12 +29,12 @@ class UtilTest {
     @Autowired
     private Util util;
 
-    private static final String EXAM_FILE_NAME_EN = "csv/exam-quastions-en.csv";
+    private static final String EXAM_ASK_NAME_EN = "what is your name?";
     private static final String EXAM_WELCOME_EN = "Welcome to the chemistry test";
     private static final String EXAM_PASS_EN = "Congratulations, you passed the test.";
     private static final String EXAM_FAIL_EN = "You fail the test today, but you can retake it later.";
 
-    private static final String EXAM_FILE_NAME_RU = "csv/exam-quastions-ru.csv";
+    private static final String EXAM_ASK_NAME_RU = "Russian: what is your name?";
     private static final String EXAM_WELCOME_RU = "Russian: Welcome to the chemistry test";
     private static final String EXAM_PASS_RU = "Russian: Congratulations, you passed the test.";
     private static final String EXAM_FAIL_RU = "Russian: You fail the test today, but you can retake it later.";
@@ -42,8 +42,10 @@ class UtilTest {
     @DisplayName("getExamPropertiesValue should get correct i18n values for ru_RU locale:")
     @Test
     void getExamPropertiesValueForRusLocale() {
-        util.setLocale(new Locale("ru", "RU"));
-        assertEquals(util.getExamPropertiesValue(null, "exam.file-name"), EXAM_FILE_NAME_RU);
+        //util.setLocale(new Locale("ru", "RU"));
+        examConfig.setLocaleLanguage("ru");
+        examConfig.setLocaleCountry("RU");
+        assertEquals(util.getExamPropertiesValue(null, "exam.ask-name"), EXAM_ASK_NAME_RU);
         assertEquals(util.getExamPropertiesValue(null, "exam.welcome"), EXAM_WELCOME_RU);
         assertEquals(util.getExamPropertiesValue(null, "exam.pass"), EXAM_PASS_RU);
         assertEquals(util.getExamPropertiesValue(null, "exam.fail"), EXAM_FAIL_RU);
@@ -52,8 +54,10 @@ class UtilTest {
     @DisplayName("getExamPropertiesValue should get correct i18n values for EN_US locale:")
     @Test
     void getExamPropertiesValueForEngLocale() {
-        util.setLocale(Locale.ENGLISH);
-        assertEquals(util.getExamPropertiesValue(null, "exam.file-name"), EXAM_FILE_NAME_EN);
+        //util.setLocale(Locale.ENGLISH);
+        examConfig.setLocaleLanguage("en");
+        examConfig.setLocaleCountry("US");
+        assertEquals(util.getExamPropertiesValue(null, "exam.ask-name"), EXAM_ASK_NAME_EN);
         assertEquals(util.getExamPropertiesValue(null, "exam.welcome"), EXAM_WELCOME_EN);
         assertEquals(util.getExamPropertiesValue(null, "exam.pass"), EXAM_PASS_EN);
         assertEquals(util.getExamPropertiesValue(null, "exam.fail"), EXAM_FAIL_EN);

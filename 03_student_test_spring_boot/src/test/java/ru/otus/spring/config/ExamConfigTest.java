@@ -29,11 +29,6 @@ class ExamConfigTest {
     @Autowired
     private Util util;
 
-    @Test
-    void DefaultLocaleShouldBeRuRu() {
-        assertEquals(util.getLocale(), new Locale("ru", "RU"));
-    }
-
     // This test fail. Why does it trying to Autowere QuestionServiceImpl?
     @Test
     void getCorrectAnswersToPass() {

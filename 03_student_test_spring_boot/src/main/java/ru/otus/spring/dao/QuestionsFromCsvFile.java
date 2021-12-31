@@ -19,17 +19,9 @@ import java.util.List;
 @Component
 public class QuestionsFromCsvFile implements QuestionsDao {
 
-    private final Util util;
-
-    @Autowired
-    public QuestionsFromCsvFile(Util util) {
-        this.util = util;
-    }
-
-    public List<Question> takeExamQuestionsList() throws QuestionsLoadingException {
+    public List<Question> takeExamQuestionsList(String fileName) throws QuestionsLoadingException {
 
         List<Question> questions = new ArrayList<>();
-        String fileName = util.getCsvExamFileName();
         try {
             CsvSchema csvSchema = CsvSchema.emptySchema().withHeader();
             CsvMapper mapper = new CsvMapper();
@@ -38,10 +30,9 @@ public class QuestionsFromCsvFile implements QuestionsDao {
             for (Question question : readValues.readAll()) {
                 questions.add(question);
             }
-        } catch (Exception e) {
-            if (e.getClass().toString().contains("FileNotFoundException")) {
-                throw new QuestionsLoadingException("Exception: wasn't able to find file " + fileName);
-            }
+        } catch (FileNotFoundException e) {
+            throw new QuestionsLoadingException("Exception: wasn't able to find file " + fileName);
+        } catch (IOException e) {
             e.printStackTrace();
         }
         return questions;

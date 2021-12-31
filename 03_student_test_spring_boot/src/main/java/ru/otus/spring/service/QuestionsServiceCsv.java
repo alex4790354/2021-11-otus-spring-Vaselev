@@ -18,7 +18,7 @@ public class QuestionsServiceCsv implements QuestionsService {
     private final ExamConfig config;
     private final QuestionsDao dao;
     private final Util util;
-    private IOService ioService;
+    private final IOService ioService;
 
     @Autowired
     public QuestionsServiceCsv(ExamConfig config, QuestionsDao dao, Util util, IOService ioService) {
@@ -36,7 +36,7 @@ public class QuestionsServiceCsv implements QuestionsService {
         ioService.out(util.getExamPropertiesValue(null, "exam.ask-name"));
         String userName = ioService.readString();
         ioService.out(util.getExamPropertiesValue(new Object[] {userName}, "exam.welcome"));
-        List<Question> questions = dao.takeExamQuestionsList();
+        List<Question> questions = dao.takeExamQuestionsList(config.getExamFileNameCsv());
         for (Question question : questions) {
             ioService.out(question.getQuestionText());
             studentAnswer = ioService.readString();
