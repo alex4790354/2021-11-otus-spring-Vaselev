@@ -27,4 +27,14 @@ public class Question {
         return questionText;
     }
 
+    public void setQuestion(String name, String value) {
+        if (name.equals("id")) {
+            this.id = Integer.parseInt(value);
+        } else if (name.equals("questionText")) {
+            this.questionText = value;
+        } else if (name.equals("answer")) {
+            this.answer = value;
+        }
+    }
+
 }

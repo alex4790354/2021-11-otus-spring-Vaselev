@@ -6,11 +6,13 @@ import org.springframework.context.ApplicationContext;
 import ru.otus.spring.service.QuestionsServiceCsv;
 import ru.otus.spring.util.QuestionsLoadingException;
 
+import java.io.IOException;
+
 
 @SpringBootApplication
 public class Application {
 
-	public static void main(String[] args) throws QuestionsLoadingException {
+	public static void main(String[] args) throws IOException {
 		ApplicationContext context = SpringApplication.run(Application.class, args);
 
 		QuestionsServiceCsv questionsServiceCsv = context.getBean(QuestionsServiceCsv.class);

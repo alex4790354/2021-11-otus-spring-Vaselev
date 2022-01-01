@@ -9,6 +9,8 @@ import ru.otus.spring.util.QuestionsLoadingException;
 import ru.otus.spring.util.Util;
 import ru.otus.spring.dao.QuestionsDao;
 import ru.otus.spring.domain.Question;
+
+import java.io.IOException;
 import java.util.List;
 
 
@@ -29,7 +31,7 @@ public class QuestionsServiceCsv implements QuestionsService {
     }
 
     @Override
-    public void takeExam() throws QuestionsLoadingException {
+    public void takeExam() throws IOException {
         int correctAnswers = 0;
         String studentAnswer;
         System.out.println("file-name: " + config.getExamFileNameCsv());
