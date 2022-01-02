@@ -11,10 +11,9 @@
 	</parent>
 
 	<groupId>ru.otus</groupId>
+	<name>05_Spring_Shell</name>
 	<artifactId>05_Spring_Shell</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-
-	<name>05_Spring_Shell</name>
 	<description>Otus demo project for Spring Boot</description>
 
 	<properties>
