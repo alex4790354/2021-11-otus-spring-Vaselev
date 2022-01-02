@@ -5,7 +5,6 @@ import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Service;
 import ru.otus.spring.config.ExamConfig;
 import ru.otus.spring.service.interfaces.Localization;
-
 import java.util.Locale;
 
 @Service

@@ -1,4 +1,10 @@
+logging:
+  level:
+    root: ERROR
+
 spring:
+  main:
+    allow-circular-references: true
   messages:
     basename: i18n/messages
     fallback-to-system-locale: false

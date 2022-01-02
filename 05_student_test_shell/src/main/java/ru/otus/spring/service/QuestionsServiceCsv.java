@@ -8,8 +8,6 @@ import ru.otus.spring.service.interfaces.IOService;
 import ru.otus.spring.service.interfaces.Localization;
 import ru.otus.spring.service.interfaces.QuestionsService;
 import ru.otus.spring.domain.Question;
-
-import java.io.IOException;
 import java.util.List;
 
 
@@ -20,6 +18,7 @@ public class QuestionsServiceCsv implements QuestionsService {
     private final Localization localization;
     private final IOService ioService;
     private final QuestionsDao dao;
+    private String studentName;
 
     @Autowired
     public QuestionsServiceCsv(ExamConfig config, QuestionsDao dao, Localization localization, IOService ioService) {
@@ -27,6 +26,7 @@ public class QuestionsServiceCsv implements QuestionsService {
         this.dao = dao;
         this.localization = localization;
         this.ioService = ioService;
+        this.studentName = "Constr";
     }
 
     @Override
@@ -35,8 +35,9 @@ public class QuestionsServiceCsv implements QuestionsService {
         String studentAnswer;
         System.out.println("file-name: " + config.getExamFileNameCsv());
         ioService.out(localization.getExamPropertiesValue("exam.ask-name", null ));
-        String userName = ioService.readString();
-        ioService.out(localization.getExamPropertiesValue("exam.welcome", userName));
+        //String userName = ioService.readString();
+        //ioService.out(localization.getExamPropertiesValue("exam.welcome", userName));
+        ioService.out(localization.getExamPropertiesValue("exam.welcome", studentName));
         List<Question> questions = dao.takeExamQuestionsList();
         for (Question question : questions) {
             ioService.out(question.getQuestionText());
@@ -52,4 +53,11 @@ public class QuestionsServiceCsv implements QuestionsService {
         }
     }
 
+    public String getStudentName() {
+        return studentName;
+    }
+
+    public void setStudentName(String studentName) {
+        this.studentName = studentName;
+    }
 }

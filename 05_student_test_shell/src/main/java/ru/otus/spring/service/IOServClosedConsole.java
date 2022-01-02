@@ -1,7 +1,7 @@
 package ru.otus.spring.service;
+
 import org.springframework.stereotype.Service;
 import ru.otus.spring.service.interfaces.IOService;
-
 import java.io.PrintStream;
 import java.util.Scanner;
 

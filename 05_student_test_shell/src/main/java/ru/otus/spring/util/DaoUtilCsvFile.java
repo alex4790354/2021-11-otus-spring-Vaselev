@@ -3,7 +3,6 @@ package ru.otus.spring.util;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import ru.otus.spring.config.ExamConfig;
-import ru.otus.spring.dao.QuestionsDao;
 import ru.otus.spring.util.interfaces.DaoUtil;
 
 
