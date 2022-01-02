@@ -12,7 +12,7 @@ import java.io.IOException;
 @SpringBootApplication
 public class Application {
 
-	public static void main(String[] args) throws IOException {
+	public static void main(String[] args) {
 		ApplicationContext context = SpringApplication.run(Application.class, args);
 		QuestionsService questionsServiceCsv = context.getBean(QuestionsService.class);
 		questionsServiceCsv.takeExam();

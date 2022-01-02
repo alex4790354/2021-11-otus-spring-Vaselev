@@ -11,21 +11,20 @@
 	</parent>
 
 	<groupId>ru.otus</groupId>
-	<name>05_Spring_Shell</name>
-	<artifactId>05_Spring_Shell</artifactId>
+	<artifactId>05_student_test_shell</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
+	<name>05_student_test_shell</name>
 
 	<description>Otus demo project for Spring Boot</description>
 	<properties>
 		<java.version>11</java.version>
-		<spring.shell.version>2.0.1.RELEASE</spring.shell.version>
 	</properties>
 	<dependencies>
-
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter</artifactId>
+			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
+
 		<dependency>
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>
@@ -35,6 +34,11 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>com.fasterxml.jackson.dataformat</groupId>
+			<artifactId>jackson-dataformat-csv</artifactId>
+			<version>2.13.1</version>
 		</dependency>
         <dependency>
             <groupId>junit</groupId>
@@ -49,12 +53,6 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-autoconfigure</artifactId>
 			<version>2.6.1</version>
-		</dependency>
-
-		<dependency>
-			<groupId>org.springframework.shell</groupId>
-			<artifactId>spring-shell-starter</artifactId>
-			<version>${spring.shell.version}</version>
 		</dependency>
 
 	</dependencies>
