@@ -7,6 +7,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.context.annotation.ComponentScan;
 import ru.otus.spring.config.ExamConfig;
+import ru.otus.spring.service.interfaces.Localization;
 import ru.otus.spring.service.interfaces.QuestionsService;
 
 import java.util.Locale;
@@ -27,7 +28,7 @@ class UtilTest {
     private ExamConfig examConfig;
 
     @Autowired
-    private Util util;
+    private Localization localization;
 
     private static final String EXAM_ASK_NAME_EN = "what is your name?";
     private static final String EXAM_WELCOME_EN = "Welcome to the chemistry test";
@@ -45,10 +46,10 @@ class UtilTest {
         //util.setLocale(new Locale("ru", "RU"));
         examConfig.setLocaleLanguage("ru");
         examConfig.setLocaleCountry("RU");
-        assertEquals(util.getExamPropertiesValue(null, "exam.ask-name"), EXAM_ASK_NAME_RU);
-        assertEquals(util.getExamPropertiesValue(null, "exam.welcome"), EXAM_WELCOME_RU);
-        assertEquals(util.getExamPropertiesValue(null, "exam.pass"), EXAM_PASS_RU);
-        assertEquals(util.getExamPropertiesValue(null, "exam.fail"), EXAM_FAIL_RU);
+        assertEquals(localization.getExamPropertiesValue("exam.ask-name", null), EXAM_ASK_NAME_RU);
+        assertEquals(localization.getExamPropertiesValue("exam.welcome",  null), EXAM_WELCOME_RU);
+        assertEquals(localization.getExamPropertiesValue("exam.pass",     null), EXAM_PASS_RU);
+        assertEquals(localization.getExamPropertiesValue("exam.fail",     null), EXAM_FAIL_RU);
     }
 
     @DisplayName("getExamPropertiesValue should get correct i18n values for EN_US locale:")
@@ -57,10 +58,10 @@ class UtilTest {
         //util.setLocale(Locale.ENGLISH);
         examConfig.setLocaleLanguage("en");
         examConfig.setLocaleCountry("US");
-        assertEquals(util.getExamPropertiesValue(null, "exam.ask-name"), EXAM_ASK_NAME_EN);
-        assertEquals(util.getExamPropertiesValue(null, "exam.welcome"), EXAM_WELCOME_EN);
-        assertEquals(util.getExamPropertiesValue(null, "exam.pass"), EXAM_PASS_EN);
-        assertEquals(util.getExamPropertiesValue(null, "exam.fail"), EXAM_FAIL_EN);
+        assertEquals(localization.getExamPropertiesValue("exam.ask-name", null), EXAM_ASK_NAME_EN);
+        assertEquals(localization.getExamPropertiesValue("exam.welcome" , null), EXAM_WELCOME_EN);
+        assertEquals(localization.getExamPropertiesValue("exam.pass",     null), EXAM_PASS_EN);
+        assertEquals(localization.getExamPropertiesValue("exam.fail",     null), EXAM_FAIL_EN);
     }
 
 }

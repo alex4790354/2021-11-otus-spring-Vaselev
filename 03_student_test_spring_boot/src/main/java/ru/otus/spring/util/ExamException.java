@@ -1,10 +1,10 @@
 package ru.otus.spring.util;
 
-import java.io.FileNotFoundException;
 
-public class HeaderLoadingException extends ArrayIndexOutOfBoundsException {
+public class ExamException extends RuntimeException {
 
-    public HeaderLoadingException(String message) {
-        super(message);
+    public ExamException(String message, Exception exc) {
+        super(message + System.lineSeparator() + exc.getMessage());
     }
+
 }

@@ -6,10 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.context.annotation.ComponentScan;
+import ru.otus.spring.service.interfaces.Localization;
 import ru.otus.spring.service.interfaces.QuestionsService;
-import ru.otus.spring.util.Util;
-
-import java.util.Locale;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -25,9 +23,6 @@ class ExamConfigTest {
 
     @Autowired
     private ExamConfig examConfig;
-
-    @Autowired
-    private Util util;
 
     // This test fail. Why does it trying to Autowere QuestionServiceImpl?
     @Test

@@ -1,7 +1,7 @@
 package ru.otus.spring.service.interfaces;
 
-public interface GetMessage {
+public interface Localization {
 
-    public String getExamPropertiesValue(Object[] obj, String key);
+    public String getExamPropertiesValue(String key, Object ...args);
 
 }
