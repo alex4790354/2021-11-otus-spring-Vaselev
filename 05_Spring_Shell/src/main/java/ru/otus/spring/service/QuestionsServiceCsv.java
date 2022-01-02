@@ -3,11 +3,10 @@ package ru.otus.spring.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ru.otus.spring.config.ExamConfig;
-import ru.otus.spring.service.interfaces.IOService;
-import ru.otus.spring.service.interfaces.QuestionsService;
-import ru.otus.spring.util.QuestionsLoadingException;
-import ru.otus.spring.util.Util;
 import ru.otus.spring.dao.QuestionsDao;
+import ru.otus.spring.service.interfaces.IOService;
+import ru.otus.spring.service.interfaces.Localization;
+import ru.otus.spring.service.interfaces.QuestionsService;
 import ru.otus.spring.domain.Question;
 
 import java.io.IOException;
@@ -18,27 +17,27 @@ import java.util.List;
 public class QuestionsServiceCsv implements QuestionsService {
 
     private final ExamConfig config;
-    private final QuestionsDao dao;
-    private final Util util;
+    private final Localization localization;
     private final IOService ioService;
+    private final QuestionsDao dao;
 
     @Autowired
-    public QuestionsServiceCsv(ExamConfig config, QuestionsDao dao, Util util, IOService ioService) {
+    public QuestionsServiceCsv(ExamConfig config, QuestionsDao dao, Localization localization, IOService ioService) {
         this.config = config;
         this.dao = dao;
-        this.util = util;
+        this.localization = localization;
         this.ioService = ioService;
     }
 
     @Override
-    public void takeExam() throws IOException {
+    public void takeExam() {
         int correctAnswers = 0;
         String studentAnswer;
         System.out.println("file-name: " + config.getExamFileNameCsv());
-        ioService.out(util.getExamPropertiesValue(null, "exam.ask-name"));
+        ioService.out(localization.getExamPropertiesValue("exam.ask-name", null ));
         String userName = ioService.readString();
-        ioService.out(util.getExamPropertiesValue(new Object[] {userName}, "exam.welcome"));
-        List<Question> questions = dao.takeExamQuestionsList(config.getExamFileNameCsv());
+        ioService.out(localization.getExamPropertiesValue("exam.welcome", userName));
+        List<Question> questions = dao.takeExamQuestionsList();
         for (Question question : questions) {
             ioService.out(question.getQuestionText());
             studentAnswer = ioService.readString();
@@ -47,9 +46,9 @@ public class QuestionsServiceCsv implements QuestionsService {
             }
         }
         if (correctAnswers >= config.getCorrectAnswersToPass()) {
-            ioService.out(util.getExamPropertiesValue(null, "exam.pass"));
+            ioService.out(localization.getExamPropertiesValue("exam.pass", null));
         } else {
-            ioService.out(util.getExamPropertiesValue(null, "exam.fail"));
+            ioService.out(localization.getExamPropertiesValue("exam.fail", null));
         }
     }
 

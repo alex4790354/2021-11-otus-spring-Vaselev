@@ -40,11 +40,15 @@ public class ExamConfig {
         this.localeCountry = localeCountry;
     }
 
-    public String getExamFileNameCsv() {
-        return String.format("%s-%s.csv", examFileNameCsv, localeLanguage);
-    }
-
     public void setExamFileNameCsv(String examFileNameCsv) {
         this.examFileNameCsv = examFileNameCsv;
     }
+
+    public String getExamFileNameCsv() {
+        return examFileNameCsv;
+    }
+    /*public String getExamFileNameCsv() {
+        return String.format("%s-%s.csv", examFileNameCsv, localeLanguage);
+    }*/
+
 }
