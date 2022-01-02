@@ -13,8 +13,8 @@
 	<groupId>ru.otus</groupId>
 	<artifactId>03_student_test_spring_boot</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-
 	<name>03_student_test_spring_boot</name>
+
 	<description>Otus demo project for Spring Boot</description>
 	<properties>
 		<java.version>11</java.version>
