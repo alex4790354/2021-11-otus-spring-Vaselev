@@ -4,46 +4,37 @@ package ru.otus.spring.domain;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
 
-@RequiredArgsConstructor
+import javax.persistence.*;
+
 @Data
+@Table(name = "book")
 public class Book {
-    private final int id;
-    private final int authorId;
-    private final int genreId;
-    private final String name;
 
-    @Override
-    public boolean equals(Object obj) {
-        if (obj == this) {
-            return true;
-        } else if (obj == null || obj.getClass() != this.getClass()) {
-            return false;
-        }
-        Book book2 = (Book) obj;
-        if (this.id == book2.id &&
-            this.authorId == book2.authorId &&
-            this.genreId == book2.genreId &&
-            this.name.equals(book2.getName())) {
-            return true;
-        }
-        else {
-            return false;
-        }
+    public Book(long id, Author author, Genre genre, String name) {
+        this.id = id;
+        this.author = author;
+        this.genre = genre;
+        this.name = name;
     }
 
-    public int getId() {
-        return id;
+    public Book(Author author, Genre genre, String name) {
+        this.author = author;
+        this.genre = genre;
+        this.name = name;
     }
 
-    public int getAuthorId() {
-        return authorId;
+    public Book() {
     }
 
-    public int getGenreId() {
-        return genreId;
-    }
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
+    private long id;
 
-    public String getName() {
-        return name;
-    }
+    private Author author;
+    private Genre genre;
+
+    @Column(name = "name")
+    private String name;
+
 }

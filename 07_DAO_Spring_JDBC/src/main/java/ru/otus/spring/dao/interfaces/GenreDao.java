@@ -7,4 +7,6 @@ public interface GenreDao {
 
     List<Genre> getAll();
 
+    Genre getById(long id);
+
 }

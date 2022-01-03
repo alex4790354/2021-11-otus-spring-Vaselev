@@ -4,9 +4,18 @@ package ru.otus.spring.domain;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
 
-@RequiredArgsConstructor
+import javax.persistence.*;
+
 @Data
+@RequiredArgsConstructor
+@Table(name = "author")
 public class Author {
-    private final int id;
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
+    private final long id;
+
+    @Column(name = "name")
     private final String name;
 }
