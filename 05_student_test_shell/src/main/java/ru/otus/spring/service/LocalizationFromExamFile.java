@@ -20,8 +20,6 @@ public class LocalizationFromExamFile implements Localization {
         this.msg = msg;
         this.language = config.getLocaleLanguage();
         this.country = config.getLocaleCountry();
-        System.out.println("Language: " + this.language);
-        System.out.println("Country: " + this.country);
     }
 
     @Override

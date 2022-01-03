@@ -7,6 +7,7 @@ import org.springframework.shell.standard.ShellMethod;
 import org.springframework.shell.standard.ShellMethodAvailability;
 import org.springframework.shell.standard.ShellOption;
 import ru.otus.spring.events.EventsPublisher;
+import ru.otus.spring.service.interfaces.QuestionsService;
 
 
 @ShellComponent
@@ -14,23 +15,22 @@ import ru.otus.spring.events.EventsPublisher;
 public class ApplicationEventsCommands {
 
     private final EventsPublisher eventsPublisher;
+    private final QuestionsService questionsService;
 
-    private String userName;
-
-    @ShellMethod(value = "Login command", key = {"l", "login"})
-    public String login(@ShellOption(defaultValue = "AnyUser") String userName) {
-        this.userName = userName;
-        return String.format("Добро пожаловать: %s", userName);
+    @ShellMethod(value = "Авторизация для студентов перед сдачей экзамена", key = {"l", "login"})
+    public String login(@ShellOption(defaultValue = "Incognito") String studentName) {
+        questionsService.setStudentName(studentName);
+        return String.format("%s, добро пожаловать на сдачу теста. (test или help для начала прохождения)", studentName);
     }
 
-    @ShellMethod(value = "Publish event command", key = {"p", "pub", "publish"})
+    @ShellMethod(value = "Прохождение теста", key = {"t", "test"})
     @ShellMethodAvailability(value = "isPublishEventCommandAvailable")
     public String publishEvent() {
         eventsPublisher.publish();
-        return "Событие опубликовано";
+        return "Экзамен проведен. ('test' для повторного прохождения или 'exit' для выхода). Для студента: " + questionsService.getStudentName();
     }
 
     private Availability isPublishEventCommandAvailable() {
-        return userName == null? Availability.unavailable("Сначала залогиньтесь"): Availability.available();
+        return questionsService.getStudentName() == null? Availability.unavailable("Сначала авторизуйтесь"): Availability.available();
     }
 }

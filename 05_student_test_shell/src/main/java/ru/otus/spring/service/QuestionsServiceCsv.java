@@ -26,7 +26,6 @@ public class QuestionsServiceCsv implements QuestionsService {
         this.dao = dao;
         this.localization = localization;
         this.ioService = ioService;
-        this.studentName = "Constr";
     }
 
     @Override
@@ -34,7 +33,7 @@ public class QuestionsServiceCsv implements QuestionsService {
         int correctAnswers = 0;
         String studentAnswer;
         System.out.println("file-name: " + config.getExamFileNameCsv());
-        ioService.out(localization.getExamPropertiesValue("exam.ask-name", null ));
+        //ioService.out(localization.getExamPropertiesValue("exam.ask-name", null ));
         //String userName = ioService.readString();
         //ioService.out(localization.getExamPropertiesValue("exam.welcome", userName));
         ioService.out(localization.getExamPropertiesValue("exam.welcome", studentName));
@@ -53,11 +52,13 @@ public class QuestionsServiceCsv implements QuestionsService {
         }
     }
 
+    @Override
     public String getStudentName() {
         return studentName;
     }
 
-    public void setStudentName(String studentName) {
+    @Override
+    public void setStudentName(String studentName){
         this.studentName = studentName;
     }
 }
