@@ -42,19 +42,19 @@ public class BookDaoJdbc implements BookDao {
     }
 
     @Override
-    public Book getById(int id) {
+    public Book getById(long id) {
         Map<String, Object> params = Collections.singletonMap("id", id);
         return npJdbc.queryForObject("SELECT id, author_id, genre_id, name FROM book WHERE id = :id", params, new BookMapper(authorDao, genreDao));
     }
 
     @Override
-    public void deleteById(int id) {
+    public void deleteById(long id) {
         Map<String, Object> params = Collections.singletonMap("id", id);
         npJdbc.update("DELETE FROM book WHERE id = :id", params);
     }
 
     @Override
-    public void updateById(int id, String newName) {
+    public void updateById(long id, String newName) {
         Map<String, Object> params = new HashMap<>();
         params.put("id", id);
         params.put("book_name", newName);

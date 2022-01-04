@@ -11,7 +11,7 @@ public class PositiveRespondent  {
 
     @SneakyThrows
     @EventListener
-    public void onApplicationEvent(HalfAGlassOfWaterEvent halfAGlassOfWaterEvent) {
+    public void onApplicationEvent(EventHalfGlass eventHalfGlass) {
         System.out.println("Hello world from PositiveRespondent");
     }
 }

@@ -11,11 +11,11 @@ public interface BookDao {
 
     List<Book> getAll();
 
-    Book getById(int id);
+    Book getById(long id);
 
-    void deleteById(int id);
+    void deleteById(long id);
 
-    void updateById(int id, String newName);
+    void updateById(long id, String newName);
 
     void insert(Book book) throws DaoException;
 

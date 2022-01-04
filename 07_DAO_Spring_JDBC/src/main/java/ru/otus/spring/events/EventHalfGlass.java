@@ -3,12 +3,12 @@ package ru.otus.spring.events;
 import lombok.Getter;
 import org.springframework.context.ApplicationEvent;
 
-public class HalfAGlassOfWaterEvent extends ApplicationEvent {
+public class EventHalfGlass extends ApplicationEvent {
 
     @Getter
     private final String payload;
 
-    public HalfAGlassOfWaterEvent(Object source) {
+    public EventHalfGlass(Object source) {
         super(source);
         payload = "Осталось половина стакана воды!!!";
     }

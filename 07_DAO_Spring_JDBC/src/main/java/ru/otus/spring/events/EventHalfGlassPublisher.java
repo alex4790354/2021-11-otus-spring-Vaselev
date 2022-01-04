@@ -6,12 +6,12 @@ import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
-public class HalfAGlassOfWaterEventPublisher implements EventsPublisher {
+public class EventHalfGlassPublisher implements EventsPublisher {
 
     private final ApplicationEventPublisher publisher;
 
     @Override
     public void publish() {
-        publisher.publishEvent(new HalfAGlassOfWaterEvent(this));
+        publisher.publishEvent(new EventHalfGlass(this));
     }
 }
