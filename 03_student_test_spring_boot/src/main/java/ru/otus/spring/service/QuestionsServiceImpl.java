@@ -3,13 +3,12 @@ package ru.otus.spring.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ru.otus.spring.config.ExamConfig;
-import ru.otus.spring.dao.QuestionsDao;
+import ru.otus.spring.dao.interfaces.QuestionsDao;
 import ru.otus.spring.service.interfaces.IOService;
 import ru.otus.spring.service.interfaces.Localization;
 import ru.otus.spring.service.interfaces.QuestionsService;
 import ru.otus.spring.domain.Question;
 
-import java.io.IOException;
 import java.util.List;
 
 
