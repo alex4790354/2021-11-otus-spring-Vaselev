@@ -5,6 +5,7 @@ import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Component;
 
 
+// TODO: delete it later.
 @Component
 public class PositiveRespondent  {
 
