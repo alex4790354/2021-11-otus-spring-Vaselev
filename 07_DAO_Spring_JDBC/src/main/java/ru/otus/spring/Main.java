@@ -5,12 +5,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
 import ru.otus.spring.customExceptions.DaoException;
-import ru.otus.spring.dao.interfaces.AuthorDao;
-import ru.otus.spring.dao.interfaces.BookDao;
-import ru.otus.spring.dao.interfaces.GenreDao;
-import ru.otus.spring.domain.Author;
-import ru.otus.spring.domain.Book;
-import ru.otus.spring.domain.Genre;
+
 
 @SpringBootApplication
 public class Main {
@@ -19,6 +14,7 @@ public class Main {
 
         ApplicationContext context = SpringApplication.run(Main.class);
 
+        /*
         AuthorDao authorDao = context.getBean(AuthorDao.class);
         for (Author author : authorDao.getAll()) {
             System.out.println(author.getName());
@@ -58,8 +54,7 @@ public class Main {
         for (Book book : bookDao.getAll()) {
             System.out.println(book.getName());
         }
-        System.out.println(System.lineSeparator());
+        System.out.println(System.lineSeparator()); */
 
-        //Console.main(args);
     }
 }
