@@ -3,16 +3,16 @@ package ru.otus.spring.dao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import ru.otus.spring.config.ExamConfig;
-import ru.otus.spring.dao.interfaces.QuestionsDaoFileNameProvider;
+import ru.otus.spring.dao.interfaces.QstnsDaoFileNameProvider;
 
 
 @Component
-public class QuestionsDaoFileNameProviderCsvFile implements QuestionsDaoFileNameProvider {
+public class QstnsDaoFileNameProviderCsvFile implements QstnsDaoFileNameProvider {
 
     private final ExamConfig examConfig;
 
     @Autowired
-    public QuestionsDaoFileNameProviderCsvFile(ExamConfig examConfig) {
+    public QstnsDaoFileNameProviderCsvFile(ExamConfig examConfig) {
         this.examConfig = examConfig;
     }
 

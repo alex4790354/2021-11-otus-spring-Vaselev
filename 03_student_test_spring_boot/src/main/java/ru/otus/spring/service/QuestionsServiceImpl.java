@@ -13,7 +13,7 @@ import java.util.List;
 
 
 @Service
-public class QuestionsServiceCsv implements QuestionsService {
+public class QuestionsServiceImpl implements QuestionsService {
 
     private final ExamConfig config;
     private final Localization localization;
@@ -21,7 +21,7 @@ public class QuestionsServiceCsv implements QuestionsService {
     private final QuestionsDao dao;
 
     @Autowired
-    public QuestionsServiceCsv(ExamConfig config, QuestionsDao dao, Localization localization, IOService ioService) {
+    public QuestionsServiceImpl(ExamConfig config, QuestionsDao dao, Localization localization, IOService ioService) {
         this.config = config;
         this.dao = dao;
         this.localization = localization;
@@ -32,8 +32,7 @@ public class QuestionsServiceCsv implements QuestionsService {
     public void takeExam() {
         int correctAnswers = 0;
         String studentAnswer;
-        System.out.println("file-name: " + config.getExamFileNameCsv());
-        ioService.out(localization.getExamPropertiesValue("exam.ask-name", null ));
+        ioService.out(localization.getExamPropertiesValue("exam.ask-name"));
         String userName = ioService.readString();
         ioService.out(localization.getExamPropertiesValue("exam.welcome", userName));
         List<Question> questions = dao.takeExamQuestionsList();
@@ -45,9 +44,9 @@ public class QuestionsServiceCsv implements QuestionsService {
             }
         }
         if (correctAnswers >= config.getCorrectAnswersToPass()) {
-            ioService.out(localization.getExamPropertiesValue("exam.pass", null));
+            ioService.out(localization.getExamPropertiesValue("exam.pass"));
         } else {
-            ioService.out(localization.getExamPropertiesValue("exam.fail", null));
+            ioService.out(localization.getExamPropertiesValue("exam.fail"));
         }
     }
 

@@ -4,7 +4,7 @@ public class Question {
 
     private long id;
     private String questionText;
-    String answer;
+    private String answer;
 
     public Question() {
     }

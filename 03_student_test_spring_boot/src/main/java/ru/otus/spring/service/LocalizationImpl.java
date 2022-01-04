@@ -9,7 +9,7 @@ import ru.otus.spring.service.interfaces.Localization;
 import java.util.Locale;
 
 @Service
-public class LocalizationFromExamFile implements Localization {
+public class LocalizationImpl implements Localization {
 
     private final MessageSource msg;
     private String language;
@@ -17,7 +17,7 @@ public class LocalizationFromExamFile implements Localization {
 
 
     @Autowired
-    public LocalizationFromExamFile(ExamConfig config, MessageSource msg) {
+    public LocalizationImpl(ExamConfig config, MessageSource msg) {
         this.msg = msg;
         this.language = config.getLocaleLanguage();
         this.country = config.getLocaleCountry();
@@ -28,17 +28,8 @@ public class LocalizationFromExamFile implements Localization {
         return msg.getMessage(key, args, Locale.forLanguageTag(this.country + "-" + this.language));
     }
 
-
-    public String getLanguage() {
-        return language;
-    }
-
     public void setLanguage(String language) {
         this.language = language;
-    }
-
-    public String getCountry() {
-        return country;
     }
 
     public void setCountry(String country) {
