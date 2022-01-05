@@ -14,11 +14,9 @@ import static org.junit.jupiter.api.Assertions.*;
 
 
 @DisplayName("Test class ExamConfigTest")
-@ComponentScan({"ru.otus.spring.config"})
 @SpringBootTest
 class ConfigTest {
 
-    // Why do I have to Mock  Shell ??
     @MockBean
     private Shell shell;
 
@@ -29,7 +27,7 @@ class ConfigTest {
     // This test fail. Why does it trying to Autowere QuestionServiceImpl?
     @Test
     void getCorrectAnswersToPass() {
-        assertEquals(config.getCorrectAnswersToPass(), 3);
+        assertEquals(3, config.getCorrectAnswersToPass());
     }
 
 }

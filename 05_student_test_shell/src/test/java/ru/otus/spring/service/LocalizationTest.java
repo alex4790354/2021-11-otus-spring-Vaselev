@@ -1,4 +1,4 @@
-package ru.otus.spring.util;
+package ru.otus.spring.service;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -8,18 +8,14 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.shell.Shell;
 import ru.otus.spring.config.Config;
-import ru.otus.spring.service.LocalizationImpl;
-import ru.otus.spring.service.interfaces.QuestionsService;
-
+import ru.otus.spring.service.interfaces.Localization;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 
-@DisplayName("Test class UtilTest")
-@ComponentScan({"ru.otus.spring.config.Config"})
+@DisplayName("Test class LocalizationImpl")
 @SpringBootTest
-class UtilTest {
+class LocalizationTest {
 
-    // Why do I have to Mock  Shell ??
     @MockBean
     private Shell shell;
 
@@ -27,7 +23,7 @@ class UtilTest {
     private Config config;
 
     @Autowired
-    private LocalizationImpl localization;
+    private Localization localization;
 
     private static final String EXAM_ASK_NAME_EN = "what is your name?";
     private static final String EXAM_WELCOME_EN = "Welcome to the chemistry test";
@@ -44,10 +40,10 @@ class UtilTest {
     void getExamPropertiesValueForRusLocale() {
         config.setLocaleLanguage("ru");
         config.setLocaleCountry("RU");
-        assertEquals(localization.getPropertiesValue("exam.ask-name", config.getLocaleLanguage(), config.getLocaleCountry()), EXAM_ASK_NAME_RU);
-        assertEquals(localization.getPropertiesValue("exam.welcome" , config.getLocaleLanguage(), config.getLocaleCountry()), EXAM_WELCOME_RU);
-        assertEquals(localization.getPropertiesValue("exam.pass"    , config.getLocaleLanguage(), config.getLocaleCountry()), EXAM_PASS_RU);
-        assertEquals(localization.getPropertiesValue("exam.fail"    , config.getLocaleLanguage(), config.getLocaleCountry()), EXAM_FAIL_RU);
+        assertEquals(EXAM_ASK_NAME_RU, localization.getPropertiesValue("exam.ask-name", config.getLocaleLanguage(), config.getLocaleCountry()));
+        assertEquals(EXAM_WELCOME_RU , localization.getPropertiesValue("exam.welcome" , config.getLocaleLanguage(), config.getLocaleCountry()));
+        assertEquals(EXAM_PASS_RU    , localization.getPropertiesValue("exam.pass"    , config.getLocaleLanguage(), config.getLocaleCountry()));
+        assertEquals(EXAM_FAIL_RU    , localization.getPropertiesValue("exam.fail"    , config.getLocaleLanguage(), config.getLocaleCountry()));
     }
 
     @DisplayName("getExamPropertiesValue should get correct i18n values for EN_US locale:")
@@ -55,10 +51,10 @@ class UtilTest {
     void getExamPropertiesValueForEngLocale() {
         config.setLocaleLanguage("en");
         config.setLocaleCountry("US");
-        assertEquals(localization.getPropertiesValue("exam.ask-name", config.getLocaleLanguage(), config.getLocaleCountry()), EXAM_ASK_NAME_EN);
-        assertEquals(localization.getPropertiesValue("exam.welcome" , config.getLocaleLanguage(), config.getLocaleCountry()), EXAM_WELCOME_EN);
-        assertEquals(localization.getPropertiesValue("exam.pass"    , config.getLocaleLanguage(), config.getLocaleCountry()), EXAM_PASS_EN);
-        assertEquals(localization.getPropertiesValue("exam.fail"    , config.getLocaleLanguage(), config.getLocaleCountry()), EXAM_FAIL_EN);
+        assertEquals(EXAM_ASK_NAME_EN, localization.getPropertiesValue("exam.ask-name", config.getLocaleLanguage(), config.getLocaleCountry()));
+        assertEquals(EXAM_WELCOME_EN , localization.getPropertiesValue("exam.welcome" , config.getLocaleLanguage(), config.getLocaleCountry()));
+        assertEquals(EXAM_PASS_EN    , localization.getPropertiesValue("exam.pass"    , config.getLocaleLanguage(), config.getLocaleCountry()));
+        assertEquals(EXAM_FAIL_EN    , localization.getPropertiesValue("exam.fail"    , config.getLocaleLanguage(), config.getLocaleCountry()));
     }
 
 }
