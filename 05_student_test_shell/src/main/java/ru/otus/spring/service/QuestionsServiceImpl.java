@@ -8,6 +8,8 @@ import ru.otus.spring.service.interfaces.IOService;
 import ru.otus.spring.service.interfaces.Localization;
 import ru.otus.spring.service.interfaces.QuestionsService;
 import ru.otus.spring.domain.Question;
+import ru.otus.spring.service.interfaces.StudentLoginService;
+
 import java.util.List;
 
 
@@ -18,25 +20,24 @@ public class QuestionsServiceImpl implements QuestionsService {
     private final Localization localization;
     private final IOService ioService;
     private final QuestionsDao dao;
-    private String studentName;
+    private final StudentLoginService stLoginService;
+
 
     @Autowired
-    public QuestionsServiceImpl(Config config, QuestionsDao dao, Localization localization, IOService ioService) {
+    public QuestionsServiceImpl(Config config, Localization localization, IOService ioService, QuestionsDao dao, StudentLoginService stLoginService) {
         this.config = config;
-        this.dao = dao;
         this.localization = localization;
         this.ioService = ioService;
+        this.dao = dao;
+        this.stLoginService = stLoginService;
     }
+
 
     @Override
     public void takeExam() {
         int correctAnswers = 0;
         String studentAnswer;
-        //System.out.println("file-name: " + config.getExamFileNameCsv());
-        //ioService.out(localization.getPropertiesValue("exam.ask-name", config.getLocaleLanguage(), config.getLocaleCountry()));
-        //String userName = ioService.readString();
-        //ioService.out(localization.getExamPropertiesValue("exam.welcome", studentName));
-        ioService.out(localization.getPropertiesValue("exam.welcome", config.getLocaleLanguage(), config.getLocaleCountry(), studentName));
+        ioService.out(localization.getPropertiesValue("exam.welcome", config.getLocaleLanguage(), config.getLocaleCountry(), stLoginService.getStudentName()));
         List<Question> questions = dao.takeExamQuestionsList();
         for (Question question : questions) {
             ioService.out(question.getQuestionText());
@@ -50,16 +51,6 @@ public class QuestionsServiceImpl implements QuestionsService {
         } else {
             ioService.out(localization.getPropertiesValue("exam.fail", config.getLocaleLanguage(), config.getLocaleCountry()));
         }
-    }
-
-    @Override
-    public String getStudentName() {
-        return studentName;
-    }
-
-    @Override
-    public void setStudentName(String studentName){
-        this.studentName = studentName;
     }
 
 }

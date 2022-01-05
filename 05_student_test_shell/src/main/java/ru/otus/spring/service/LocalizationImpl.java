@@ -19,7 +19,6 @@ public class LocalizationImpl implements Localization {
 
     @Override
     public String getPropertiesValue(String key, String language, String country, Object ...args) {
-        System.out.println("key: " + key + ", language: " + language + ", country: " + country);
         return msg.getMessage(key, args, Locale.forLanguageTag(language + "-" + country));
     }
 

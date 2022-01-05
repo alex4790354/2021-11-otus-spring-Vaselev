@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.context.annotation.ComponentScan;
+import org.springframework.shell.Shell;
 import ru.otus.spring.config.Config;
 import ru.otus.spring.service.LocalizationImpl;
 import ru.otus.spring.service.interfaces.QuestionsService;
@@ -14,9 +15,13 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 
 @DisplayName("Test class UtilTest")
-@ComponentScan({"ru.otus.spring.config.ExamConfig"})
+@ComponentScan({"ru.otus.spring.config.Config"})
 @SpringBootTest
 class UtilTest {
+
+    // Why do I have to Mock  Shell ??
+    @MockBean
+    private Shell shell;
 
     @Autowired
     private Config config;
