@@ -1,0 +1,10 @@
+spring:
+  messages:
+    basename: i18n/messages
+    fallback-to-system-locale: false
+
+exam:
+  correct-answers-to-pass: 3
+  locale-language: en
+  locale-country: US
+  exam-file-name-csv: csv/exam-quastions
