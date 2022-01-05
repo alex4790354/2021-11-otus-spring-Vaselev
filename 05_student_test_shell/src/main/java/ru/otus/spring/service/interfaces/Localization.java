@@ -2,6 +2,6 @@ package ru.otus.spring.service.interfaces;
 
 public interface Localization {
 
-    public String getExamPropertiesValue(String key, Object ...args);
+    String getPropertiesValue(String key, String language, String country, Object ...args);
 
 }

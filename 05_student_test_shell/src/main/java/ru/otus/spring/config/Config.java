@@ -9,7 +9,7 @@ import java.util.Locale;
 
 @ConfigurationProperties(prefix = "exam")
 @Component
-public class ExamConfig {
+public class Config {
 
     private Integer correctAnswersToPass;
     private String localeLanguage;
@@ -47,8 +47,5 @@ public class ExamConfig {
     public String getExamFileNameCsv() {
         return examFileNameCsv;
     }
-    /*public String getExamFileNameCsv() {
-        return String.format("%s-%s.csv", examFileNameCsv, localeLanguage);
-    }*/
 
 }

@@ -3,23 +3,17 @@ package ru.otus.spring;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
-import org.springframework.context.event.ApplicationEventMulticaster;
-import org.springframework.context.event.SimpleApplicationEventMulticaster;
-import org.springframework.core.task.SimpleAsyncTaskExecutor;
+import ru.otus.spring.service.interfaces.QuestionsService;
+
+
+import java.io.IOException;
 
 
 @SpringBootApplication
 public class Application {
 
+	public static void main(String[] args) throws IOException {
 
-	public ApplicationEventMulticaster applicationEventMulticaster() {
-		SimpleApplicationEventMulticaster eventMulticaster = new SimpleApplicationEventMulticaster();
-		eventMulticaster.setTaskExecutor(new SimpleAsyncTaskExecutor());
-		return eventMulticaster;
-	}
-
-
-	public static void main(String[] args) {
 		ApplicationContext context = SpringApplication.run(Application.class, args);
 
 	}

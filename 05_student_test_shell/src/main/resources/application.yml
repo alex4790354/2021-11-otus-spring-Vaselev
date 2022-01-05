@@ -11,6 +11,6 @@ spring:
 
 exam:
   correct-answers-to-pass: 3
-  locale-language: ru
-  locale-country: RU
+  locale-language: en
+  locale-country: US
   exam-file-name-csv: csv/exam-quastions
