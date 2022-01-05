@@ -5,7 +5,7 @@ import org.springframework.stereotype.Component;
 import ru.otus.spring.dao.interfaces.QuestionsDao;
 import ru.otus.spring.domain.Question;
 import ru.otus.spring.util.ExamException;
-import ru.otus.spring.dao.interfaces.QstnsDaoFileNameProvider;
+import ru.otus.spring.dao.interfaces.QustionsFileNameProvider;
 
 import java.io.*;
 import java.nio.charset.StandardCharsets;
@@ -16,11 +16,11 @@ import java.util.List;
 @Component
 public class QuestionsFromCsvFile implements QuestionsDao {
 
-    private final QstnsDaoFileNameProvider qstnsDaoFileNameProvider;
+    private final QustionsFileNameProvider qustionsFileNameProvider;
 
     @Autowired
-    public QuestionsFromCsvFile(QstnsDaoFileNameProvider qstnsDaoFileNameProvider) {
-        this.qstnsDaoFileNameProvider = qstnsDaoFileNameProvider;
+    public QuestionsFromCsvFile(QustionsFileNameProvider qustionsFileNameProvider) {
+        this.qustionsFileNameProvider = qustionsFileNameProvider;
     }
 
 
@@ -32,9 +32,9 @@ public class QuestionsFromCsvFile implements QuestionsDao {
             List<Question> questions = new ArrayList<>();
 
             ClassLoader classLoader = getClass().getClassLoader();
-            InputStream inputStream = classLoader.getResourceAsStream(qstnsDaoFileNameProvider.getFileName());
+            InputStream inputStream = classLoader.getResourceAsStream(qustionsFileNameProvider.getFileName());
             if (inputStream == null) {
-                throw new IllegalArgumentException("file not found! " + qstnsDaoFileNameProvider.getFileName());
+                throw new IllegalArgumentException("file not found! " + qustionsFileNameProvider.getFileName());
             }
             try (InputStreamReader streamReader = new InputStreamReader(inputStream, StandardCharsets.UTF_8);
                  BufferedReader reader = new BufferedReader(streamReader)) {
@@ -58,7 +58,7 @@ public class QuestionsFromCsvFile implements QuestionsDao {
                     indx++;
                 }
             } catch (Exception e) {
-                throw new ExamException("Please check the header file (first row in " + qstnsDaoFileNameProvider.getFileName() + ")", e);
+                throw new ExamException("Please check the header file (first row in " + qustionsFileNameProvider.getFileName() + ")", e);
             }
             return questions;
         } catch (Exception e) {
