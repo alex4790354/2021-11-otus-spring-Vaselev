@@ -37,7 +37,7 @@ public class QuestionsServiceImpl implements QuestionsService {
     public void takeExam() {
         int correctAnswers = 0;
         String studentAnswer;
-        ioService.out(localization.getPropertiesValue("exam.welcome", config.getLocaleLanguage(), config.getLocaleCountry(), stLoginService.getStudentName()));
+        ioService.out(localization.getPropertiesValue("exam.welcome", stLoginService.getStudentName()));
         List<Question> questions = dao.takeExamQuestionsList();
         for (Question question : questions) {
             ioService.out(question.getQuestionText());
@@ -47,9 +47,9 @@ public class QuestionsServiceImpl implements QuestionsService {
             }
         }
         if (correctAnswers >= config.getCorrectAnswersToPass()) {
-            ioService.out(localization.getPropertiesValue("exam.pass", config.getLocaleLanguage(), config.getLocaleCountry()));
+            ioService.out(localization.getPropertiesValue("exam.pass"));
         } else {
-            ioService.out(localization.getPropertiesValue("exam.fail", config.getLocaleLanguage(), config.getLocaleCountry()));
+            ioService.out(localization.getPropertiesValue("exam.fail"));
         }
     }
 

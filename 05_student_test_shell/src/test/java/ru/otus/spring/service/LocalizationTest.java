@@ -8,6 +8,7 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.shell.Shell;
 import ru.otus.spring.config.Config;
+import ru.otus.spring.service.interfaces.LocaleProvider;
 import ru.otus.spring.service.interfaces.Localization;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -21,6 +22,9 @@ class LocalizationTest {
 
     @Autowired
     private Config config;
+
+    @Autowired
+    private LocaleProvider localeProvider;
 
     @Autowired
     private Localization localization;
@@ -40,21 +44,20 @@ class LocalizationTest {
     void getExamPropertiesValueForRusLocale() {
         config.setLocaleLanguage("ru");
         config.setLocaleCountry("RU");
-        assertEquals(EXAM_ASK_NAME_RU, localization.getPropertiesValue("exam.ask-name", config.getLocaleLanguage(), config.getLocaleCountry()));
-        assertEquals(EXAM_WELCOME_RU , localization.getPropertiesValue("exam.welcome" , config.getLocaleLanguage(), config.getLocaleCountry()));
-        assertEquals(EXAM_PASS_RU    , localization.getPropertiesValue("exam.pass"    , config.getLocaleLanguage(), config.getLocaleCountry()));
-        assertEquals(EXAM_FAIL_RU    , localization.getPropertiesValue("exam.fail"    , config.getLocaleLanguage(), config.getLocaleCountry()));
+        assertEquals(EXAM_ASK_NAME_RU, localization.getPropertiesValue("exam.ask-name"));
+        assertEquals(EXAM_WELCOME_RU , localization.getPropertiesValue("exam.welcome" ));
+        assertEquals(EXAM_PASS_RU    , localization.getPropertiesValue("exam.pass"    ));
+        assertEquals(EXAM_FAIL_RU    , localization.getPropertiesValue("exam.fail"    ));
     }
 
     @DisplayName("getExamPropertiesValue should get correct i18n values for EN_US locale:")
     @Test
     void getExamPropertiesValueForEngLocale() {
-        config.setLocaleLanguage("en");
-        config.setLocaleCountry("US");
-        assertEquals(EXAM_ASK_NAME_EN, localization.getPropertiesValue("exam.ask-name", config.getLocaleLanguage(), config.getLocaleCountry()));
-        assertEquals(EXAM_WELCOME_EN , localization.getPropertiesValue("exam.welcome" , config.getLocaleLanguage(), config.getLocaleCountry()));
-        assertEquals(EXAM_PASS_EN    , localization.getPropertiesValue("exam.pass"    , config.getLocaleLanguage(), config.getLocaleCountry()));
-        assertEquals(EXAM_FAIL_EN    , localization.getPropertiesValue("exam.fail"    , config.getLocaleLanguage(), config.getLocaleCountry()));
+        localeProvider.setLocale("en", "US");
+        assertEquals(EXAM_ASK_NAME_EN, localization.getPropertiesValue("exam.ask-name"));
+        assertEquals(EXAM_WELCOME_EN , localization.getPropertiesValue("exam.welcome" ));
+        assertEquals(EXAM_PASS_EN    , localization.getPropertiesValue("exam.pass"    ));
+        assertEquals(EXAM_FAIL_EN    , localization.getPropertiesValue("exam.fail"    ));
     }
 
 }
