@@ -3,7 +3,6 @@ package ru.otus.spring.shell;
 import ru.otus.spring.customExceptions.DaoException;
 import ru.otus.spring.dao.interfaces.BookDao;
 import ru.otus.spring.domain.Book;
-import ru.otus.spring.events.EventsPublisher;
 import lombok.RequiredArgsConstructor;
 import org.springframework.shell.Availability;
 import org.springframework.shell.standard.ShellComponent;
@@ -14,9 +13,8 @@ import org.springframework.shell.standard.ShellOption;
 
 @ShellComponent
 @RequiredArgsConstructor
-public class ApplicationEventsCommands {
+public class ApplicationShellCommands {
 
-    private final EventsPublisher eventsPublisher;
     private final BookDao bookDao;
     private String userName;
 
