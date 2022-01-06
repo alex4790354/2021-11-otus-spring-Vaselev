@@ -1,0 +1,16 @@
+logging:
+  level:
+    root: ERROR
+
+spring:
+  main:
+    allow-circular-references: true
+  messages:
+    basename: i18n/messages
+    fallback-to-system-locale: false
+
+exam:
+  correct-answers-to-pass: 3
+  locale-language: ru
+  locale-country: RU
+  exam-file-name-csv: csv/exam-quastions
