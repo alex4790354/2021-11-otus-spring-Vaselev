@@ -1,26 +1,45 @@
-package ru.otus.spring.dao;
+package ru.otus.spring.jdbc.dao;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.jdbc.JdbcTest;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Import;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
-import ru.otus.spring.dao.interfaces.BookDao;
-
+import ru.otus.spring.jdbc.customExceptions.DaoException;
+import ru.otus.spring.jdbc.dao.interfaces.BookDao;
+import ru.otus.spring.jdbc.domain.Author;
+import ru.otus.spring.jdbc.domain.Book;
+import ru.otus.spring.jdbc.domain.Genre;
 
 
 @DisplayName("BooksDao for books manipulation test")
 @ExtendWith(SpringExtension.class)
 @JdbcTest
 @Import(BookDaoJdbc.class)
+@ComponentScan({"ru.otus.spring.jdbc"})
 @AutoConfigureTestDatabase(replace= AutoConfigureTestDatabase.Replace.NONE)
 class BookDaoJdbcTest {
 
-    private final int EXPECTED_BOOKS_COUNT = 9;
+    private final int EXPECTED_BOOKS_COUNT = 10;
+
+    private final Author AUTHOR_ONE = new Author(1, "Михаил Булгаков");
+    private final Author AUTHOR_NOT_EXIST = new Author(100, "Author not exist");
+    private final Genre GENRE_ONE = new Genre(1, "Роман");
+    private final String BOOK_ONE_NAME = "Мастер и Маргарита";
+    private final String BOOK_ONE_NAME_UPDATED = "Мастер и Маргарита UPDATED";
+
+    private final Book BOOK_ONE = new Book(1, AUTHOR_ONE, GENRE_ONE, BOOK_ONE_NAME);
+    private final Book BOOK_ONE_UPDATED = new Book(1, AUTHOR_ONE, GENRE_ONE, BOOK_ONE_NAME_UPDATED);
+    private final Book BOOK_CANT_INSERT = new Book(10, AUTHOR_NOT_EXIST, GENRE_ONE, BOOK_ONE_NAME_UPDATED);
+
+
 
     @Autowired
     private BookDao bookDao;
@@ -38,56 +57,35 @@ class BookDaoJdbcTest {
     @DisplayName("Should return expected Books count")
     @Test
     void shouldReturnExpectedBooksCount() {
-
         int actualBooksCount = bookDao.getCount();
         assertEquals(EXPECTED_BOOKS_COUNT, actualBooksCount);
     }
 
-    /*
+
     @Test
     void getByIdBookShouldReturnExpectedBook() {
-        Author author = new Author(1, "Михаил Булгаков");
-        Genre genre = new Genre(1, "Роман");
-        Book expectedBook = new Book(1, author, genre, "Мастер и Маргарита");
-        assertEquals(bookDao.getById(1), expectedBook);
+        assertEquals(BOOK_ONE, bookDao.getById(1));
     }
 
     @Test
-    void updateById() {
-        Author author = new Author(1, "Михаил Булгаков");
-        Genre genre = new Genre(1, "Роман");
-        bookDao.updateById( 1, "Мастер и Маргарита UPDATED");
-
-        Book expectedBook = new Book(1, author, genre, "Мастер и Маргарита UPDATED");
-        assertEquals(bookDao.getById(1), expectedBook);
+    void shouldUpdateBookById() {
+        bookDao.updateById( 1, BOOK_ONE_NAME_UPDATED);
+        assertEquals(BOOK_ONE_UPDATED, bookDao.getById(1));
     }
 
    @Test
-    void booksCountShouldDecressAfterDeleteById() {
+    void booksCountShouldDecressAfterDeleteById() throws DaoException {
         assertEquals(bookDao.getCount(), EXPECTED_BOOKS_COUNT);
-        bookDao.deleteById(2);
+        bookDao.deleteById(1);
         assertEquals(bookDao.getCount(), EXPECTED_BOOKS_COUNT - 1);
     }
 
     @Test
-    void booksCountShouldincreasedAfterCorrectInsert() throws WrongSqlStatement {
+    void booksCountShouldincreasedAfterCorrectInsert() throws DaoException {
         int count = bookDao.getCount();
-        bookDao.insert("Аркадий и Борис Стругацкие", "Фантастика", "Отель у погибшего альпениста 1");
-        assertEquals(bookDao.getCount(), count + 1);
+        bookDao.insert(BOOK_ONE);
+        assertEquals(count + 1, bookDao.getCount());
     }
 
-    @Test
-    void incorrectInsertShouldGenerateException() {
-
-        Throwable thrown = assertThrows(WrongSqlStatement.class, () -> {
-            bookDao.insert("Нет такого автора", "Нет такого жанра", "Отель у погибшего альпениста 2");
-        });
-        assertEquals(thrown.getMessage(), "Error: Author or genre doesn't exist. Please check and correct it");
-    }*/
-
-    /*@Test
-        void getAll() {
-        too much for not
-    }*/
 
 }

@@ -1,8 +1,8 @@
-package ru.otus.spring.shell;
+package ru.otus.spring.jdbc.shell;
 
-import ru.otus.spring.customExceptions.DaoException;
-import ru.otus.spring.dao.interfaces.BookDao;
-import ru.otus.spring.domain.Book;
+import ru.otus.spring.jdbc.customExceptions.DaoException;
+import ru.otus.spring.jdbc.dao.interfaces.BookDao;
+import ru.otus.spring.jdbc.domain.Book;
 import lombok.RequiredArgsConstructor;
 import org.springframework.shell.Availability;
 import org.springframework.shell.standard.ShellComponent;

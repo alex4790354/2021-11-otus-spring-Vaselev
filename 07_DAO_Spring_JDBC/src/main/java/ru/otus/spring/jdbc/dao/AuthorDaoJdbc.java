@@ -1,12 +1,13 @@
-package ru.otus.spring.dao;
+package ru.otus.spring.jdbc.dao;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcOperations;
 import org.springframework.stereotype.Repository;
-import ru.otus.spring.dao.interfaces.AuthorDao;
-import ru.otus.spring.domain.Author;
+import ru.otus.spring.jdbc.dao.interfaces.AuthorDao;
+import ru.otus.spring.jdbc.domain.Author;
+
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Collections;
@@ -26,7 +27,7 @@ public class AuthorDaoJdbc implements AuthorDao {
     @Override
     public Author getById(long id) {
         Map<String, Object> params = Collections.singletonMap("id", id);
-        return npJdbc.queryForObject("SELECT id, name FROM genre WHERE id = :id", params, new AuthorMapper());
+        return npJdbc.queryForObject("SELECT id, name FROM author WHERE id = :id", params, new AuthorMapper());
     }
 
     @Override

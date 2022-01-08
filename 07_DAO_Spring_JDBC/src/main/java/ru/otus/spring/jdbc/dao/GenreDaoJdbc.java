@@ -1,11 +1,10 @@
-package ru.otus.spring.dao;
+package ru.otus.spring.jdbc.dao;
 
-import org.springframework.jdbc.core.JdbcOperations;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcOperations;
 import org.springframework.stereotype.Repository;
-import ru.otus.spring.dao.interfaces.GenreDao;
-import ru.otus.spring.domain.Genre;
+import ru.otus.spring.jdbc.dao.interfaces.GenreDao;
+import ru.otus.spring.jdbc.domain.Genre;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;

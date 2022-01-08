@@ -9,4 +9,4 @@ spring:
     url: jdbc:postgresql://localhost:5432/myDB
     username: admin
     password: admin
-    initialization-mode: always
+    #initialization-mode: always

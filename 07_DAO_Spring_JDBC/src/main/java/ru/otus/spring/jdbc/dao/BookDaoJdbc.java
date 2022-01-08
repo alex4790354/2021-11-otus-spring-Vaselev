@@ -1,16 +1,16 @@
-package ru.otus.spring.dao;
+package ru.otus.spring.jdbc.dao;
 
 
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcOperations;
 import org.springframework.stereotype.Repository;
-import ru.otus.spring.customExceptions.DaoException;
-import ru.otus.spring.dao.interfaces.AuthorDao;
-import ru.otus.spring.dao.interfaces.BookDao;
-import ru.otus.spring.dao.interfaces.GenreDao;
-import ru.otus.spring.domain.Author;
-import ru.otus.spring.domain.Book;
-import ru.otus.spring.domain.Genre;
+import ru.otus.spring.jdbc.customExceptions.DaoException;
+import ru.otus.spring.jdbc.dao.interfaces.AuthorDao;
+import ru.otus.spring.jdbc.dao.interfaces.BookDao;
+import ru.otus.spring.jdbc.dao.interfaces.GenreDao;
+import ru.otus.spring.jdbc.domain.Author;
+import ru.otus.spring.jdbc.domain.Book;
+import ru.otus.spring.jdbc.domain.Genre;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -33,7 +33,6 @@ public class BookDaoJdbc implements BookDao {
     @Override
     public int getCount() {
         Map<String, Object> params = Collections.emptyMap();
-        //     npJdbc.queryForObject("SELECT count(*) FROM book ", params, Integer.class);
         return npJdbc.getJdbcOperations().queryForObject("SELECT count(*) FROM book ", Integer.class);
     }
 

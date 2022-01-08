@@ -1,7 +1,7 @@
-package ru.otus.spring.dao.interfaces;
+package ru.otus.spring.jdbc.dao.interfaces;
 
-import ru.otus.spring.customExceptions.DaoException;
-import ru.otus.spring.domain.Book;
+import ru.otus.spring.jdbc.customExceptions.DaoException;
+import ru.otus.spring.jdbc.domain.Book;
 
 import java.util.List;
 
