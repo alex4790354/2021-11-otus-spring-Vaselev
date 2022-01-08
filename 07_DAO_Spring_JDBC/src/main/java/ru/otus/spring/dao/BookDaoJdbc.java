@@ -33,7 +33,8 @@ public class BookDaoJdbc implements BookDao {
     @Override
     public int getCount() {
         Map<String, Object> params = Collections.emptyMap();
-        return npJdbc.queryForObject("SELECT count(*) FROM book ", params, Integer.class);
+        //     npJdbc.queryForObject("SELECT count(*) FROM book ", params, Integer.class);
+        return npJdbc.getJdbcOperations().queryForObject("SELECT count(*) FROM book ", Integer.class);
     }
 
     @Override
@@ -70,13 +71,15 @@ public class BookDaoJdbc implements BookDao {
         params.put("book_name", book.getName());
         try {
             npJdbc.update("INSERT INTO book(author_id, genre_id, name) VALUES (:author_id, :genre_id, :book_name )", params);
-        } catch (Exception exc) {
-            if (exc.getClass().toString().toLowerCase().contains("dataintegrityviolation")) {
+        } catch (Exception exc) { //(SQLException exc) {
+            if (exc.getClass().isInstance(new SQLException())) {
                 throw new DaoException("Error: Author or genre doesn't exist. Please check and correct it");
             } else {
-                exc.printStackTrace();
+                throw exc;
             }
+
         }
+
     }
 
 

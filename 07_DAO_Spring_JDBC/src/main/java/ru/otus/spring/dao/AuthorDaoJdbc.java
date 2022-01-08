@@ -1,6 +1,7 @@
 package ru.otus.spring.dao;
 
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcOperations;
 import org.springframework.stereotype.Repository;
@@ -17,6 +18,7 @@ public class AuthorDaoJdbc implements AuthorDao {
 
     private final NamedParameterJdbcOperations npJdbc;
 
+    @Autowired
     public AuthorDaoJdbc(NamedParameterJdbcOperations npJdbc) {
         this.npJdbc = npJdbc;
     }

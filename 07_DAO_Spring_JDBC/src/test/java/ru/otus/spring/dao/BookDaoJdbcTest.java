@@ -1,9 +1,9 @@
 package ru.otus.spring.dao;
 
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-//import org.junit.jupiter.api.Assertions.assertEquals;
-
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.jdbc.JdbcTest;
@@ -11,15 +11,16 @@ import org.springframework.context.annotation.Import;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import ru.otus.spring.dao.interfaces.BookDao;
 
+
+
 @DisplayName("BooksDao for books manipulation test")
 @ExtendWith(SpringExtension.class)
 @JdbcTest
 @Import(BookDaoJdbc.class)
-
-//@AutoConfigureTestDatabase(replace= AutoConfigureTestDatabase.Replace.NONE)
+@AutoConfigureTestDatabase(replace= AutoConfigureTestDatabase.Replace.NONE)
 class BookDaoJdbcTest {
 
-    private static final int EXPECTED_BOOKS_COUNT = 9;
+    private final int EXPECTED_BOOKS_COUNT = 9;
 
     @Autowired
     private BookDao bookDao;
@@ -33,15 +34,16 @@ class BookDaoJdbcTest {
      * */
 
 
-    /*
+
     @DisplayName("Should return expected Books count")
     @Test
     void shouldReturnExpectedBooksCount() {
 
         int actualBooksCount = bookDao.getCount();
-        assertEquals(actualBooksCount, EXPECTED_BOOKS_COUNT);
+        assertEquals(EXPECTED_BOOKS_COUNT, actualBooksCount);
     }
 
+    /*
     @Test
     void getByIdBookShouldReturnExpectedBook() {
         Author author = new Author(1, "Михаил Булгаков");

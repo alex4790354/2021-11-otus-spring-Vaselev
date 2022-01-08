@@ -63,7 +63,7 @@ public class ApplicationShellCommands {
         return "insert finished.";
     }
 
-    private Availability isPublishEventCommandAvailable() {
+    private Availability isAuthorized() {
         return this.userName == null? Availability.unavailable("Сначала авторизуйтесь"): Availability.available();
     }
 }
