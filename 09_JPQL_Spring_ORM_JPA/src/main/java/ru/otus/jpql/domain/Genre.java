@@ -1,22 +1,25 @@
-package ru.otus.spring.domain;
+package ru.otus.jpql.domain;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.RequiredArgsConstructor;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
 
 @Data
-@RequiredArgsConstructor
+@AllArgsConstructor
+@NoArgsConstructor
+@Entity(name = "genreEntity")
 @Table(name = "genre")
 public class Genre {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    private final long id;
+    private long id;
 
     @Column(name = "name")
-    private final String name;
+    private String name;
 
 }

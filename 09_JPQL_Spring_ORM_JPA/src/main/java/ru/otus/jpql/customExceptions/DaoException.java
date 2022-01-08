@@ -1,4 +1,4 @@
-package ru.otus.spring.customExceptions;
+package ru.otus.jpql.customExceptions;
 
 
 public class DaoException extends Exception {
