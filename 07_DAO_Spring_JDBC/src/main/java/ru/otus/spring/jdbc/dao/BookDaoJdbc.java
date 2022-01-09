@@ -83,7 +83,7 @@ public class BookDaoJdbc implements BookDao {
         try {
             npJdbc.update("INSERT INTO book(author_id, genre_id, name) VALUES (:author_id, :genre_id, :book_name )", params);
         } catch (Exception exc) {
-            if (exc.getClass().getName().equals("SQLException")) {
+            if (exc.getClass().getName().equals("DataIntegrityViolationException")) {
                 throw new DaoException("Error: Author or genre doesn't exist. Please check and correct it");
             } else {
                 throw exc;

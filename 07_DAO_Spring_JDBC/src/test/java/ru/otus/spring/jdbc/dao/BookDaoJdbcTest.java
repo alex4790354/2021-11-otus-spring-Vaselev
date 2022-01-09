@@ -3,14 +3,14 @@ package ru.otus.spring.jdbc.dao;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import static org.assertj.core.api.Assertions.assertThatCode;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.jdbc.JdbcTest;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Import;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import ru.otus.spring.jdbc.customExceptions.DaoException;
 import ru.otus.spring.jdbc.dao.interfaces.BookDao;
@@ -37,7 +37,7 @@ class BookDaoJdbcTest {
 
     private final Book BOOK_ONE = new Book(1, AUTHOR_ONE, GENRE_ONE, BOOK_ONE_NAME);
     private final Book BOOK_ONE_UPDATED = new Book(1, AUTHOR_ONE, GENRE_ONE, BOOK_ONE_NAME_UPDATED);
-    private final Book BOOK_CANT_INSERT = new Book(10, AUTHOR_NOT_EXIST, GENRE_ONE, BOOK_ONE_NAME_UPDATED);
+    private final Book BOOK_CANT_BE_INSERTED = new Book(10, AUTHOR_NOT_EXIST, GENRE_ONE, BOOK_ONE_NAME_UPDATED);
 
 
     @Autowired
@@ -77,6 +77,14 @@ class BookDaoJdbcTest {
         bookDao.insert(BOOK_ONE_UPDATED);
         assertEquals(EXPECTED_BOOKS_COUNT + 1, bookDao.getCount());
     }
+
+    @DisplayName("Should trow an error")
+    @Test
+    void shouldTrowAnError() {
+        assertThatCode(() -> bookDao.insert(BOOK_CANT_BE_INSERTED))
+                .isInstanceOf(DataIntegrityViolationException.class);
+    }
+
 
 
 }
