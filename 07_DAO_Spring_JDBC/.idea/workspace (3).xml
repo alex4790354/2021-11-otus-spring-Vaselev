@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="RunManager" selected="JUnit.BookDaoJdbcTest.shouldReturnExpectedBooksCount">
+    <configuration name="BookDaoJdbcTest.shouldReturnExpectedBooksCount" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="07_DAO_Spring_JDBC" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="ru.otus.spring.jdbc.dao.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="ru.otus.spring.jdbc.dao" />
+      <option name="MAIN_CLASS_NAME" value="ru.otus.spring.jdbc.dao.BookDaoJdbcTest" />
+      <option name="METHOD_NAME" value="shouldReturnExpectedBooksCount" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="JetRunConfigurationType">
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="KotlinStandaloneScriptRunConfigurationType">
+      <option name="filePath" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Main" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+      <module name="07_DAO_Spring_JDBC" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="ru.otus.spring.Main" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="JUnit.BookDaoJdbcTest.shouldReturnExpectedBooksCount" />
+      </list>
+    </recent_temporary>
+  </component>
+</project>
