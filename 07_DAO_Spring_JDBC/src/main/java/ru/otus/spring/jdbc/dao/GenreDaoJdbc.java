@@ -1,5 +1,6 @@
 package ru.otus.spring.jdbc.dao;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcOperations;
 import org.springframework.stereotype.Repository;
@@ -18,7 +19,7 @@ public class GenreDaoJdbc implements GenreDao {
 
     private final NamedParameterJdbcOperations npJdbc;
 
-
+    @Autowired
     public GenreDaoJdbc(NamedParameterJdbcOperations npJdbc) {
         this.npJdbc = npJdbc;
     }

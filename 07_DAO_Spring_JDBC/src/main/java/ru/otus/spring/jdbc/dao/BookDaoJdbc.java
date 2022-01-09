@@ -1,6 +1,7 @@
 package ru.otus.spring.jdbc.dao;
 
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcOperations;
 import org.springframework.stereotype.Repository;
@@ -20,13 +21,10 @@ import java.util.*;
 public class BookDaoJdbc implements BookDao {
 
     private final NamedParameterJdbcOperations npJdbc;
-    private final AuthorDao authorDao;
-    private final GenreDao genreDao;
 
+    @Autowired
     public BookDaoJdbc(NamedParameterJdbcOperations npJdbc, AuthorDao authorDao, GenreDao genreDao) {
         this.npJdbc = npJdbc;
-        this.authorDao = authorDao;
-        this.genreDao = genreDao;
     }
 
     // wasn't able to get count using npJdbc
@@ -38,13 +36,28 @@ public class BookDaoJdbc implements BookDao {
 
     @Override
     public List<Book> getAll() {
-        return npJdbc.query("SELECT id, author_id, genre_id, name FROM book ", new BookMapper(authorDao, genreDao));
+        return npJdbc.query("SELECT b.id book_id, " +
+                        " b.author_id author_id, " +
+                        " b.genre_id genre_id, " +
+                        " b.name book_name, " +
+                        " a.name author_name, " +
+                        " g.name genre_name " +
+                        " FROM book b, author a, genre g " +
+                        " WHERE b.author_id = a.id AND b.genre_id = g.id ",
+                new BookMapper());
     }
 
     @Override
-    public Book getById(long id) {
-        Map<String, Object> params = Collections.singletonMap("id", id);
-        return npJdbc.queryForObject("SELECT id, author_id, genre_id, name FROM book WHERE id = :id", params, new BookMapper(authorDao, genreDao));
+    public Book getById(long bookId) {
+        Map<String, Object> params = Collections.singletonMap("book_id", bookId);
+        return npJdbc.queryForObject("SELECT b.id book_id, " +
+                " b.author_id author_id, " +
+                " b.genre_id genre_id, " +
+                " b.name book_name, " +
+                " a.name author_name, " +
+                " g.name genre_name " +
+                " FROM book b, author a, genre g " +
+                " WHERE b.author_id = a.id AND b.genre_id = g.id AND b.id = :book_id ", params, new BookMapper());
     }
 
     @Override
@@ -62,7 +75,6 @@ public class BookDaoJdbc implements BookDao {
     }
 
     @Override
-    //public void insert(String authorName, String genreName, String bookName) throws WrongSqlStatement {
     public void insert(Book book) throws DaoException {
         Map<String, Object> params = new HashMap<>();
         params.put("author_id", book.getAuthor().getId());
@@ -70,33 +82,22 @@ public class BookDaoJdbc implements BookDao {
         params.put("book_name", book.getName());
         try {
             npJdbc.update("INSERT INTO book(author_id, genre_id, name) VALUES (:author_id, :genre_id, :book_name )", params);
-        } catch (Exception exc) { //(SQLException exc) {
-            if (exc.getClass().isInstance(new SQLException())) {
+        } catch (Exception exc) {
+            if (exc.getClass().getName().equals("SQLException")) {
                 throw new DaoException("Error: Author or genre doesn't exist. Please check and correct it");
             } else {
                 throw exc;
             }
-
         }
-
     }
-
 
     private static class BookMapper implements RowMapper<Book> {
-        private final AuthorDao authorDao;
-        private final GenreDao genreDao;
-        public BookMapper(AuthorDao authorDao, GenreDao genreDao) {
-            this.authorDao = authorDao;
-            this.genreDao = genreDao;
-        }
-
         @Override
         public Book mapRow(ResultSet resultSet, int i) throws SQLException {
-            int id = resultSet.getInt("id");
-            Author author = authorDao.getById(resultSet.getInt("author_id"));
-            Genre genre = genreDao.getById(resultSet.getInt("genre_id"));
-            String bookName = resultSet.getString("name");
-            return new Book(id, author, genre, bookName);
+            Author author = new Author(resultSet.getLong("author_id"), resultSet.getString("author_name"));
+            Genre genre = new Genre(resultSet.getLong("genre_id"), resultSet.getString("genre_name"));
+            return new Book(resultSet.getLong("genre_id"), author, genre, resultSet.getString("book_name"));
         }
     }
+
 }

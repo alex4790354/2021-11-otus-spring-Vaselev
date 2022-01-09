@@ -40,18 +40,8 @@ class BookDaoJdbcTest {
     private final Book BOOK_CANT_INSERT = new Book(10, AUTHOR_NOT_EXIST, GENRE_ONE, BOOK_ONE_NAME_UPDATED);
 
 
-
     @Autowired
     private BookDao bookDao;
-
-    /**
-     *
-     * @JdbcTest не работают для тестирования классов, в которых использовался NamedParameterJdbcOperations
-     * (хотя работало нормально на Jdbc)
-     * Объяснений, примера или документации того как делать с npJdbc пока не нашел.
-     *
-     * */
-
 
 
     @DisplayName("Should return expected Books count")
@@ -75,16 +65,17 @@ class BookDaoJdbcTest {
 
    @Test
     void booksCountShouldDecressAfterDeleteById() throws DaoException {
-        assertEquals(bookDao.getCount(), EXPECTED_BOOKS_COUNT);
+        assertEquals(EXPECTED_BOOKS_COUNT, bookDao.getCount());
         bookDao.deleteById(1);
-        assertEquals(bookDao.getCount(), EXPECTED_BOOKS_COUNT - 1);
+        assertEquals(EXPECTED_BOOKS_COUNT - 1, bookDao.getCount());
+        bookDao.insert(BOOK_ONE);
+       assertEquals(EXPECTED_BOOKS_COUNT, bookDao.getCount());
     }
 
     @Test
-    void booksCountShouldincreasedAfterCorrectInsert() throws DaoException {
-        int count = bookDao.getCount();
-        bookDao.insert(BOOK_ONE);
-        assertEquals(count + 1, bookDao.getCount());
+    void booksCountShouldincreasedAfterInsert() throws DaoException {
+        bookDao.insert(BOOK_ONE_UPDATED);
+        assertEquals(EXPECTED_BOOKS_COUNT + 1, bookDao.getCount());
     }
 
 
