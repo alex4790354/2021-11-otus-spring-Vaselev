@@ -1,0 +1,12 @@
+logging:
+  level:
+    root: ERROR
+
+spring:
+  main:
+    allow-circular-references: true
+  datasource:
+    url: jdbc:postgresql://localhost:5432/myDB
+    username: admin
+    password: admin
+    #initialization-mode: always
