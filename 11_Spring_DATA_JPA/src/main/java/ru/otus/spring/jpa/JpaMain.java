@@ -1,18 +1,18 @@
-package ru.otus.spring.jdbc;
+package ru.otus.spring.jpa;
 
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
-import ru.otus.spring.jdbc.customExceptions.DaoException;
+import ru.otus.spring.jpa.customExceptions.DaoException;
 
 
 @SpringBootApplication
-public class SpringJdbcMain {
+public class JpaMain {
 
     public static void main(String[] args) throws DaoException { //throws Exception {
 
-        ApplicationContext context = SpringApplication.run(SpringJdbcMain.class);
+        ApplicationContext context = SpringApplication.run(JpaMain.class);
 
     }
 }

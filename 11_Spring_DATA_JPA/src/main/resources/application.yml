@@ -3,10 +3,19 @@ logging:
     root: ERROR
 
 spring:
-  main:
-    allow-circular-references: true
   datasource:
     url: jdbc:postgresql://localhost:5432/myDB
     username: admin
     password: admin
     initialization-mode: always
+
+  jpa:
+    generate-ddl: true
+    hibernate:
+      ddl-auto: create
+
+    properties:
+      hibernate:
+        format_sql: false
+
+    show-sql: true
