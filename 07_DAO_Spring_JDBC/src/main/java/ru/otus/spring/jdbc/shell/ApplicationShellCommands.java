@@ -25,10 +25,10 @@ public class ApplicationShellCommands {
     private String userName;
 
     
-    @ShellMethod(value = "Авторизация для студентов перед сдачей экзамена", key = {"l", "login"})
+    @ShellMethod(value = "Авторизация для пользования библиотекой.", key = {"l", "login"})
     public String login(@ShellOption(defaultValue = "Incognito") String userName) {
         this.userName = userName;
-        return String.format("%s, добро пожаловать на сдачу теста. (test или help для начала прохождения)", this.userName);
+        return String.format("%s, добро пожаловать в библиотеку.", this.userName);
     }
 
     
@@ -64,9 +64,10 @@ public class ApplicationShellCommands {
     @ShellMethod(value = "Update book name by ID", key = {"u", "update"})
     @ShellMethodAvailability(value = "isAuthorized")
     public String updateById(long id, String newName) {
-        bookDao.updateById(id, newName);
+        bookDao.updateNameById(id, newName);
         return "Update finished.";
     }
+
 
     @ShellMethod(value = "Insert new book", key = {"in", "insert"})
     @ShellMethodAvailability(value = "isAuthorized")
@@ -78,7 +79,9 @@ public class ApplicationShellCommands {
         return "insert finished.";
     }
 
+
     private Availability isAuthorized() {
         return this.userName == null? Availability.unavailable("Сначала авторизуйтесь"): Availability.available();
     }
+
 }

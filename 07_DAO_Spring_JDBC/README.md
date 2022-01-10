@@ -1,6 +1,12 @@
 # 2021-11-otus-spring-Vaselev
 Otus Spring Sandbox
 
+for test on PostgreSQL should add:
+    @ExtendWith(SpringExtension.class)
+    @ComponentScan({"ru.otus.spring.jdbc"})
+    @AutoConfigureTestDatabase(replace= AutoConfigureTestDatabase.Replace.NONE)
+
+
 commands to run: 
 
     login <Login_name>

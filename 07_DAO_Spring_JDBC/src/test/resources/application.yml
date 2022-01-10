@@ -3,10 +3,12 @@ logging:
     root: ERROR
 
 spring:
-  main:
-    allow-circular-references: true
   datasource:
-    url: jdbc:postgresql://localhost:5432/myDB
-    username: admin
-    password: admin
+    url: jdbc:h2:mem:testdb
     #initialization-mode: always
+    #data: data.sql
+  sql:
+    init:
+      mode: always
+      data-locations: data.sql
+      #schema-locations: schema.sql

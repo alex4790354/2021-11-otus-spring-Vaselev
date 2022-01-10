@@ -15,8 +15,10 @@ public interface BookDao {
 
     void deleteById(long id);
 
-    void updateById(long id, String newName);
+    void updateNameById(long id, String newName);
 
-    void insert(Book book) throws DaoException;
+    void updateById(long id, Book book);
+
+    void insert(Book book);
 
 }

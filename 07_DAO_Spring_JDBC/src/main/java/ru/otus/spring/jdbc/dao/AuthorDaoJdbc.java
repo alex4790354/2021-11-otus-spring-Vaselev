@@ -7,12 +7,12 @@ import org.springframework.jdbc.core.namedparam.NamedParameterJdbcOperations;
 import org.springframework.stereotype.Repository;
 import ru.otus.spring.jdbc.dao.interfaces.AuthorDao;
 import ru.otus.spring.jdbc.domain.Author;
-
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
+
 
 @Repository
 public class AuthorDaoJdbc implements AuthorDao {

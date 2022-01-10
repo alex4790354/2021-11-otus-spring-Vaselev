@@ -6,7 +6,6 @@ import org.springframework.jdbc.core.namedparam.NamedParameterJdbcOperations;
 import org.springframework.stereotype.Repository;
 import ru.otus.spring.jdbc.dao.interfaces.GenreDao;
 import ru.otus.spring.jdbc.domain.Genre;
-
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Collections;

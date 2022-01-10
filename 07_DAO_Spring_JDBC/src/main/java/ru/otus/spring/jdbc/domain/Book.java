@@ -1,39 +1,22 @@
 package ru.otus.spring.jdbc.domain;
 
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 
-import javax.persistence.*;
 
 @Data
-@Table(name = "book")
+@AllArgsConstructor
 public class Book {
 
-    public Book(long id, Author author, Genre genre, String name) {
-        this.id = id;
-        this.author = author;
-        this.genre = genre;
-        this.name = name;
-    }
+    private long id;
+    private Author author;
+    private Genre genre;
+    private String name;
 
     public Book(Author author, Genre genre, String name) {
         this.author = author;
         this.genre = genre;
         this.name = name;
     }
-
-    public Book() {
-    }
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
-    private long id;
-
-    private Author author;
-    private Genre genre;
-
-    @Column(name = "name")
-    private String name;
-
 }
