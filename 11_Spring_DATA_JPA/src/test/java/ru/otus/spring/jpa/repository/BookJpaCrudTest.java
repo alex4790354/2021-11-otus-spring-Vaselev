@@ -55,7 +55,6 @@ class BookJpaCrudTest {
         Long newId = bookRepository.save(BOOK_NEW).getId();
         assertEquals(EXPECTED_BOOKS_COUNT + 1, bookRepository.findCount());
         assertEquals(BOOK_NEW, bookRepository.findById(newId).get());
-        bookRepository.deleteById(newId);
     }
 
 
