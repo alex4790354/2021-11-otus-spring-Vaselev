@@ -1,20 +1,24 @@
-package ru.otus.jpql.repositories;
+package ru.otus.spring.orm.repositories;
 
+import lombok.SneakyThrows;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Repository;
-import ru.otus.jpql.domain.Book;
+import ru.otus.spring.orm.customExceptions.DaoException;
+import ru.otus.spring.orm.domain.Book;
 import javax.persistence.*;
 import java.util.List;
 import java.util.Optional;
 
 @Repository
-public class BookRepositoryJPA implements BookRepository{
+public class BookRepositoryORM implements BookRepository{
 
     @PersistenceContext
     private final EntityManager em;
 
-    public BookRepositoryJPA(EntityManager em) {
+    public BookRepositoryORM(EntityManager em) {
         this.em = em;
     }
+
 
     @Override
     public List<Book> findAll() {
@@ -22,11 +26,13 @@ public class BookRepositoryJPA implements BookRepository{
         return query.getResultList();
     }
 
+
     @Override
     public Long getBooksCount() {
         TypedQuery<Long> query = em.createQuery("SELECT count(b) FROM bookEntity b ", Long.class);
         return query.getSingleResult();
     }
+
 
     @Override
     public Optional<Book> findBookById(long id) {
@@ -39,32 +45,37 @@ public class BookRepositoryJPA implements BookRepository{
         }
     }
 
+
     @Override
     public List<String> findAllBookNames() {
         TypedQuery<String> query = em.createQuery("SELECT b.name FROM bookEntity b ", String.class);
         return query.getResultList();
     }
 
+
     @Override
-    public List<Book> findBookByAuthorName(String authorName) {
+    public List<Book> findBooksByAuthorName(String authorName) {
         TypedQuery<Book> query = em.createQuery("SELECT b FROM bookEntity b WHERE b.author.name = :authorName", Book.class);
         query.setParameter("authorName", authorName);
         return query.getResultList();
     }
 
+
     @Override
-    public List<Book> findBookByGenreName(String genreName) {
+    public List<Book> findBooksByGenreName(String genreName) {
         TypedQuery<Book> query = em.createQuery("SELECT b FROM bookEntity b WHERE b.genre.name like :genreName", Book.class);
         query.setParameter("genreName", genreName);
         return query.getResultList();
     }
 
+
     @Override
-    public List<Book> findBookByName(String bookName) {
+    public List<Book> findBooksByName(String bookName) {
         TypedQuery<Book> query = em.createQuery("SELECT b FROM bookEntity b WHERE b.name like :bookName", Book.class);
         query.setParameter("bookName", bookName);
         return query.getResultList();
     }
+
 
     @Override
     public void updateBookName(String oldBookName, String newBookName) {
@@ -76,6 +87,22 @@ public class BookRepositoryJPA implements BookRepository{
         query.executeUpdate();
     }
 
+
+    @Override
+    public void updateBookById(Book newBook) {
+        Query query = em.createQuery(" UPDATE bookEntity b " +
+                " SET b.author = :author, " +
+                " b.genre = :genre, " +
+                " b.name = :newBookName " +
+                " WHERE b.id = :id ");
+        query.setParameter("author", newBook.getAuthor());
+        query.setParameter("genre", newBook.getGenre());
+        query.setParameter("newBookName", newBook.getName());
+        query.setParameter("id", newBook.getId());
+        query.executeUpdate();
+    }
+
+
     @Override
     public void deleteById(long id) {
         Query query = em.createQuery(" DELETE FROM bookEntity b WHERE b.id = :id ");
@@ -83,13 +110,22 @@ public class BookRepositoryJPA implements BookRepository{
         query.executeUpdate();
     }
 
+    @SneakyThrows
     @Override
     public void insertNewBook(Book newBook) {
-        em.createNativeQuery("INSERT INTO book(author_id, genre_id, name) VALUES (?,?,?)")
-                .setParameter(1, newBook.getAuthor().getId())
-                .setParameter(2, newBook.getGenre().getId())
-                .setParameter(3, newBook.getName())
-                .executeUpdate();
+        try {
+            em.createNativeQuery("INSERT INTO book(author_id, genre_id, name) VALUES (?,?,?)")
+                    .setParameter(1, newBook.getAuthor().getId())
+                    .setParameter(2, newBook.getGenre().getId())
+                    .setParameter(3, newBook.getName())
+                    .executeUpdate();
+        } catch (Exception e) {
+            if (e.getClass().equals(DataIntegrityViolationException.class)) {
+                throw new DaoException("Unexpected exception during book insertion.", e);
+            } else {
+                throw e;
+            }
+        }
     }
 
 }

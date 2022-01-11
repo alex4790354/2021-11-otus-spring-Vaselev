@@ -1,4 +1,4 @@
-INSERT INTO author(name) VALUES ('Михаил Булгаков108');
+INSERT INTO author(name) VALUES ('Михаил Булгаков');
 INSERT INTO author(name) VALUES ('Антуан де Сент-Экзюпери');
 INSERT INTO author(name) VALUES ('Александр Дюма');
 INSERT INTO author(name) VALUES ('Аркадий и Борис Стругацкие');

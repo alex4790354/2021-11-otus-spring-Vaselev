@@ -1,7 +1,6 @@
-package ru.otus.jpql.repositories;
+package ru.otus.spring.orm.repositories;
 
-import ru.otus.jpql.domain.Book;
-import ru.otus.jpql.domain.Genre;
+import ru.otus.spring.orm.domain.Book;
 
 import java.util.List;
 import java.util.Optional;
@@ -16,13 +15,15 @@ public interface BookRepository {
 
     List<String> findAllBookNames();
 
-    List<Book> findBookByAuthorName(String authorName);
+    List<Book> findBooksByName(String bookName);
 
-    List<Book> findBookByGenreName(String genreName);
+    List<Book> findBooksByAuthorName(String authorName);
 
-    List<Book> findBookByName(String bookName);
+    List<Book> findBooksByGenreName(String genreName);
 
     void updateBookName(String oldBookName, String newBookName);
+
+    void updateBookById(Book newBook);
 
     void deleteById(long id);
 

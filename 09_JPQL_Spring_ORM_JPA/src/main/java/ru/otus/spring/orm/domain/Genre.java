@@ -1,9 +1,9 @@
-package ru.otus.jpql.domain;
+package ru.otus.spring.orm.domain;
+
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
 import javax.persistence.*;
 
 
