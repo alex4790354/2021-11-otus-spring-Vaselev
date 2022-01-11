@@ -78,9 +78,9 @@ public class BookDaoJdbc implements BookDao {
     }
 
     @Override
-    public void updateById(long id, Book newBook) {
+    public void updateById(Book newBook) {
         Map<String, Object> params = new HashMap<>();
-        params.put("id", id);
+        params.put("id", newBook.getId());
         params.put("author_id", newBook.getAuthor().getId());
         params.put("genre_id", newBook.getGenre().getId());
         params.put("book_name", newBook.getName());
@@ -96,11 +96,11 @@ public class BookDaoJdbc implements BookDao {
         params.put("book_name", book.getName());
         try {
             npJdbc.update("INSERT INTO book(author_id, genre_id, name) VALUES (:author_id, :genre_id, :book_name )", params);
-        } catch (Exception exc) {
-            if (exc.getClass().equals(DataIntegrityViolationException.class)) {
-                throw new DaoException("Unexpected exception during book insertion.", exc);
+        } catch (Exception e) {
+            if (e.getClass().equals(DataIntegrityViolationException.class)) {
+                throw new DaoException("Unexpected exception during book insertion.", e);
             } else {
-                throw exc;
+                throw e;
             }
         }
     }

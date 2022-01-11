@@ -56,9 +56,9 @@ class BookDaoJdbcTest {
     @DisplayName("Should correctly update book")
     @Test
     void shouldUpdateBookByBookId() {
-        bookDao.updateById( 1, BOOK_ONE_UPDATED);
+        bookDao.updateById(BOOK_ONE_UPDATED);
         assertEquals(BOOK_ONE_UPDATED, bookDao.getById(1));
-        bookDao.updateById( 1, BOOK_ONE);
+        bookDao.updateById(BOOK_ONE);
         assertEquals(BOOK_ONE, bookDao.getById(1));
     }
 

@@ -17,7 +17,7 @@ public interface BookDao {
 
     void updateNameById(long id, String newName);
 
-    void updateById(long id, Book book);
+    void updateById(Book book);
 
     void insert(Book book);
 
