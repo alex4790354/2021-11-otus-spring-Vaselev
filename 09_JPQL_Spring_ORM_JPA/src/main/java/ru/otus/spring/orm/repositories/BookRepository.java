@@ -23,7 +23,7 @@ public interface BookRepository {
 
     void updateBookName(String oldBookName, String newBookName);
 
-    void updateBookById(Book newBook);
+    Book updateBook(Book newBook);
 
     void deleteById(long id);
 
