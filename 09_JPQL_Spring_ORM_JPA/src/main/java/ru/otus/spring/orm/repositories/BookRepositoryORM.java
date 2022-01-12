@@ -26,7 +26,7 @@ public class BookRepositoryORM implements BookRepository{
     @Transactional(readOnly = true)
     @Override
     public List<Book> findAll() {
-        TypedQuery<Book> query = em.createQuery("SELECT b FROM bookEntity b ", Book.class);
+        TypedQuery<Book> query = em.createQuery("SELECT b FROM Book b ", Book.class);
         return query.getResultList();
     }
 
@@ -34,7 +34,7 @@ public class BookRepositoryORM implements BookRepository{
     @Transactional(readOnly = true)
     @Override
     public Long getBooksCount() {
-        TypedQuery<Long> query = em.createQuery("SELECT count(b) FROM bookEntity b ", Long.class);
+        TypedQuery<Long> query = em.createQuery("SELECT count(b) FROM Book b ", Long.class);
         return query.getSingleResult();
     }
 
@@ -42,7 +42,7 @@ public class BookRepositoryORM implements BookRepository{
     @Transactional(readOnly = true)
     @Override
     public Optional<Book> findBookById(long id) {
-        TypedQuery<Book> query = em.createQuery("SELECT b FROM bookEntity b WHERE b.id = :id", Book.class);
+        TypedQuery<Book> query = em.createQuery("SELECT b FROM Book b WHERE b.id = :id", Book.class);
         query.setParameter("id", id);
         try {
             return Optional.of(query.getSingleResult());
@@ -55,7 +55,7 @@ public class BookRepositoryORM implements BookRepository{
     @Transactional(readOnly = true)
     @Override
     public List<String> findAllBookNames() {
-        TypedQuery<String> query = em.createQuery("SELECT b.name FROM bookEntity b ", String.class);
+        TypedQuery<String> query = em.createQuery("SELECT b.name FROM Book b ", String.class);
         return query.getResultList();
     }
 
@@ -63,7 +63,7 @@ public class BookRepositoryORM implements BookRepository{
     @Transactional(readOnly = true)
     @Override
     public List<Book> findBooksByAuthorName(String authorName) {
-        TypedQuery<Book> query = em.createQuery("SELECT b FROM bookEntity b WHERE b.author.name = :authorName", Book.class);
+        TypedQuery<Book> query = em.createQuery("SELECT b FROM Book b WHERE b.author.name = :authorName", Book.class);
         query.setParameter("authorName", authorName);
         return query.getResultList();
     }
@@ -72,7 +72,7 @@ public class BookRepositoryORM implements BookRepository{
     @Transactional(readOnly = true)
     @Override
     public List<Book> findBooksByGenreName(String genreName) {
-        TypedQuery<Book> query = em.createQuery("SELECT b FROM bookEntity b WHERE b.genre.name like :genreName", Book.class);
+        TypedQuery<Book> query = em.createQuery("SELECT b FROM Book b WHERE b.genre.name like :genreName", Book.class);
         query.setParameter("genreName", genreName);
         return query.getResultList();
     }
@@ -81,7 +81,7 @@ public class BookRepositoryORM implements BookRepository{
     @Transactional(readOnly = true)
     @Override
     public List<Book> findBooksByName(String bookName) {
-        TypedQuery<Book> query = em.createQuery("SELECT b FROM bookEntity b WHERE b.name like :bookName", Book.class);
+        TypedQuery<Book> query = em.createQuery("SELECT b FROM Book b WHERE b.name like :bookName", Book.class);
         query.setParameter("bookName", bookName);
         return query.getResultList();
     }
@@ -89,13 +89,13 @@ public class BookRepositoryORM implements BookRepository{
 
     @Transactional
     @Override
-    public void updateBookName(String oldBookName, String newBookName) {
-        Query query = em.createQuery(" UPDATE bookEntity b " +
+    public int updateBookName(String oldBookName, String newBookName) {
+        return em.createQuery(" UPDATE Book b " +
                 " SET b.name = :newBookName " +
-                " WHERE b.name = :oldBookName ");
-        query.setParameter("newBookName", newBookName);
-        query.setParameter("oldBookName", oldBookName);
-        query.executeUpdate();
+                " WHERE b.name = :oldBookName ")
+            .setParameter("newBookName", newBookName)
+            .setParameter("oldBookName", oldBookName)
+            .executeUpdate();
     }
 
 
@@ -113,10 +113,13 @@ public class BookRepositoryORM implements BookRepository{
 
     @Transactional
     @Override
-    public void deleteById(long id) {
-        Query query = em.createQuery(" DELETE FROM bookEntity b WHERE b.id = :id ");
-        query.setParameter("id", id);
-        query.executeUpdate();
+    public int deleteById(long id) {
+        int result = em.createQuery(" DELETE FROM Book b WHERE b.id = :id ")
+            .setParameter("id", id)
+            .executeUpdate();
+        // TODO: check: should I do it or not:
+        findBookById(id).ifPresent(em::remove);
+        return result;
     }
 
     @Transactional

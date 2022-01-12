@@ -21,11 +21,11 @@ public interface BookRepository {
 
     List<Book> findBooksByGenreName(String genreName);
 
-    void updateBookName(String oldBookName, String newBookName);
+    int updateBookName(String oldBookName, String newBookName);
 
     Book updateBook(Book newBook);
 
-    void deleteById(long id);
+    int deleteById(long id);
 
     void insertNewBook(Book newBook);
 
