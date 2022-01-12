@@ -1,6 +1,4 @@
 spring:
-  main:
-    allow-circular-references: true
   datasource:
     url: jdbc:postgresql://localhost:5432/myDB
     username: admin
@@ -8,14 +6,15 @@ spring:
   sql:
     init:
       mode: always
+      #data-locations: data.sql
   jpa:
     generate-ddl: false
     hibernate:
-      ddl-auto: create-drop
+      ddl-auto: none
     show-sql: true
     properties:
       hibernate:
-      format_sql: true
+      #format_sql: true
 
 logging:
   level:

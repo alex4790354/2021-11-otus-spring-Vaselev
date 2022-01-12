@@ -4,7 +4,12 @@ package ru.otus.spring.orm.domain;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.BatchSize;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
+
 import javax.persistence.*;
+import java.util.List;
 
 @Data
 @AllArgsConstructor
@@ -34,5 +39,22 @@ public class Book {
 
     @Column(name = "name")
     private String name;
+
+    @Fetch(FetchMode.SELECT)
+    @BatchSize(size = 10)
+    @OneToMany (mappedBy = "book",
+            targetEntity = Review.class,
+            fetch = FetchType.LAZY,
+            cascade = CascadeType.ALL)
+    private List<Review> reviews;
+
+    public List<Review> getReviews() {
+        return reviews;
+    }
+
+    public void setReviews(List<Review> reviews) {
+        this.reviews = reviews;
+    }
+
 
 }
