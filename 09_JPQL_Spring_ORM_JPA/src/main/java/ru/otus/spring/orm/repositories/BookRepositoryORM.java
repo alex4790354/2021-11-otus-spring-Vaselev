@@ -23,14 +23,15 @@ public class BookRepositoryORM implements BookRepository{
     }
 
 
-    @Transactional(readOnly = true)
+    @Transactional(readOnly = true)  // Здесь и далее - для примера, пока у нас нет сервисов.
     @Override
     public List<Book> findAll() {
         TypedQuery<Book> query = em.createQuery("SELECT b FROM Book b ", Book.class);
         return query.getResultList();
     }
 
-
+    
+    // Здесь и далее @Transactional - для примера, пока у нас нет сервисов.
     @Transactional(readOnly = true)
     @Override
     public Long getBooksCount() {
