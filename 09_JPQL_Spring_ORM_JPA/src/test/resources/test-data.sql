@@ -8,16 +8,16 @@ INSERT INTO genre (name) VALUES ('Проза');
 INSERT INTO genre (name) VALUES ('Фантастика');
 INSERT INTO genre (name) VALUES ('Приключения');
 
-INSERT INTO book(author_id, genre_id, name) VALUES (1, 1, 'Мастер и Маргарита');
-INSERT INTO book(author_id, genre_id, name) VALUES (1, 2, 'Белая гвардия');
-INSERT INTO book(author_id, genre_id, name) VALUES (1, 3, 'Собачье сердце');
-INSERT INTO book(author_id, genre_id, name) VALUES (2, 2, 'Маленький принц');
-INSERT INTO book(author_id, genre_id, name) VALUES (3, 4, 'Граф Монте-Кристо');
-INSERT INTO book(author_id, genre_id, name) VALUES (4, 3, 'Трудно быть Богом');
-INSERT INTO book(author_id, genre_id, name) VALUES (4, 3, 'Пикник на обочине');
-INSERT INTO book(author_id, genre_id, name) VALUES (4, 3, 'Улитка на склоне');
-INSERT INTO book(author_id, genre_id, name) VALUES (4, 3, 'Обитаемый остров');
-INSERT INTO book(author_id, genre_id, name) VALUES (4, 3, 'Отель у погибшего альпениста');
+INSERT INTO book(author_id, genre_id, title) VALUES (1, 1, 'Мастер и Маргарита');
+INSERT INTO book(author_id, genre_id, title) VALUES (1, 2, 'Белая гвардия');
+INSERT INTO book(author_id, genre_id, title) VALUES (1, 3, 'Собачье сердце');
+INSERT INTO book(author_id, genre_id, title) VALUES (2, 2, 'Маленький принц');
+INSERT INTO book(author_id, genre_id, title) VALUES (3, 4, 'Граф Монте-Кристо');
+INSERT INTO book(author_id, genre_id, title) VALUES (4, 3, 'Трудно быть Богом');
+INSERT INTO book(author_id, genre_id, title) VALUES (4, 3, 'Пикник на обочине');
+INSERT INTO book(author_id, genre_id, title) VALUES (4, 3, 'Улитка на склоне');
+INSERT INTO book(author_id, genre_id, title) VALUES (4, 3, 'Обитаемый остров');
+INSERT INTO book(author_id, genre_id, title) VALUES (4, 3, 'Отель у погибшего альпениста');
 
 INSERT INTO review(book_id, review) VALUES (1,  'Review-01.1 - Мастер');
 INSERT INTO review(book_id, review) VALUES (1,  'Review-01.2 - Мастер');

@@ -7,11 +7,13 @@ import java.util.Optional;
 
 public interface BookRepository {
 
+    Optional<Book> findBookById(long id);
+
+    ///////////// CHECKED  ^^
+
     List<Book> findAll();
 
     Long getBooksCount();
-
-    Optional<Book> findBookById(long id);
 
     List<String> findAllBookNames();
 

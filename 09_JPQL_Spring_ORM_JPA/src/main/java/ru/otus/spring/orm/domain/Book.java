@@ -12,16 +12,17 @@ import javax.persistence.*;
 import java.util.List;
 
 @Data
+@Entity(name = "Book")
 @AllArgsConstructor
 @NoArgsConstructor
-@Entity(name = "Book")
+// @RequiredArgsConstructor // TODO: try to change it
 @Table(name = "book")
 public class Book {
 
-    public Book(Author author, Genre genre, String name) {
+    public Book(Author author, Genre genre, String title) {
         this.author = author;
         this.genre = genre;
-        this.name = name;
+        this.title = title;
     }
 
     @Id
@@ -31,14 +32,18 @@ public class Book {
 
     @ManyToOne(optional = false)
     @JoinColumn(name = "author_id", nullable = false, referencedColumnName = "id")
+    @Fetch(FetchMode.SELECT)
+    @BatchSize(size = 5)
     private Author author;
 
     @ManyToOne(optional = false)
     @JoinColumn(name = "genre_id", nullable = false, referencedColumnName = "id")
+    @Fetch(FetchMode.SELECT)
+    @BatchSize(size = 5)
     private Genre genre;
 
-    @Column(name = "name")
-    private String name;
+    @Column(name = "title")
+    private String title;
 
     @Fetch(FetchMode.SELECT)
     @BatchSize(size = 10)
@@ -52,8 +57,8 @@ public class Book {
         return reviews;
     }
 
-    public void setReviews(List<Review> reviews) {
-        this.reviews = reviews;
+    public void setReviews(List<Review> comments) {
+        this.reviews = comments;
     }
 
 

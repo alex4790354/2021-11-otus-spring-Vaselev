@@ -11,7 +11,7 @@ import javax.persistence.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity(name = "Review")
-@Table(name = "review")
+@Table(name = "Review")
 public class Review {
 
 
@@ -20,13 +20,13 @@ public class Review {
     @Column(name = "id")
     private long id;
 
-    @Column(name = "review")
-    private String review;
-
     @ManyToOne(
             fetch = FetchType.LAZY
     )
     @JoinColumn(name = "book_id")
     private Book book;
+
+    @Column(name = "review")
+    private String review;
 
 }
