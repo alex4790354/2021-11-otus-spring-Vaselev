@@ -7,28 +7,22 @@ import java.util.Optional;
 
 public interface BookRepository {
 
-    Optional<Book> findBookById(long id);
+    Optional<Book> getBookById(long id);
 
-    ///////////// CHECKED  ^^
+    List<Book> getAllBooks();
 
-    List<Book> findAll();
+    List<Book> getBooksByStartName(String bookName);
+
+    List<Book> getBooksByAuthorId(Long authorId);
+
+    List<Book> getBooksByGenreId(Long genreId);
 
     Long getBooksCount();
 
-    List<String> findAllBookNames();
+    void deleteBook(Book book);
 
-    List<Book> findBooksByName(String bookName);
-
-    List<Book> findBooksByAuthorName(String authorName);
-
-    List<Book> findBooksByGenreName(String genreName);
+    Book saveBook(Book newBook);
 
     int updateBookName(String oldBookName, String newBookName);
-
-    Book updateBook(Book newBook);
-
-    int deleteById(long id);
-
-    void insertNewBook(Book newBook);
 
 }

@@ -2,13 +2,10 @@ package ru.otus.spring.orm.repositories.jpa;
 
 
 import lombok.SneakyThrows;
-import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
 import ru.otus.spring.orm.customExceptions.DaoException;
 import ru.otus.spring.orm.domain.Book;
 import ru.otus.spring.orm.repositories.BookRepository;
-
 import javax.persistence.*;
 import java.util.List;
 import java.util.Optional;
@@ -26,30 +23,49 @@ public class BookRepositoryJPA implements BookRepository {
 
 
     @Override
-    public Optional<Book> findBookById(long id) {
-        /*TypedQuery<Book> query = em.createQuery("SELECT b FROM Book b WHERE b.id = :id", Book.class);
+    public Optional<Book> getBookById(long id) {
+
+        return Optional.ofNullable(em.find(Book.class, id));
+
+        /* //Second implementation. Not sure which would be better to use
+
+        TypedQuery<Book> query = em.createQuery("SELECT b FROM Book b WHERE b.id = :id", Book.class);
         query.setParameter("id", id);
         try {
             return Optional.of(query.getSingleResult());
         } catch (NoResultException e) {
             return Optional.empty();
         }*/
-        return Optional.ofNullable(em.find(Book.class, id));
     }
 
-    //// CHECKED ^^
 
-
-    @Transactional(readOnly = true)  // Здесь и далее - для примера, пока у нас нет сервисов.
     @Override
-    public List<Book> findAll() {
+    public List<Book> getAllBooks() {
         TypedQuery<Book> query = em.createQuery("SELECT b FROM Book b ", Book.class);
         return query.getResultList();
     }
 
+    @Override
+    public List<Book> getBooksByStartName(String bookName) {
+        TypedQuery<Book> query = em.createQuery("SELECT b FROM Book b WHERE b.title like :bookName", Book.class);
+        query.setParameter("bookName", bookName + "%");
+        return query.getResultList();
+    }
 
-    // Здесь и далее @Transactional - для примера, пока у нас нет сервисов.
-    @Transactional(readOnly = true)
+    @Override
+    public List<Book> getBooksByAuthorId(Long authorId) {
+        TypedQuery<Book> query = em.createQuery("SELECT b FROM Book b WHERE b.author.id = :authorId", Book.class);
+        query.setParameter("authorId", authorId);
+        return query.getResultList();
+    }
+
+    @Override
+    public List<Book> getBooksByGenreId(Long genreId) {
+        TypedQuery<Book> query = em.createQuery("SELECT b FROM Book b WHERE b.genre.id = :genreId", Book.class);
+        query.setParameter("genreId", genreId);
+        return query.getResultList();
+    }
+
     @Override
     public Long getBooksCount() {
         TypedQuery<Long> query = em.createQuery("SELECT count(b) FROM Book b ", Long.class);
@@ -58,33 +74,22 @@ public class BookRepositoryJPA implements BookRepository {
 
 
     @Override
-    public List<String> findAllBookNames() {
-        TypedQuery<String> query = em.createQuery("SELECT b.title FROM Book b ", String.class);
-        return query.getResultList();
+    public void deleteBook(Book book) {
+        em.remove(book);
     }
 
-
+    @SneakyThrows
     @Override
-    public List<Book> findBooksByAuthorName(String authorName) {
-        TypedQuery<Book> query = em.createQuery("SELECT b FROM Book b WHERE b.author.name = :authorName", Book.class);
-        query.setParameter("authorName", authorName);
-        return query.getResultList();
-    }
-
-
-    @Override
-    public List<Book> findBooksByGenreName(String genreName) {
-        TypedQuery<Book> query = em.createQuery("SELECT b FROM Book b WHERE b.genre.name like :genreName", Book.class);
-        query.setParameter("genreName", genreName);
-        return query.getResultList();
-    }
-
-
-    @Override
-    public List<Book> findBooksByName(String bookName) {
-        TypedQuery<Book> query = em.createQuery("SELECT b FROM Book b WHERE b.title like :bookName", Book.class);
-        query.setParameter("bookName", bookName);
-        return query.getResultList();
+    public Book saveBook(Book newBook) {
+        try {
+            if (newBook.getId() == 0) {
+                em.persist(newBook);
+                return newBook;
+            }
+            return em.merge(newBook);
+        } catch (Exception e) {
+            throw new DaoException("Unexpected exception during book insertion.", e);
+        }
     }
 
 
@@ -96,43 +101,6 @@ public class BookRepositoryJPA implements BookRepository {
             .setParameter("newBookName", newBookName)
             .setParameter("oldBookName", oldBookName)
             .executeUpdate();
-    }
-
-
-    @Override
-    public Book updateBook(Book newBook) {
-        if (newBook.getId() <= 0) {
-            em.persist(newBook);
-            return newBook;
-        } else {
-            return em.merge(newBook);
-        }
-    }
-
-
-    @Override
-    public int deleteById(long id) {
-        int result = em.createQuery(" DELETE FROM Book b WHERE b.id = :id ")
-            .setParameter("id", id)
-            .executeUpdate();
-        // TODO: check: should I do it or not:
-        findBookById(id).ifPresent(em::remove);
-        return result;
-    }
-
-
-    @SneakyThrows
-    @Override
-    public void insertNewBook(Book newBook) {
-        try {
-            em.merge(newBook);
-        } catch (Exception e) {
-            if (e.getClass().equals(DataIntegrityViolationException.class)) {
-                throw new DaoException("Unexpected exception during book insertion.", e);
-            } else {
-                throw e;
-            }
-        }
     }
 
 }

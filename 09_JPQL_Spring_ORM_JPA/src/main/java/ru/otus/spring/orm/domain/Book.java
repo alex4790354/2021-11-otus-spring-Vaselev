@@ -4,6 +4,7 @@ package ru.otus.spring.orm.domain;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 import org.hibernate.annotations.BatchSize;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
@@ -23,6 +24,7 @@ public class Book {
         this.author = author;
         this.genre = genre;
         this.title = title;
+        this.reviews = null;
     }
 
     @Id
@@ -30,13 +32,13 @@ public class Book {
     @Column(name = "id")
     private long id;
 
-    @ManyToOne(optional = false)
+    @ManyToOne(optional = false, targetEntity = Author.class)
     @JoinColumn(name = "author_id", nullable = false, referencedColumnName = "id")
     @Fetch(FetchMode.SELECT)
     @BatchSize(size = 5)
     private Author author;
 
-    @ManyToOne(optional = false)
+    @ManyToOne(optional = false, targetEntity = Genre.class)
     @JoinColumn(name = "genre_id", nullable = false, referencedColumnName = "id")
     @Fetch(FetchMode.SELECT)
     @BatchSize(size = 5)
@@ -47,18 +49,20 @@ public class Book {
 
     @Fetch(FetchMode.SELECT)
     @BatchSize(size = 10)
-    @OneToMany (mappedBy = "book",
-            targetEntity = Review.class,
-            fetch = FetchType.LAZY,
-            cascade = CascadeType.ALL)
+    @ToString.Exclude
+    @OneToMany (mappedBy = "book"
+            ,targetEntity = Review.class
+            ,fetch = FetchType.EAGER)
+            //,fetch = FetchType.LAZY
+            //,cascade = CascadeType.ALL)
     private List<Review> reviews;
 
     public List<Review> getReviews() {
         return reviews;
     }
 
-    public void setReviews(List<Review> comments) {
-        this.reviews = comments;
+    public void setReviews(List<Review> reviews) {
+        this.reviews = reviews;
     }
 
 

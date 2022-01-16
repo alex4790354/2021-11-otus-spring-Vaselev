@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 
 @Data
 @AllArgsConstructor
@@ -20,13 +21,16 @@ public class Review {
     @Column(name = "id")
     private long id;
 
-    @ManyToOne(
-            fetch = FetchType.LAZY
-    )
+    @ManyToOne(targetEntity = Book.class)
     @JoinColumn(name = "book_id")
     private Book book;
 
+    @NotBlank
     @Column(name = "review")
     private String review;
 
+    public Review(Book book, String review) {
+        this.book = book;
+        this.review = review;
+    }
 }
