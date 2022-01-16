@@ -52,9 +52,8 @@ public class Book {
     @ToString.Exclude
     @OneToMany (mappedBy = "book"
             ,targetEntity = Review.class
-            ,fetch = FetchType.EAGER)
-            //,fetch = FetchType.LAZY
-            //,cascade = CascadeType.ALL)
+            ,fetch = FetchType.EAGER
+            ,cascade = CascadeType.ALL)
     private List<Review> reviews;
 
     public List<Review> getReviews() {
