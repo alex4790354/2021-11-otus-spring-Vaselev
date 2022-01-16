@@ -26,13 +26,11 @@ public class ShellAppDelete {
         System.out.println("Author with id=" + authorId + " deleted.");
     }
 
-
     @ShellMethod(value = "delete genre", key = {"delG"})
     public void deleteGenreById(@ShellOption(defaultValue = "1") long genreId) {
         genreService.delete(genreId);
         System.out.println("Genre with id = " + genreId + " was deleted");
     }
-
 
     @ShellMethod(value = "delete book", key = {"delB"})
     public void deleteBookById(@ShellOption(defaultValue = "1") long bookId) {
@@ -40,11 +38,10 @@ public class ShellAppDelete {
         System.out.println("Book with bookId = " + bookId + " was deleted");
     }
 
-
     @ShellMethod(value = "delete books Reviews", key = {"delR"})
     public void deleteBooksReviews(@ShellOption long reviewId) {
         reviewsService.delete(reviewId);
-        System.out.println("Review with ID = " + reviewId + " deleted.");
+        System.out.println("Review with ID = " + reviewId + " was deleted.");
     }
 
 }

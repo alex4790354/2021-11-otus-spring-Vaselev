@@ -11,8 +11,6 @@ public interface BookService {
 
     List<Book> getAllBooks();
 
-    List<Book> getBooksByName(String bookName);
-
     Long getBooksCount();
 
     void deleteBook(long id);
@@ -20,8 +18,6 @@ public interface BookService {
     Book saveBook(Book book);
 
     Book saveBook(Long id, String newTitle);
-
-    int updateBookName(String oldBookName, String newBookName);
 
     List<Review> getReviewsByBookId(Long bookId);
 

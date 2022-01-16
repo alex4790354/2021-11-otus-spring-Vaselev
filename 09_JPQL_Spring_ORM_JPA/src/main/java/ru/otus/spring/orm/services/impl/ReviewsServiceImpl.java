@@ -32,10 +32,7 @@ public class ReviewsServiceImpl implements ReviewsService {
             throw new DaoException(BOOK_NOT_EXIST, new RuntimeException());
         }
         Review review = new Review(0, book, reviewStr);
-        Review newReviewId = reviewRepository.save(review);
-        List<Review> reviewsAfterCreate = reviewRepository.getReviewsByBookId(book.getId());
-        book.setReviews(reviewsAfterCreate);
-        return newReviewId.getId();
+        return reviewRepository.save(review).getId();
     }
 
     @Transactional(readOnly = true)
@@ -49,11 +46,11 @@ public class ReviewsServiceImpl implements ReviewsService {
     @Override
     public Review getReviewById(long id) {
         Review review = reviewRepository.getReviewById(id).orElse(null);
-        if (review != null) {
-            return review;
-        } else {
+        if (review == null) {
             throw new DaoException(REVIEW_NOT_EXIST, new RuntimeException());
+
         }
+        return review;
     }
 
     @SneakyThrows
@@ -65,28 +62,14 @@ public class ReviewsServiceImpl implements ReviewsService {
             throw new DaoException(REVIEW_NOT_EXIST, new RuntimeException());
         }
         review.setReview(newReview);
-
-        Book book = bookRepository.getBookById(review.getBook().getId()).orElse(null);
-        if (book == null) {
-            throw new DaoException(BOOK_NOT_EXIST, new RuntimeException());
-        }
-        List<Review> reviews = reviewRepository.getReviewsByBookId(review.getBook().getId());
-        book.setReviews(reviews);
-        bookRepository.saveBook(book);
+        reviewRepository.save(review);
     }
 
     @Transactional
     @Override
     public void delete(long id) {
         Review review = getReviewById(id);
-        Book book = review.getBook();
         reviewRepository.delete(review);
-        List<Review> reviesAfterDel = reviewRepository.getReviewsByBookId(book.getId());
-        if (reviesAfterDel == null) {
-            book.setReviews(null);
-        } else {
-            book.setReviews(reviesAfterDel);
-        }
     }
 
 }

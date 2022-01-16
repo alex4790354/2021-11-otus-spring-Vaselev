@@ -28,7 +28,6 @@ public class ShellAppAdd {
 
     @ShellMethod(value = "add genre", key = {"addG"})
     public void addGenre(@ShellOption String name) {
-
         genreService.create(name);
     }
 
@@ -37,19 +36,16 @@ public class ShellAppAdd {
     public void addBook(@ShellOption(defaultValue = "Title") String title,
                         @ShellOption(defaultValue = "1") long authorId,
                         @ShellOption(defaultValue = "1") long genreId) {
-
         Book book = new Book(authorService.getById(authorId), genreService.getGenreById(genreId), title);
         bookService.saveBook(book);
     }
 
 
     @ShellMethod(value = "add books Review", key = {"addR"})
-    public void addBooksReview(@ShellOption(defaultValue = "1") long bookId,
+    public void addNewReview(@ShellOption(defaultValue = "1") long bookId,
                                @ShellOption(defaultValue = "good Book") String reviewContext) {
-        Book book = bookService.getBookById(bookId);
-        System.out.println(book.getReviews().size());
         reviewsService.create(bookId, reviewContext + " - " + bookId);
-        System.out.println(book.getReviews().size());
+        System.out.println("New review was create.");
 
     }
 

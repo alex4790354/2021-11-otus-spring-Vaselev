@@ -6,11 +6,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 import ru.otus.spring.orm.customExceptions.DaoException;
 import ru.otus.spring.orm.domain.Author;
-import ru.otus.spring.orm.domain.Book;
-import ru.otus.spring.orm.domain.Review;
 import ru.otus.spring.orm.repositories.AuthorRepository;
-import ru.otus.spring.orm.repositories.BookRepository;
-import ru.otus.spring.orm.repositories.ReviewRepository;
 import ru.otus.spring.orm.services.AuthorService;
 import java.util.List;
 
@@ -20,8 +16,6 @@ import java.util.List;
 public class AuthorServiceImpl implements AuthorService {
 
     private final AuthorRepository authorRepository;
-    private final BookRepository bookRepository;
-    private final ReviewRepository reviewRepository;
     private static final String AUTHOR_NOT_EXIST = "no author found by id";
 
     @Transactional
@@ -40,12 +34,7 @@ public class AuthorServiceImpl implements AuthorService {
             throw new DaoException(AUTHOR_NOT_EXIST, new RuntimeException());
         }
         author.setName(fullName);
-        List<Book> books = bookRepository.getBooksByAuthorId(author.getId());
         authorRepository.save(author);
-        for (Book book : books) {
-            book.setAuthor(author);
-            bookRepository.saveBook(book);
-        }
     }
 
     @SneakyThrows
@@ -76,18 +65,6 @@ public class AuthorServiceImpl implements AuthorService {
         Author author = authorRepository.getAuthorById(authorId).orElse(null);
         if (author == null) {
             throw new DaoException(AUTHOR_NOT_EXIST, new RuntimeException());
-        }
-
-        List<Book> books = bookRepository.getBooksByAuthorId(authorId);
-        List<Review> reviews = null;
-        for (Book book : books) {
-             reviews = book.getReviews();
-             if (reviews != null) {
-                 for (Review review : reviews) {
-                     reviewRepository.delete(review);
-                 }
-             }
-             bookRepository.deleteBook(book);
         }
         authorRepository.delete(author);
     }

@@ -11,18 +11,10 @@ public interface BookRepository {
 
     List<Book> getAllBooks();
 
-    List<Book> getBooksByStartName(String bookName);
-
-    List<Book> getBooksByAuthorId(Long authorId);
-
-    List<Book> getBooksByGenreId(Long genreId);
-
     Long getBooksCount();
 
     void deleteBook(Book book);
 
     Book saveBook(Book newBook);
-
-    int updateBookName(String oldBookName, String newBookName);
 
 }

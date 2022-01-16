@@ -2,7 +2,6 @@ package ru.otus.spring.orm.services.impl;
 
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.otus.spring.orm.customExceptions.DaoException;
@@ -35,13 +34,6 @@ public class BookServiceImpl implements BookService {
 
     @Transactional(readOnly = true)
     @Override
-    public List<Book> getBooksByName(String bookName) {
-        return bookRepository.getBooksByStartName(bookName);
-    }
-
-
-    @Transactional(readOnly = true)
-    @Override
     public List<Book> getAllBooks() {
         return bookRepository.getAllBooks();
     }
@@ -68,15 +60,6 @@ public class BookServiceImpl implements BookService {
         if (book == null) {
             throw new DaoException(BOOK_NOT_EXIST, new RuntimeException());
         }
-
-        List<Review> reviews = book.getReviews();
-        if (reviews == null) {
-            return;
-        }
-        for (Review review : reviews) {
-            reviewRepository.delete(review);
-        }
-        //book.setReviews(null);
         bookRepository.deleteBook(book);
     }
 
@@ -102,13 +85,6 @@ public class BookServiceImpl implements BookService {
         }
         book.setTitle(newTitle);
         return saveBook(book);
-    }
-
-
-    @Transactional
-    @Override
-    public int updateBookName(String oldBookName, String newBookName) {
-        return bookRepository.updateBookName(oldBookName, newBookName);
     }
 
 

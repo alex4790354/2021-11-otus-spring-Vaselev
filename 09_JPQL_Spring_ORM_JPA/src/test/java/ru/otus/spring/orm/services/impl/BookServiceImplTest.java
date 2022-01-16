@@ -67,12 +67,6 @@ class BookServiceImplTest {
         assertEquals(EXPECTED_BOOKS_COUNT, bookService.getBooksCount());
     }
 
-    @DisplayName("Should get correct books count start with ")
-    @Test
-    void ShouldGetCorrectBooksCountStartWith() {
-        assertEquals(BOOKS_COUNT_START_WITH_O, bookService.getBooksByName("О").size());
-    }
-
     @DisplayName("Should be able to delete a book:")
     @Test
     void shouldDeletefirstBook() {
@@ -93,17 +87,6 @@ class BookServiceImplTest {
         assertEquals(book.getAuthor(), savedBook.getAuthor());
         assertEquals(book.getGenre(), savedBook.getGenre());
         assertEquals(book.getTitle(), savedBook.getTitle());
-    }
-
-    @DisplayName("Should be able to update book name correctly")
-    @Test
-    void shouldUpdateBookName() {
-        Book oldBook = bookService.getBookById(1L);
-        assertEquals(BOOK_ONE_NAME, oldBook.getTitle());
-        bookService.updateBookName(BOOK_ONE_NAME, BOOK_ONE_NAME_UPDATED);
-        Book newBook = bookService.getBookById(1L);
-        assertEquals(BOOK_ONE_NAME, newBook.getTitle());
-        bookService.updateBookName(BOOK_ONE_NAME_UPDATED, BOOK_ONE_NAME);
     }
 
 

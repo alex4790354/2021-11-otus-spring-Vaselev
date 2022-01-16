@@ -1,6 +1,7 @@
 package ru.otus.spring.orm.repositories.jpa;
 
 
+import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
 import org.springframework.stereotype.Repository;
 import ru.otus.spring.orm.customExceptions.DaoException;
@@ -11,15 +12,12 @@ import java.util.List;
 import java.util.Optional;
 
 
+@RequiredArgsConstructor
 @Repository
 public class BookRepositoryJPA implements BookRepository {
 
     @PersistenceContext
     private final EntityManager em;
-
-    public BookRepositoryJPA(EntityManager em) {
-        this.em = em;
-    }
 
 
     @Override
@@ -45,26 +43,6 @@ public class BookRepositoryJPA implements BookRepository {
         return query.getResultList();
     }
 
-    @Override
-    public List<Book> getBooksByStartName(String bookName) {
-        TypedQuery<Book> query = em.createQuery("SELECT b FROM Book b WHERE b.title like :bookName", Book.class);
-        query.setParameter("bookName", bookName + "%");
-        return query.getResultList();
-    }
-
-    @Override
-    public List<Book> getBooksByAuthorId(Long authorId) {
-        TypedQuery<Book> query = em.createQuery("SELECT b FROM Book b WHERE b.author.id = :authorId", Book.class);
-        query.setParameter("authorId", authorId);
-        return query.getResultList();
-    }
-
-    @Override
-    public List<Book> getBooksByGenreId(Long genreId) {
-        TypedQuery<Book> query = em.createQuery("SELECT b FROM Book b WHERE b.genre.id = :genreId", Book.class);
-        query.setParameter("genreId", genreId);
-        return query.getResultList();
-    }
 
     @Override
     public Long getBooksCount() {
@@ -90,17 +68,6 @@ public class BookRepositoryJPA implements BookRepository {
         } catch (Exception e) {
             throw new DaoException("Unexpected exception during book insertion.", e);
         }
-    }
-
-
-    @Override
-    public int updateBookName(String oldBookName, String newBookName) {
-        return em.createQuery(" UPDATE Book b " +
-                " SET b.title = :newBookName " +
-                " WHERE b.title = :oldBookName ")
-            .setParameter("newBookName", newBookName)
-            .setParameter("oldBookName", oldBookName)
-            .executeUpdate();
     }
 
 }

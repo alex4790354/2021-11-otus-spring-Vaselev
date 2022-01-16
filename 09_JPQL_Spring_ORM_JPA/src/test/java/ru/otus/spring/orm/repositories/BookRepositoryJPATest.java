@@ -70,13 +70,6 @@ class BookRepositoryJPATest {
     }
 
 
-    @DisplayName("Should get correct 3 books by author")
-    @Test
-    void shouldGetAllBooksLikeName() {
-        List<Book> bookNames = bookRepository.getBooksByStartName("Ма%");
-        assertEquals(BOOKS_COUNT_START_WITH_O, bookNames.size());
-    }
-
     @DisplayName("Should be able to delete a book:")
     @Test
     void shouldDeletefirstBook() {
@@ -98,18 +91,6 @@ class BookRepositoryJPATest {
         assertEquals(book.getAuthor(), savedBook.getAuthor());
         assertEquals(book.getGenre(), savedBook.getGenre());
         assertEquals(book.getTitle(), savedBook.getTitle());
-    }
-
-
-    @DisplayName("Should be able to update book name correctly")
-    @Test
-    void shouldUpdateBookName() {
-        Book oldBook = bookRepository.getBookById(1L).get();
-        assertEquals(BOOK_ONE_NAME, oldBook.getTitle());
-        bookRepository.updateBookName(BOOK_ONE_NAME, BOOK_ONE_NAME_UPDATED);
-        Book newBook = bookRepository.getBookById(1L).get();
-        assertEquals(BOOK_ONE_NAME, newBook.getTitle());
-        bookRepository.updateBookName(BOOK_ONE_NAME_UPDATED, BOOK_ONE_NAME);
     }
 
 
