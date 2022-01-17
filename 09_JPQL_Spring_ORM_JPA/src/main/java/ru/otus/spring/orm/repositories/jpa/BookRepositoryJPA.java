@@ -23,23 +23,27 @@ public class BookRepositoryJPA implements BookRepository {
     @Override
     public Optional<Book> getBookById(long id) {
 
-        return Optional.ofNullable(em.find(Book.class, id));
-
-        /* //Second implementation. Not sure which would be better to use
-
-        TypedQuery<Book> query = em.createQuery("SELECT b FROM Book b WHERE b.id = :id", Book.class);
+        TypedQuery<Book> query = em.createQuery("SELECT b " +
+                " FROM Book b " +
+                " JOIN FETCH b.author " +
+                " JOIN fetch b.genre " +
+                " WHERE b.id = :id", Book.class);
         query.setParameter("id", id);
         try {
             return Optional.of(query.getSingleResult());
         } catch (NoResultException e) {
             return Optional.empty();
-        }*/
+        }
     }
 
 
     @Override
     public List<Book> getAllBooks() {
-        TypedQuery<Book> query = em.createQuery("SELECT b FROM Book b ", Book.class);
+        TypedQuery<Book> query = em.createQuery("SELECT b " +
+                " FROM Book b " +
+                " JOIN FETCH b.author " +
+                " JOIN fetch b.genre ",
+                Book.class);
         return query.getResultList();
     }
 
