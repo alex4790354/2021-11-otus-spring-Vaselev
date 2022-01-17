@@ -39,7 +39,6 @@ class BookRepositoryJPATest {
     private final static Book BOOK_CANT_BE_INSERTED = new Book(10, AUTHOR_NOT_EXIST, GENRE_ONE, BOOK_ONE_NAME_UPDATED, new ArrayList<>());
     private final static long BOOK_ID = 1l;
 
-
     @Autowired
     private BookRepositoryJPA bookRepository;
 
@@ -56,7 +55,7 @@ class BookRepositoryJPATest {
 
     @DisplayName("Should find all books")
     @Test
-    void ShouldFindAllBooks() {
+    void ShouldGetAllBooks() {
         List<Book> books = bookRepository.getAllBooks();
         assertEquals(EXPECTED_BOOKS_COUNT, books.size());
     }
