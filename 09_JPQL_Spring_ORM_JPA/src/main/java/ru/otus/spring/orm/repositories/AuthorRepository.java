@@ -8,7 +8,7 @@ import java.util.Optional;
 
 public interface AuthorRepository {
 
-    List<Author> getAuthors();
+    List<Author> getAllAuthors();
 
     Optional<Author> getAuthorById(long id);
 

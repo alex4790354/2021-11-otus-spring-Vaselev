@@ -12,7 +12,7 @@ public interface ReviewRepository {
 
     Review save(Review review);
 
-    List<Review> getReviews();
+    List<Review> getAllReviews();
 
     List<Review> getReviewsByBookId(long reviewId);
 

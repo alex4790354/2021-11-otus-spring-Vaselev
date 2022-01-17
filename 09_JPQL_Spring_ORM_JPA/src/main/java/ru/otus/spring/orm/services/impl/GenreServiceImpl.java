@@ -29,7 +29,7 @@ public class GenreServiceImpl implements GenreService {
     @Transactional(readOnly = true)
     @Override
     public List<Genre> getGenres() {
-        return genreRepository.getGenres();
+        return genreRepository.getAllGenres();
     }
 
     @SneakyThrows

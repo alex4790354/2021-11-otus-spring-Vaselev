@@ -2,7 +2,6 @@ package ru.otus.spring.orm.repositories.jpa;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
-import ru.otus.spring.orm.domain.Genre;
 import ru.otus.spring.orm.domain.Review;
 import ru.otus.spring.orm.repositories.ReviewRepository;
 import javax.persistence.EntityManager;
@@ -25,7 +24,7 @@ public class ReviewRepositoryJpa implements ReviewRepository {
     }
 
     @Override
-    public List<Review> getReviews() {
+    public List<Review> getAllReviews() {
         return em.createQuery("select c from Review c", Review.class).getResultList();
     }
 

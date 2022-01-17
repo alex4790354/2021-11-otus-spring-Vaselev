@@ -38,7 +38,7 @@ public class ReviewsServiceImpl implements ReviewsService {
     @Transactional(readOnly = true)
     @Override
     public List<Review> getAllReviews() {
-        return reviewRepository.getReviews();
+        return reviewRepository.getAllReviews();
     }
 
     @SneakyThrows

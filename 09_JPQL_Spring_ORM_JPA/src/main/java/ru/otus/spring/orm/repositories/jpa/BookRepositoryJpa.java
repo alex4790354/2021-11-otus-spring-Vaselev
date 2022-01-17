@@ -14,7 +14,7 @@ import java.util.Optional;
 
 @RequiredArgsConstructor
 @Repository
-public class BookRepositoryJPA implements BookRepository {
+public class BookRepositoryJpa implements BookRepository {
 
     @PersistenceContext
     private final EntityManager em;

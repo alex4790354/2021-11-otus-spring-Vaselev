@@ -9,9 +9,8 @@ import ru.otus.spring.orm.domain.Author;
 import ru.otus.spring.orm.domain.Book;
 import ru.otus.spring.orm.domain.Genre;
 import ru.otus.spring.orm.domain.Review;
-import ru.otus.spring.orm.repositories.jpa.BookRepositoryJPA;
+import ru.otus.spring.orm.repositories.jpa.BookRepositoryJpa;
 import ru.otus.spring.orm.repositories.jpa.ReviewRepositoryJpa;
-
 import javax.persistence.PersistenceException;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -24,7 +23,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @DisplayName("ORM JPA books repository testing.")
 @DataJpaTest
-@Import({BookServiceImpl.class, BookRepositoryJPA.class, ReviewRepositoryJpa.class})
+@Import({BookServiceImpl.class, BookRepositoryJpa.class, ReviewRepositoryJpa.class})
 class BookServiceImplTest {
 
     private final static int EXPECTED_BOOKS_COUNT = 10;
@@ -36,7 +35,6 @@ class BookServiceImplTest {
     private final static Book BOOK_ONE = new Book(1, AUTHOR_ONE, GENRE_ONE, BOOK_ONE_NAME, new ArrayList<>());
     private final static List<Review> BOOK_ONE_RIEVIEWS = Arrays.asList(new Review(1, BOOK_ONE, "Note-01.1 - Мастер"), new Review(2, BOOK_ONE, "Note-01.2 - Мастер"));
     private final static Book BOOK_CANT_BE_INSERTED = new Book(10, AUTHOR_NOT_EXIST, GENRE_ONE, BOOK_ONE_NAME_UPDATED, new ArrayList<>());
-    private final static int BOOKS_COUNT_START_WITH_O = 2;
 
 
     @Autowired  // TODO: change to Service
@@ -97,12 +95,5 @@ class BookServiceImplTest {
                 .isInstanceOf(PersistenceException.class);
     }
 
-    /*@Test
-    void shouldIncreasedReviewsNumber() {
-        Book book = bookService.findBookById(1L);
-        System.out.println(book.getReviews().size());
-        bookService.addBookComment(book.getId(), "One new Comment");
-        System.out.println(book.getReviews().size());
-    }*/
 
 }

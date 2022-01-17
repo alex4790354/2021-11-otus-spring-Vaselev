@@ -21,7 +21,7 @@ public class AuthorServiceImpl implements AuthorService {
     @Transactional
     @Override
     public long create(String fullName) {
-        Author author = new Author(0, fullName);
+        Author author = new Author(0L, fullName);
         return authorRepository.save(author).getId();
     }
 
@@ -54,7 +54,7 @@ public class AuthorServiceImpl implements AuthorService {
     @Transactional(readOnly = true)
     @Override
     public List<Author> getAll() {
-        return authorRepository.getAuthors();
+        return authorRepository.getAllAuthors();
     }
 
 

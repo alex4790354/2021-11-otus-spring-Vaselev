@@ -9,7 +9,7 @@ public interface GenreRepository {
 
     Optional<Genre> getGenreById(long id);
 
-    List<Genre> getGenres();
+    List<Genre> getAllGenres();
 
     Genre save(Genre genre);
 
