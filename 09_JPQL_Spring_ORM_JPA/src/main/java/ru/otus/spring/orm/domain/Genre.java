@@ -5,6 +5,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 
 @Data
@@ -22,4 +24,12 @@ public class Genre {
     @Column(name = "name")
     private String name;
 
+    @OneToMany(mappedBy = "author", cascade = CascadeType.ALL, orphanRemoval = false)
+    private List<Book> books = new ArrayList<Book>();
+
+    public Genre(long id, String name) {
+        this.id = id;
+        this.name = name;
+        this.books = new ArrayList<>();
+    }
 }
