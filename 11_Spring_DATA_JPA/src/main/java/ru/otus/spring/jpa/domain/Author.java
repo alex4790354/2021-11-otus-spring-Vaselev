@@ -4,15 +4,16 @@ package ru.otus.spring.jpa.domain;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.RequiredArgsConstructor;
-
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
+
 
 @Data
-@NoArgsConstructor
 @AllArgsConstructor
+@NoArgsConstructor
+@Entity(name = "Author")
 @Table(name = "author")
-@Entity
 public class Author {
 
     @Id
@@ -23,8 +24,8 @@ public class Author {
     @Column(name = "name")
     private String name;
 
-    public Author(String name) {
-        this.name = name;
-    }
+    @OneToMany(mappedBy = "author", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Book> books = new ArrayList<>();
+
 
 }

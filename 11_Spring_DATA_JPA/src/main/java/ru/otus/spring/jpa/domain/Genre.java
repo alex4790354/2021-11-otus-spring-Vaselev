@@ -1,18 +1,17 @@
 package ru.otus.spring.jpa.domain;
 
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.RequiredArgsConstructor;
-
 import javax.persistence.*;
 
 
 @Data
-@NoArgsConstructor
 @AllArgsConstructor
+@NoArgsConstructor
+@Entity(name = "Genre")
 @Table(name = "genre")
-@Entity
 public class Genre {
 
     @Id
@@ -23,7 +22,4 @@ public class Genre {
     @Column(name = "name")
     private String name;
 
-    public Genre(String name) {
-        this.name = name;
-    }
 }

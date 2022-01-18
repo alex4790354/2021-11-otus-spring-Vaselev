@@ -10,7 +10,7 @@ import ru.otus.spring.jpa.customExceptions.DaoException;
 @SpringBootApplication
 public class JpaMain {
 
-    public static void main(String[] args) throws DaoException { //throws Exception {
+    public static void main(String[] args) {
 
         ApplicationContext context = SpringApplication.run(JpaMain.class);
 
