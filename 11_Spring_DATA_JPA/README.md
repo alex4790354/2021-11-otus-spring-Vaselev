@@ -1,15 +1,18 @@
 # 2021-11-otus-spring-Vaselev
 Otus Spring Sandbox
 
-commands to run: 
+"Белая магия" Spring Data: Spring Data JPA 
 
-    login <Login_name>
-    all
-    count
-    id <book_id>
-    d <book_id>
-    u <book_id> "New book name"
-    insert - don't know how? 
-    
-    exit
 
+Цель:
+Цель: максимально просто писать слой репозиториев с применением современных подходов
+Результат: приложение со слоем репозиториев на Spring Data JPA
+
+Домашнее задание выполняется переписыванием предыдущего на JPA.
+
+Требования:
+
+Переписать все репозитории по работе с книгами на Spring Data JPA репозитории.
+Используйте spring-boot-starter-data-jpa.
+Кастомные методы репозиториев (или с хитрым @Query) покрыть тестами, используя H2.
+@Transactional рекомендуется ставить на методы сервисов, а не репозиториев.
