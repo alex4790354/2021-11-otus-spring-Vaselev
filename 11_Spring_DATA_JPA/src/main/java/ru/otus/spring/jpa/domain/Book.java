@@ -32,13 +32,13 @@ public class Book {
     @Column(name = "id")
     private long id;
 
-    @ManyToOne(optional = false, targetEntity = Author.class, cascade = CascadeType.ALL)
+    @ManyToOne(optional = false, targetEntity = Author.class, cascade = CascadeType.DETACH)
     @JoinColumn(name = "author_id", nullable = false, referencedColumnName = "id")
     @Fetch(FetchMode.SELECT)
     @BatchSize(size = 5)
     private Author author;
 
-    @ManyToOne(optional = false, targetEntity = Genre.class, cascade = CascadeType.ALL)
+    @ManyToOne(optional = false, targetEntity = Genre.class, cascade = CascadeType.DETACH)
     @JoinColumn(name = "genre_id", nullable = false, referencedColumnName = "id")
     @Fetch(FetchMode.SELECT)
     @BatchSize(size = 5)

@@ -9,6 +9,7 @@ import ru.otus.spring.jpa.domain.Genre;
 import ru.otus.spring.jpa.repositories.GenreRepository;
 import ru.otus.spring.jpa.services.GenreService;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -23,7 +24,7 @@ public class GenreServiceImpl implements GenreService {
     @Transactional
     @Override
     public long create(String name) {
-        Genre genre = new Genre(0, name);
+        Genre genre = new Genre(0, name, new ArrayList<>());
         return genreRepository.save(genre).getId();
     }
 
