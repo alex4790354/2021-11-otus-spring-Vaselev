@@ -8,7 +8,7 @@ import ru.otus.spring.orm.domain.Book;
 import ru.otus.spring.orm.services.AuthorService;
 import ru.otus.spring.orm.services.BookService;
 import ru.otus.spring.orm.services.GenreService;
-import ru.otus.spring.orm.services.ReviewsService;
+import ru.otus.spring.orm.services.NoteService;
 
 @RequiredArgsConstructor
 @ShellComponent
@@ -17,7 +17,7 @@ public class ShellAppUpdate {
     private final AuthorService authorService;
     private final GenreService genreService;
     private final BookService bookService;
-    private final ReviewsService reviewsService;
+    private final NoteService notesService;
 
     @ShellMethod(value = "update author", key = {"updA"})
     public void updateAuthorName(@ShellOption(defaultValue = "1") long id,
@@ -42,11 +42,11 @@ public class ShellAppUpdate {
         System.out.println("book updated. New book title: " + book.getTitle());
     }
 
-    @ShellMethod(value = "update review", key = {"updR"})
-    public void updateReviewContext(@ShellOption(defaultValue = "1") long id,
-                                    @ShellOption(defaultValue = "new cool review context-1") String newContext) {
-        reviewsService.update(id, newContext);
-        System.out.println("Review context was updated.");
+    @ShellMethod(value = "update note", key = {"updN"})
+    public void updateNoteContext(@ShellOption(defaultValue = "1") long id,
+                                    @ShellOption(defaultValue = "new cool note context-1") String newContext) {
+        notesService.update(id, newContext);
+        System.out.println("Note context was updated.");
     }
 
 }

@@ -11,6 +11,12 @@ public interface BookRepository {
 
     List<Book> getAllBooks();
 
+    // Для JPA: решение проблемы N+1:
+    /*@EntityGraph(attributePaths = {"author", "genre"})
+    @Override
+    List<Book> findAll();*/
+
+
     Long getBooksCount();
 
     void deleteBook(Book book);

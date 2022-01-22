@@ -7,11 +7,11 @@ import org.springframework.shell.standard.ShellOption;
 import ru.otus.spring.orm.domain.Author;
 import ru.otus.spring.orm.domain.Book;
 import ru.otus.spring.orm.domain.Genre;
-import ru.otus.spring.orm.domain.Review;
+import ru.otus.spring.orm.domain.Note;
 import ru.otus.spring.orm.services.AuthorService;
 import ru.otus.spring.orm.services.BookService;
 import ru.otus.spring.orm.services.GenreService;
-import ru.otus.spring.orm.services.ReviewsService;
+import ru.otus.spring.orm.services.NoteService;
 
 import java.util.List;
 
@@ -21,7 +21,7 @@ public class ShellAppGet {
     private final AuthorService authorService;
     private final GenreService genreService;
     private final BookService bookService;
-    private final ReviewsService reviewsService;
+    private final NoteService notesService;
 
 
     @ShellMethod(value = "get author", key = {"getA"})
@@ -61,16 +61,16 @@ public class ShellAppGet {
         System.out.println(books);
     }
 
-    @ShellMethod(value = "get Review by ID", key = {"getR"})
-    public void getReviewById(@ShellOption(defaultValue = "1") long id) {
-        Review review = reviewsService.getReviewById(id);
-        System.out.println(review);
+    @ShellMethod(value = "get Note by ID", key = {"getN"})
+    public void getNoteById(@ShellOption(defaultValue = "1") long id) {
+        Note note = notesService.getNoteById(id);
+        System.out.println(note);
     }
 
-    @ShellMethod(value = "get all reviews", key = {"getRs"})
-    public void getAllReviews()  {
-        List<Review> reviews = reviewsService.getAllReviews();
-        System.out.println(reviews);
+    @ShellMethod(value = "get all notes", key = {"getRs"})
+    public void getAllNote()  {
+        List<Note> notes = notesService.getAllNote();
+        System.out.println(notes);
     }
 
 }

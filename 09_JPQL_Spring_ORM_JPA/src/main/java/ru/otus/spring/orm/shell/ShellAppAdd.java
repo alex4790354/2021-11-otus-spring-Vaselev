@@ -8,7 +8,7 @@ import ru.otus.spring.orm.domain.Book;
 import ru.otus.spring.orm.services.AuthorService;
 import ru.otus.spring.orm.services.BookService;
 import ru.otus.spring.orm.services.GenreService;
-import ru.otus.spring.orm.services.ReviewsService;
+import ru.otus.spring.orm.services.NoteService;
 
 
 @ShellComponent
@@ -17,7 +17,7 @@ public class ShellAppAdd {
     private final BookService bookService;
     private final AuthorService authorService;
     private final GenreService genreService;
-    private final ReviewsService reviewsService;
+    private final NoteService notesService;
 
 
     @ShellMethod(value = "add author", key = {"addA"})
@@ -41,11 +41,11 @@ public class ShellAppAdd {
     }
 
 
-    @ShellMethod(value = "add books Review", key = {"addR"})
-    public void addNewReview(@ShellOption(defaultValue = "1") long bookId,
-                               @ShellOption(defaultValue = "good Book") String reviewContext) {
-        reviewsService.create(bookId, reviewContext + " - " + bookId);
-        System.out.println("New review was create.");
+    @ShellMethod(value = "add books Note", key = {"addN"})
+    public void addNewNote(@ShellOption(defaultValue = "1") long bookId,
+                               @ShellOption(defaultValue = "good Book") String noteContext) {
+        notesService.create(bookId, noteContext + " - " + bookId);
+        System.out.println("New note was create.");
 
     }
 

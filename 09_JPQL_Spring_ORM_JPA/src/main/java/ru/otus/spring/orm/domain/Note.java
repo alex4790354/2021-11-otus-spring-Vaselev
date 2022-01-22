@@ -1,9 +1,7 @@
 package ru.otus.spring.orm.domain;
 
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
@@ -11,9 +9,10 @@ import javax.validation.constraints.NotBlank;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Entity(name = "Review")
-@Table(name = "Review")
-public class Review {
+@Entity(name = "Note")
+@Table(name = "Note")
+@EqualsAndHashCode(exclude = "book")
+public class Note {
 
 
     @Id
@@ -23,14 +22,16 @@ public class Review {
 
     @ManyToOne(targetEntity = Book.class)
     @JoinColumn(name = "book_id")
+    @ToString.Exclude
     private Book book;
 
     @NotBlank
-    @Column(name = "review")
-    private String review;
+    @Column(name = "note")
+    private String note;
 
-    public Review(Book book, String review) {
+    public Note(Book book, String note) {
         this.book = book;
-        this.review = review;
+        this.note = note;
     }
+
 }

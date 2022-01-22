@@ -4,13 +4,15 @@ package ru.otus.spring.orm.domain;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
 
 @Data
-@AllArgsConstructor
+//@AllArgsConstructor
 @NoArgsConstructor
 @Entity(name = "Genre")
 @Table(name = "genre")
@@ -24,7 +26,11 @@ public class Genre {
     @Column(name = "name")
     private String name;
 
-    @OneToMany(mappedBy = "author", cascade = CascadeType.ALL, orphanRemoval = false)
+    @OneToMany(mappedBy = "author",
+            cascade = CascadeType.ALL,
+            fetch=FetchType.LAZY,
+            orphanRemoval = false)
+    @ToString.Exclude
     private List<Book> books = new ArrayList<Book>();
 
     public Genre(long id, String name) {

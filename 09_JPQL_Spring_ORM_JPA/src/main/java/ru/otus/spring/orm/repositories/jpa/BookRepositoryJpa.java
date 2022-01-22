@@ -26,7 +26,7 @@ public class BookRepositoryJpa implements BookRepository {
         TypedQuery<Book> query = em.createQuery("SELECT b " +
                 " FROM Book b " +
                 " JOIN FETCH b.author " +
-                " JOIN fetch b.genre " +
+                " JOIN FETCH b.genre " +
                 " WHERE b.id = :id", Book.class);
         query.setParameter("id", id);
         try {

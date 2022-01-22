@@ -24,7 +24,7 @@ public class Book {
         this.author = author;
         this.genre = genre;
         this.title = title;
-        this.reviews = null;
+        //this.notes = null;
     }
 
     @Id
@@ -47,22 +47,32 @@ public class Book {
     @Column(name = "title")
     private String title;
 
-    @Fetch(FetchMode.SELECT)
+    /*@Fetch(FetchMode.SUBSELECT)
     @BatchSize(size = 10)
     @ToString.Exclude
-    @OneToMany (mappedBy = "book"
-            ,targetEntity = Review.class
-            ,fetch = FetchType.LAZY
-            ,cascade = CascadeType.ALL)
-    private List<Review> reviews;
+    @OneToMany (targetEntity = Note.class,
+            cascade = CascadeType.ALL,
+            mappedBy = "book",
+            orphanRemoval = true,
+            fetch = FetchType.LAZY) .
+    private List<Note> notes;*/
 
-    public List<Review> getReviews() {
-        return reviews;
+    public Book(Author author, Genre genre, String title, List<Note> notes) {
+        this.author = author;
+        this.genre = genre;
+        this.title = title;
+        //this.notes = notes;
     }
 
-    public void setReviews(List<Review> reviews) {
-        this.reviews = reviews;
+    // TODO: remove List<Note> notes
+    public Book(long id, Author author, Genre genre, String title, List<Note> notes) {
+        this.id = id;
+        this.author = author;
+        this.genre = genre;
+        this.title = title;
+        //this.notes = notes;
     }
+
 
 
 }

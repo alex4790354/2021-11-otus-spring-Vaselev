@@ -1,4 +1,4 @@
-package ru.otus.spring.orm.services.impl;
+package ru.otus.spring.orm.repositories;
 
 import lombok.val;
 import org.junit.jupiter.api.DisplayName;
@@ -10,13 +10,10 @@ import ru.otus.spring.orm.domain.Author;
 import ru.otus.spring.orm.domain.Book;
 import ru.otus.spring.orm.domain.Genre;
 import ru.otus.spring.orm.domain.Note;
-import ru.otus.spring.orm.repositories.NoteRepository;
 import ru.otus.spring.orm.repositories.jpa.BookRepositoryJpa;
 import ru.otus.spring.orm.repositories.jpa.NoteRepositoryJpa;
-
 import java.util.ArrayList;
 import java.util.Optional;
-
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
@@ -25,7 +22,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 @DisplayName("ORM JPA Genres repository testing.")
 @DataJpaTest
 @Import({NoteRepositoryJpa.class, BookRepositoryJpa.class})
-class NoteServiceImplTest {
+class NoteRepositoryJPATest {
 
     private final static int EXPECTED_NOTES_COUNT = 27;
     private final static long NOTE_ONE_ID = 1L;
@@ -36,11 +33,11 @@ class NoteServiceImplTest {
     private final static String BOOK_ONE_NAME = "Мастер и Маргарита";
     private final static Book BOOK_ONE = new Book(1, AUTHOR_ONE, GENRE_ONE, BOOK_ONE_NAME, new ArrayList<>());
 
-    /*@Autowired
+    @Autowired
     private NoteRepository noteRepository;
 
 
-    @DisplayName("Should get correct Note by ID")
+    /*@DisplayName("Should get correct Note by ID")
     @Test
     void shouldGetCorrectGenre() {
         Optional<Note> genre = noteRepository.getNoteById(NOTE_ONE_ID);

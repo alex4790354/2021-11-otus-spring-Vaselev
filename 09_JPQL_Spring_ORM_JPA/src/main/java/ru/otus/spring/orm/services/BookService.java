@@ -1,7 +1,7 @@
 package ru.otus.spring.orm.services;
 
 import ru.otus.spring.orm.domain.Book;
-import ru.otus.spring.orm.domain.Review;
+import ru.otus.spring.orm.domain.Note;
 
 import java.util.List;
 
@@ -19,6 +19,6 @@ public interface BookService {
 
     Book saveBook(Long id, String newTitle);
 
-    List<Review> getReviewsByBookId(Long bookId);
+    List<Note> getNoteByBookId(Long bookId);
 
 }

@@ -6,9 +6,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.otus.spring.orm.customExceptions.DaoException;
 import ru.otus.spring.orm.domain.Book;
-import ru.otus.spring.orm.domain.Review;
+import ru.otus.spring.orm.domain.Note;
 import ru.otus.spring.orm.repositories.BookRepository;
-import ru.otus.spring.orm.repositories.ReviewRepository;
+import ru.otus.spring.orm.repositories.NoteRepository;
 import ru.otus.spring.orm.services.BookService;
 import java.util.List;
 
@@ -18,7 +18,7 @@ import java.util.List;
 public class BookServiceImpl implements BookService {
 
     private final BookRepository bookRepository;
-    private final ReviewRepository reviewRepository;
+    private final NoteRepository noteRepository;
     static final String BOOK_NOT_EXIST = "Book with this ID doesn't exist.";
 
 
@@ -41,8 +41,8 @@ public class BookServiceImpl implements BookService {
 
     @Transactional(readOnly = true)
     @Override
-    public List<Review> getReviewsByBookId(Long bookId) {
-        return reviewRepository.getReviewsByBookId(bookId);
+    public List<Note> getNoteByBookId(Long bookId) {
+        return noteRepository.getNoteByBookId(bookId);
     }
 
 
@@ -57,10 +57,9 @@ public class BookServiceImpl implements BookService {
     @Override
     public void deleteBook(long id) {
         Book book = bookRepository.getBookById(id).orElse(null);
-        if (book == null) {
-            throw new DaoException(BOOK_NOT_EXIST, new RuntimeException());
+        if (book != null) {
+            bookRepository.deleteBook(book);
         }
-        bookRepository.deleteBook(book);
     }
 
 

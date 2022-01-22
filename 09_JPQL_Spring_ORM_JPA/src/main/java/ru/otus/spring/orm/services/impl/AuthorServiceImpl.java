@@ -32,11 +32,10 @@ public class AuthorServiceImpl implements AuthorService {
     @Override
     public void update(long id, String fullName) {
         Author author = authorRepository.getAuthorById(id).orElse(null);
-        if (author == null) {
-            throw new DaoException(AUTHOR_NOT_EXIST, new RuntimeException());
+        if (author != null) {
+            author.setName(fullName);
+            authorRepository.save(author);
         }
-        author.setName(fullName);
-        authorRepository.save(author);
     }
 
     @SneakyThrows
@@ -49,7 +48,6 @@ public class AuthorServiceImpl implements AuthorService {
         } else {
             throw new DaoException(AUTHOR_NOT_EXIST, new RuntimeException());
         }
-
     }
 
 
