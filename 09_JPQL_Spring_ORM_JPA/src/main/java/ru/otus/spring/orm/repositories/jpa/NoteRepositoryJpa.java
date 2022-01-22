@@ -2,6 +2,7 @@ package ru.otus.spring.orm.repositories.jpa;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
+import ru.otus.spring.orm.domain.Book;
 import ru.otus.spring.orm.domain.Note;
 import ru.otus.spring.orm.repositories.NoteRepository;
 import javax.persistence.EntityManager;
@@ -20,12 +21,17 @@ public class NoteRepositoryJpa implements NoteRepository {
 
     @Override
     public Optional<Note> getNoteById(long id) {
-        return Optional.ofNullable(em.find(Note.class, id));
+        TypedQuery<Note> query = em.createQuery("SELECT n " +
+                " FROM Note n " +
+                " WHERE n.id = :id", Note.class);
+        query.setParameter("id", id);
+        return  Optional.ofNullable(query.getSingleResult());
     }
 
     @Override
     public List<Note> getAllNote() {
-        return em.createQuery("select c from Note c", Note.class).getResultList();
+        TypedQuery<Note> query = em.createQuery("select c from Note c", Note.class);
+        return query.getResultList();
     }
 
     @Override
