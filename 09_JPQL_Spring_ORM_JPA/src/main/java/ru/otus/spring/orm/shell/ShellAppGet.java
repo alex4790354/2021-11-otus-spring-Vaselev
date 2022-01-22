@@ -25,52 +25,44 @@ public class ShellAppGet {
 
 
     @ShellMethod(value = "get author", key = {"getA"})
-    public void getAuthorById(@ShellOption(defaultValue = "1") long id) {
-        Author author = authorService.getById(id);
-        System.out.println(author);
+    public Author getAuthorById(@ShellOption(defaultValue = "1") long id) {
+        return authorService.getById(id);
     }
 
 
     @ShellMethod(value = "get all all Authors", key = {"getAs"})
-    public void getAuthors() {
-        List<Author> authors = authorService.getAll();
-        System.out.println(authors);
+    public List<Author> getAuthors() {
+        return authorService.getAll();
     }
 
     @ShellMethod(value = "get genre by ID", key = {"getG"})
-    public void getGenreById(@ShellOption(defaultValue = "1") long id) {
-        Genre genre = genreService.getGenreById(id);
-        System.out.println(genre);
+    public Genre getGenreById(@ShellOption(defaultValue = "1") long id) {
+        return genreService.getGenreById(id);
     }
 
     @ShellMethod(value = "get all all Authors", key = {"getGs"})
-    public void getAllGenres() {
-        List<Genre> genres = genreService.getGenres();
-        System.out.println(genres);
+    public List<Genre> getAllGenres() {
+         return genreService.getGenres();
     }
 
     @ShellMethod(value = "get book", key = {"getB"})
-    public void getBookById(@ShellOption(defaultValue = "1") long id) {
-        Book book = bookService.getBookById(id);
-        System.out.println(book);
+    public Book getBookById(@ShellOption(defaultValue = "1") long id) {
+        return bookService.getBookById(id);
     }
 
     @ShellMethod(value = "get all books", key = {"getBs"})
-    public void getBooks()  {
-        List<Book> books = bookService.getAllBooks();
-        System.out.println(books);
+    public List<Book> getBooks()  {
+        return bookService.getAllBooks();
     }
 
     @ShellMethod(value = "get Note by ID", key = {"getN"})
-    public void getNoteById(@ShellOption(defaultValue = "1") long id) {
-        Note note = notesService.getNoteById(id);
-        System.out.println(note);
+    public Note getNoteById(@ShellOption(defaultValue = "1") long id) {
+        return notesService.getNoteById(id);
     }
 
     @ShellMethod(value = "get all notes", key = {"getNs"})
-    public void getAllNote()  {
-        List<Note> notes = notesService.getAllNote();
-        System.out.println(notes);
+    public List<Note> getAllNote()  {
+         return notesService.getAllNote();
     }
 
 }
