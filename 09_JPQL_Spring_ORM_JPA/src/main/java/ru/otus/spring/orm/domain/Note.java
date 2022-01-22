@@ -14,7 +14,6 @@ import static javax.persistence.FetchType.LAZY;
 @Table(name = "Note")
 public class Note {
 
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
