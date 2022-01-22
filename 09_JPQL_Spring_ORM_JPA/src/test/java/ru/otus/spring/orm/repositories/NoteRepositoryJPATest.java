@@ -31,13 +31,13 @@ class NoteRepositoryJPATest {
     private final static Author AUTHOR_ONE = new Author(1, "Михаил Булгаков");
     private final static Genre GENRE_ONE = new Genre(1, "Роман");
     private final static String BOOK_ONE_NAME = "Мастер и Маргарита";
-    private final static Book BOOK_ONE = new Book(1, AUTHOR_ONE, GENRE_ONE, BOOK_ONE_NAME, new ArrayList<>());
+    private final static Book BOOK_ONE = new Book(1, AUTHOR_ONE, GENRE_ONE, BOOK_ONE_NAME);
 
     @Autowired
     private NoteRepository noteRepository;
 
 
-    /*@DisplayName("Should get correct Note by ID")
+    @DisplayName("Should get correct Note by ID")
     @Test
     void shouldGetCorrectGenre() {
         Optional<Note> genre = noteRepository.getNoteById(NOTE_ONE_ID);
@@ -73,6 +73,6 @@ class NoteRepositoryJPATest {
         Note savedNote = noteRepository.save(note);
         assertThat(savedNote.getId()).isGreaterThan(0);
         assertEquals(NOTE_ONE_CONTEXT_NEW, savedNote.getNote());
-    }*/
+    }
 
 }

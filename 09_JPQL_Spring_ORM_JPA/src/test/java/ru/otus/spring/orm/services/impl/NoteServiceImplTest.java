@@ -34,9 +34,9 @@ class NoteServiceImplTest {
     private final static Author AUTHOR_ONE = new Author(1, "Михаил Булгаков");
     private final static Genre GENRE_ONE = new Genre(1, "Роман");
     private final static String BOOK_ONE_NAME = "Мастер и Маргарита";
-    private final static Book BOOK_ONE = new Book(1, AUTHOR_ONE, GENRE_ONE, BOOK_ONE_NAME, new ArrayList<>());
+    private final static Book BOOK_ONE = new Book(1, AUTHOR_ONE, GENRE_ONE, BOOK_ONE_NAME);
 
-    /*@Autowired
+    @Autowired
     private NoteRepository noteRepository;
 
 
@@ -76,6 +76,6 @@ class NoteServiceImplTest {
         Note savedNote = noteRepository.save(note);
         assertThat(savedNote.getId()).isGreaterThan(0);
         assertEquals(NOTE_ONE_CONTEXT_NEW, savedNote.getNote());
-    }*/
+    }
 
 }

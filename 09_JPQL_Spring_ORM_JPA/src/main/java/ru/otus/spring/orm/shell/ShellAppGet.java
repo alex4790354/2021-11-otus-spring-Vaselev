@@ -67,7 +67,7 @@ public class ShellAppGet {
         System.out.println(note);
     }
 
-    @ShellMethod(value = "get all notes", key = {"getRs"})
+    @ShellMethod(value = "get all notes", key = {"getNs"})
     public void getAllNote()  {
         List<Note> notes = notesService.getAllNote();
         System.out.println(notes);

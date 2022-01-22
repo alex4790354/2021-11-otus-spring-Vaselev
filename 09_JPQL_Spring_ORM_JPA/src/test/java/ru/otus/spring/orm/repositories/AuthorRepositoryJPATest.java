@@ -22,7 +22,7 @@ class AuthorRepositoryJPATest {
 
     private final static int EXPECTED_AUTHORS_COUNT = 4;
     private final static long AUTHOR_ONE_ID = 1L;
-    private final static String AUTHOR_ONE_NAME = "Михаил Булгаков";
+    private final static String AUTHOR_ONE_NAME = "Михаил Булгаков-test";
     private final static String AUTHOR_ONE_NAME_NEW = "Михаил Булгаков - New";
 
 

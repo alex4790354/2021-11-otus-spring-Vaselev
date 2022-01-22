@@ -1,31 +1,24 @@
 package ru.otus.spring.orm.domain;
 
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
+import lombok.*;
 import org.hibernate.annotations.BatchSize;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Data
 @Entity(name = "Book")
 @AllArgsConstructor
 @NoArgsConstructor
-// @RequiredArgsConstructor // TODO: try to change it
+@NamedEntityGraph(name = "book-author-genre",
+        attributeNodes = {@NamedAttributeNode("author"),
+                          @NamedAttributeNode("genre")})
 @Table(name = "book")
 public class Book {
-
-    public Book(Author author, Genre genre, String title) {
-        this.author = author;
-        this.genre = genre;
-        this.title = title;
-        //this.notes = null;
-    }
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -47,7 +40,8 @@ public class Book {
     @Column(name = "title")
     private String title;
 
-    /*@Fetch(FetchMode.SUBSELECT)
+    // Don't need to have 'List<Note> notes' in book. But can uncomment in later if need it
+    /*@Fetch(FetchMode.SELECT)
     @BatchSize(size = 10)
     @ToString.Exclude
     @OneToMany (targetEntity = Note.class,
@@ -56,23 +50,5 @@ public class Book {
             orphanRemoval = true,
             fetch = FetchType.LAZY) .
     private List<Note> notes;*/
-
-    public Book(Author author, Genre genre, String title, List<Note> notes) {
-        this.author = author;
-        this.genre = genre;
-        this.title = title;
-        //this.notes = notes;
-    }
-
-    // TODO: remove List<Note> notes
-    public Book(long id, Author author, Genre genre, String title, List<Note> notes) {
-        this.id = id;
-        this.author = author;
-        this.genre = genre;
-        this.title = title;
-        //this.notes = notes;
-    }
-
-
 
 }

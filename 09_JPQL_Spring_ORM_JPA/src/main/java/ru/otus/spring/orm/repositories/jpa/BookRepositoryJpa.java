@@ -3,6 +3,7 @@ package ru.otus.spring.orm.repositories.jpa;
 
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
+import org.springframework.data.jpa.repository.EntityGraph;
 import org.springframework.stereotype.Repository;
 import ru.otus.spring.orm.customExceptions.DaoException;
 import ru.otus.spring.orm.domain.Book;
@@ -22,13 +23,13 @@ public class BookRepositoryJpa implements BookRepository {
 
     @Override
     public Optional<Book> getBookById(long id) {
-
         TypedQuery<Book> query = em.createQuery("SELECT b " +
                 " FROM Book b " +
                 " JOIN FETCH b.author " +
                 " JOIN FETCH b.genre " +
                 " WHERE b.id = :id", Book.class);
         query.setParameter("id", id);
+        query.setHint("javax.persistence.fetchgraph", em.getEntityGraph("book-author-genre"));
         try {
             return Optional.of(query.getSingleResult());
         } catch (NoResultException e) {
@@ -42,8 +43,8 @@ public class BookRepositoryJpa implements BookRepository {
         TypedQuery<Book> query = em.createQuery("SELECT b " +
                 " FROM Book b " +
                 " JOIN FETCH b.author " +
-                " JOIN fetch b.genre ",
-                Book.class);
+                " JOIN fetch b.genre ", Book.class);
+        query.setHint("javax.persistence.fetchgraph", em.getEntityGraph("book-author-genre"));
         return query.getResultList();
     }
 

@@ -32,9 +32,9 @@ class BookServiceImplTest {
     private final static Genre GENRE_ONE = new Genre(1, "Роман");
     private final static String BOOK_ONE_NAME = "Мастер и Маргарита";
     private final static String BOOK_ONE_NAME_UPDATED = "Мастер и Маргарита - NEW";
-    private final static Book BOOK_ONE = new Book(1, AUTHOR_ONE, GENRE_ONE, BOOK_ONE_NAME, new ArrayList<>());
+    private final static Book BOOK_ONE = new Book(1, AUTHOR_ONE, GENRE_ONE, BOOK_ONE_NAME);
     private final static List<Note> BOOK_ONE_RIEVIEWS = Arrays.asList(new Note(1, BOOK_ONE, "Note-01.1 - Мастер"), new Note(2, BOOK_ONE, "Note-01.2 - Мастер"));
-    private final static Book BOOK_CANT_BE_INSERTED = new Book(10, AUTHOR_NOT_EXIST, GENRE_ONE, BOOK_ONE_NAME_UPDATED, new ArrayList<>());
+    private final static Book BOOK_CANT_BE_INSERTED = new Book(10, AUTHOR_NOT_EXIST, GENRE_ONE, BOOK_ONE_NAME_UPDATED);
 
 
     @Autowired  // TODO: change to Service
@@ -81,7 +81,7 @@ class BookServiceImplTest {
     @DisplayName("Should be able to insert new book-1")
     @Test
     void shouldInsertNewBook() {
-        Book book = new Book(new Author(1L, "Михаил Булгаков"), new Genre(1, "Роман"), "Мастер и Маргарита");
+        Book book = new Book(0L, new Author(1L, "Михаил Булгаков"), new Genre(1, "Роман"), "Мастер и Маргарита");
         Book savedBook = bookService.saveBook(book);
         assertThat(savedBook.getId()).isGreaterThan(0);
         assertEquals(book.getAuthor(), savedBook.getAuthor());
