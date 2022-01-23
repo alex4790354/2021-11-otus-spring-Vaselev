@@ -12,6 +12,13 @@ import static javax.persistence.FetchType.LAZY;
 @NoArgsConstructor
 @Entity(name = "Note")
 @Table(name = "Note")
+/*@NamedEntityGraph(name = "comment-book-author-genre",
+                    attributeNodes = {@NamedAttributeNode(value = "book", subgraph = "book-subgraph")}
+                   ,subgraphs = {@NamedSubgraph(name = "book-subgraph",
+                                                attributeNodes = {@NamedAttributeNode("genre"),
+                                                                  @NamedAttributeNode("author")})
+                                }
+                  )*/
 public class Note {
 
     @Id

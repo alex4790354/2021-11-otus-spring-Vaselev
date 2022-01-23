@@ -10,7 +10,10 @@ import ru.otus.spring.orm.domain.Book;
 import ru.otus.spring.orm.repositories.BookRepository;
 import javax.persistence.*;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
+
+import static java.util.Optional.ofNullable;
 
 
 @RequiredArgsConstructor
@@ -23,18 +26,8 @@ public class BookRepositoryJpa implements BookRepository {
 
     @Override
     public Optional<Book> getBookById(long id) {
-        TypedQuery<Book> query = em.createQuery("SELECT b " +
-                " FROM Book b " +
-                " JOIN FETCH b.author " +
-                " JOIN FETCH b.genre " +
-                " WHERE b.id = :id", Book.class);
-        query.setParameter("id", id);
-        query.setHint("javax.persistence.fetchgraph", em.getEntityGraph("book-author-genre"));
-        try {
-            return Optional.of(query.getSingleResult());
-        } catch (NoResultException e) {
-            return Optional.empty();
-        }
+        Map<String, Object> properties = Map.of("javax.persistence.fetchgraph", em.getEntityGraph("book-author-genre"));
+        return ofNullable(em.find(Book.class, id, properties));
     }
 
 

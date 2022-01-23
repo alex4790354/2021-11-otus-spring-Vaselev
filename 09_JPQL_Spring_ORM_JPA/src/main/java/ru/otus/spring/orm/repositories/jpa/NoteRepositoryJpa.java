@@ -11,6 +11,8 @@ import javax.persistence.TypedQuery;
 import java.util.List;
 import java.util.Optional;
 
+import static java.util.Optional.ofNullable;
+
 
 @Component
 @RequiredArgsConstructor
@@ -21,11 +23,7 @@ public class NoteRepositoryJpa implements NoteRepository {
 
     @Override
     public Optional<Note> getNoteById(long id) {
-        TypedQuery<Note> query = em.createQuery("SELECT n " +
-                " FROM Note n " +
-                " WHERE n.id = :id", Note.class);
-        query.setParameter("id", id);
-        return  Optional.ofNullable(query.getSingleResult());
+        return ofNullable(em.find(Note.class, id));
     }
 
     @Override

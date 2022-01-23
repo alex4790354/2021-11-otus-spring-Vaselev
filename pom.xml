@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    
+
+    <groupId>org.example</groupId>
+    <name>2021-11-otus_spring_Vasilev</name>
+    <artifactId>2021-11-otus_spring_Vasilev</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <description>Spring Boot Otus demo project</description>
+    <packaging>pom</packaging>
+
+    <properties>
+        <java.version>11</java.version>
+    </properties>
+
+    <modules>
+        <module>01_student_test</module>
+		<module>03_student_test_spring_boot</module>
+		<module>05_student_test_shell</module>
+		<module>07_DAO_Spring_JDBC</module>
+		<module>09_JPQL_Spring_ORM_JPA</module>
+		<module>11_Spring_DATA_JPA</module>
+        
+    </modules>
+
+</project>
