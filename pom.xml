@@ -22,7 +22,7 @@
 		<module>05_student_test_shell</module>
 		<module>07_DAO_Spring_JDBC</module>
 		<module>09_JPQL_Spring_ORM_JPA</module>
-		<module>11_Spring_DATA_JPA</module>
+		<!--<module>11_Spring_DATA_JPA</module>-->
         
     </modules>
 
