@@ -19,15 +19,17 @@ public class BookServiceImpl implements BookService {
 
     private final BookRepository bookRepository;
     private final NoteRepository noteRepository;
-    static final String BOOK_NOT_EXIST = "Book with this ID doesn't exist.";
+    private static final String BOOK_NOT_EXIST = "Book with this ID doesn't exist.";
 
 
     @Transactional(readOnly = true)
-    @SneakyThrows
+    @SneakyThrows // Would be better do not use SneakyThrows at all.
     @Override
     public Book getBookById(long id) {
         Book book = bookRepository.getBookById(id).orElse(null);
-        if (book == null) throw new DaoException(BOOK_NOT_EXIST, new RuntimeException());
+        if (book == null) {
+            throw new DaoException(BOOK_NOT_EXIST, new RuntimeException());
+        }
         return book;
     }
 
@@ -52,7 +54,7 @@ public class BookServiceImpl implements BookService {
         return bookRepository.getBooksCount();
     }
 
-    @SneakyThrows
+    @SneakyThrows // Would be better do not use SneakyThrows at all.
     @Transactional
     @Override
     public void deleteBook(long id) {
@@ -64,7 +66,7 @@ public class BookServiceImpl implements BookService {
 
 
     @Transactional
-    @SneakyThrows
+    @SneakyThrows // Would be better do not use SneakyThrows at all.
     @Override
     public Book saveBook(Book book) {
         if (book != null) {
@@ -75,7 +77,7 @@ public class BookServiceImpl implements BookService {
     }
 
     @Transactional
-    @SneakyThrows
+    @SneakyThrows // Would be better do not use SneakyThrows at all.
     @Override
     public Book saveBook(Long id, String newTitle) {
         Book book = bookRepository.getBookById(id).orElse(null);

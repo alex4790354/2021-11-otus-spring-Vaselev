@@ -34,7 +34,7 @@ public class GenreServiceImpl implements GenreService {
         return genreRepository.getAllGenres();
     }
 
-    @SneakyThrows
+    @SneakyThrows // Would be better do not use SneakyThrows at all.
     @Transactional(readOnly = true)
     @Override
     public Genre getGenreById(long id) {
@@ -45,7 +45,7 @@ public class GenreServiceImpl implements GenreService {
         throw new DaoException(GENRE_NOT_EXIST, new RuntimeException());
     }
 
-    @SneakyThrows
+    @SneakyThrows // Would be better do not use SneakyThrows at all.
     @Transactional
     @Override
     public void update(long id, String name) {
@@ -57,7 +57,7 @@ public class GenreServiceImpl implements GenreService {
         genreRepository.save(genre);
     }
 
-    @SneakyThrows
+    @SneakyThrows // Would be better do not use SneakyThrows at all.
     @Transactional
     @Override
     public void delete(long genreId) {

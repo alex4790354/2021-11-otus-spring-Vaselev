@@ -27,7 +27,7 @@ public class AuthorServiceImpl implements AuthorService {
         return authorRepository.save(author).getId();
     }
 
-    @SneakyThrows
+    @SneakyThrows // Would be better do not use SneakyThrows at all.
     @Transactional
     @Override
     public void update(long id, String fullName) {
@@ -38,7 +38,7 @@ public class AuthorServiceImpl implements AuthorService {
         }
     }
 
-    @SneakyThrows
+    @SneakyThrows // Would be better do not use SneakyThrows at all.
     @Transactional(readOnly = true)
     @Override
     public Author getById(long id) {
@@ -58,7 +58,7 @@ public class AuthorServiceImpl implements AuthorService {
     }
 
 
-    @SneakyThrows
+    @SneakyThrows // Would be better do not use SneakyThrows at all.
     @Transactional
     @Override
     public void delete(long authorId) {

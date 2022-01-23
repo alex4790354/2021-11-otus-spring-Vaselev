@@ -5,11 +5,10 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 import org.springframework.context.annotation.Import;
 import ru.otus.spring.orm.domain.Author;
 import ru.otus.spring.orm.repositories.jpa.AuthorRepositoryJpa;
-
-import java.util.ArrayList;
 import java.util.Optional;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -29,6 +28,9 @@ class AuthorRepositoryJPATest {
     @Autowired
     private AuthorRepository authorRepository;
 
+    @Autowired
+    private TestEntityManager em;
+
 
     @DisplayName("Should get correct Author")
     @Test
@@ -41,7 +43,7 @@ class AuthorRepositoryJPATest {
 
     @DisplayName("Should find all Authors")
     @Test
-    void ShouldGetAllAuthors() {
+    void shouldGetAllAuthors() {
         val authors = authorRepository.getAllAuthors();
         assertThat(authors).isNotNull().hasSize(EXPECTED_AUTHORS_COUNT)
                 .allMatch(s -> s.getId() > 0)
@@ -52,7 +54,7 @@ class AuthorRepositoryJPATest {
     @DisplayName("Should be able to delete a Author:")
     @Test
     void shouldDeletefirstAuthor() {
-        Author author = authorRepository.getAuthorById(AUTHOR_ONE_ID).get();
+        Author author = em.find(Author.class, AUTHOR_ONE_ID); // authorRepository.getAuthorById(AUTHOR_ONE_ID).get();
         assertEquals(AUTHOR_ONE_NAME, author.getName());
         // DELETE:
         authorRepository.delete(author);

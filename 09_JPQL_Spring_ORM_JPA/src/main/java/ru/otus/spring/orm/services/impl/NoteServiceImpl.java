@@ -24,7 +24,7 @@ public class NoteServiceImpl implements NoteService {
 
 
     @Transactional
-    @SneakyThrows
+    @SneakyThrows // Would be better do not use SneakyThrows at all.
     @Override
     public long create(Long bookId, String noteStr) {
         Book book = bookRepository.getBookById(bookId).orElse(null);
@@ -41,7 +41,7 @@ public class NoteServiceImpl implements NoteService {
         return noteRepository.getAllNote();
     }
 
-    @SneakyThrows
+    @SneakyThrows // Would be better do not use SneakyThrows at all.
     @Transactional(readOnly = true)
     @Override
     public Note getNoteById(long id) {
@@ -53,7 +53,7 @@ public class NoteServiceImpl implements NoteService {
         return note;
     }
 
-    @SneakyThrows
+    @SneakyThrows // Would be better do not use SneakyThrows at all.
     @Transactional
     @Override
     public void update(long id, String newNote) {

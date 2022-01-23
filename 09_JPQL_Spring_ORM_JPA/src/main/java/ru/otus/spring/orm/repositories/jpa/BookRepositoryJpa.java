@@ -28,17 +28,34 @@ public class BookRepositoryJpa implements BookRepository {
     public Optional<Book> getBookById(long id) {
         Map<String, Object> properties = Map.of("javax.persistence.fetchgraph", em.getEntityGraph("book-author-genre"));
         return ofNullable(em.find(Book.class, id, properties));
+        /* Second option:
+        TypedQuery<Book> query = em.createQuery("SELECT b " +
+                " FROM Book b " +
+                " JOIN FETCH b.author " +
+                " JOIN FETCH b.genre " +
+                " WHERE b.id = :id", Book.class);
+        query.setParameter("id", id);
+        query.setHint("javax.persistence.fetchgraph", em.getEntityGraph("book-author-genre"));
+        try {
+            return Optional.of(query.getSingleResult());
+        } catch (NoResultException e) {
+            return Optional.empty();
+        }*/
     }
 
 
     @Override
     public List<Book> getAllBooks() {
-        TypedQuery<Book> query = em.createQuery("SELECT b " +
-                " FROM Book b " +
-                " JOIN FETCH b.author " +
-                " JOIN fetch b.genre ", Book.class);
+        TypedQuery<Book> query = em.createQuery("SELECT b FROM Book b ", Book.class);
         query.setHint("javax.persistence.fetchgraph", em.getEntityGraph("book-author-genre"));
         return query.getResultList();
+
+        //Or we can use second option: JOIN FETCH instead of fetchgraph
+        /*TypedQuery<Book> query1 = em.createQuery("SELECT b " +
+                        " FROM Book b " +
+                " JOIN FETCH b.author " +
+                " JOIN fetch b.genre "
+                , Book.class);*/
     }
 
 
@@ -54,7 +71,7 @@ public class BookRepositoryJpa implements BookRepository {
         em.remove(book);
     }
 
-    @SneakyThrows
+    @SneakyThrows // Would be better do not use SneakyThrows at all.
     @Override
     public Book saveBook(Book newBook) {
         try {

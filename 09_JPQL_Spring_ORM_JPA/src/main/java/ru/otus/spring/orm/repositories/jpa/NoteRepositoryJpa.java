@@ -24,11 +24,22 @@ public class NoteRepositoryJpa implements NoteRepository {
     @Override
     public Optional<Note> getNoteById(long id) {
         return ofNullable(em.find(Note.class, id));
+        /*TypedQuery<Note> query = em.createQuery("SELECT n " +
+                " FROM Note n " +
+                //" JOIN FETCH n.book " +
+                //" JOIN FETCH n.book.author " +
+                //" JOIN FETCH n.book.genre " +
+                " WHERE n.id = :id", Note.class);
+        query.setParameter("id", id);*/
+        //query.setHint("javax.persistence.fetchgraph", em.getEntityGraph("comment-book-author-genre"));
+        //return  Optional.ofNullable(query.getSingleResult());
+        //return Optional.ofNullable(em.find(Note.class, id));
     }
 
     @Override
     public List<Note> getAllNote() {
         TypedQuery<Note> query = em.createQuery("select c from Note c", Note.class);
+        //query.setHint("javax.persistence.fetchgraph", em.getEntityGraph("comment-book-author-genre"));
         return query.getResultList();
     }
 
@@ -36,6 +47,7 @@ public class NoteRepositoryJpa implements NoteRepository {
     public List<Note> getNoteByBookId(long bookId) {
         TypedQuery<Note> query = em.createQuery("SELECT r FROM Note r WHERE r.book.id = :bookId", Note.class);
         query.setParameter("bookId", bookId);
+        //query.setHint("javax.persistence.fetchgraph", em.getEntityGraph("comment-book-author-genre"));
         return query.getResultList();
     }
 

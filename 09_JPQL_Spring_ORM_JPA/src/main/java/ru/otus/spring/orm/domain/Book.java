@@ -25,30 +25,18 @@ public class Book {
     @Column(name = "id")
     private long id;
 
-    @ManyToOne(optional = false, targetEntity = Author.class, cascade = CascadeType.DETACH)
+    @ManyToOne(optional = false, targetEntity = Author.class, cascade = CascadeType.DETACH, fetch = FetchType.LAZY)
     @JoinColumn(name = "author_id", nullable = false, referencedColumnName = "id")
-    @Fetch(FetchMode.SELECT)
-    @BatchSize(size = 5)
+    //@Fetch(FetchMode.SELECT)
+    //@BatchSize(size = 5)
     private Author author;
 
-    @ManyToOne(optional = false, targetEntity = Genre.class, cascade = CascadeType.DETACH)
+    @ManyToOne(optional = false, targetEntity = Genre.class, cascade = CascadeType.DETACH, fetch = FetchType.LAZY)
     @JoinColumn(name = "genre_id", nullable = false, referencedColumnName = "id")
-    @Fetch(FetchMode.SELECT)
-    @BatchSize(size = 5)
     private Genre genre;
 
     @Column(name = "title")
     private String title;
 
-    // Don't need to have 'List<Note> notes' in book. But can uncomment in later if need it
-    /*@Fetch(FetchMode.SELECT)
-    @BatchSize(size = 10)
-    @ToString.Exclude
-    @OneToMany (targetEntity = Note.class,
-            cascade = CascadeType.ALL,
-            mappedBy = "book",
-            orphanRemoval = true,
-            fetch = FetchType.LAZY) .
-    private List<Note> notes;*/
 
 }
