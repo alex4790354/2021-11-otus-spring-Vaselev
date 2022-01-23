@@ -39,7 +39,7 @@ public class ShellAppDelete {
     }
 
     @ShellMethod(value = "delete books Note", key = {"delN"})
-    public void deleteBooksNote(@ShellOption long noteId) {
+    public void deleteBooksNote(@ShellOption(defaultValue = "1") long noteId) {
         notesService.delete(noteId);
         System.out.println("Note with ID = " + noteId + " was deleted.");
     }
