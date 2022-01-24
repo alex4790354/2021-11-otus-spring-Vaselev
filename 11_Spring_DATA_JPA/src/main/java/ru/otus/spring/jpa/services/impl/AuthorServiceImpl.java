@@ -21,53 +21,47 @@ public class AuthorServiceImpl implements AuthorService {
     private final AuthorRepository authorRepository;
     private static final String AUTHOR_NOT_EXIST = "no author found by id";
 
-    @Transactional
+    @Transactional(readOnly = true)
     @Override
-    public long create(String fullName) {
-        Author author = new Author(0L, fullName, new ArrayList<Book>());
-        return authorRepository.save(author).getId();
+    public List<Author> findAll() {
+        return authorRepository.findAll();
     }
 
-    @SneakyThrows
+
+    @Transactional(readOnly = true)
+    @Override
+    public Author findById(long id) {
+        return authorRepository.findById(id).orElseThrow(() -> new DaoException(AUTHOR_NOT_EXIST));
+    }
+
     @Transactional
     @Override
-    public void update(long id, String fullName) {
+    public Author create(String fullName) {
+        Author author = new Author(0L, fullName);
+        return authorRepository.save(author);
+    }
+
+    
+    @Transactional
+    @Override
+    public void save(long id, String fullName) {
         Author author = authorRepository.findById(id).orElse(null);
         if (author == null) {
-            throw new DaoException(AUTHOR_NOT_EXIST, new RuntimeException());
+            throw new DaoException(AUTHOR_NOT_EXIST);
         }
         author.setName(fullName);
         authorRepository.save(author);
     }
 
-    @SneakyThrows
-    @Transactional(readOnly = true)
-    @Override
-    public Author getById(long id) {
-        Author author = authorRepository.findById(id).orElse(null);
-        if (author != null) {
-            return author;
-        } else {
-            throw new DaoException(AUTHOR_NOT_EXIST, new RuntimeException());
-        }
-    }
 
-
-    @Transactional(readOnly = true)
-    @Override
-    public List<Author> getAll() {
-        return authorRepository.findAll();
-    }
-
-
-    @SneakyThrows
+    
     @Transactional
     @Override
     public void delete(long authorId) {
         Author author = authorRepository.findById(authorId).orElse(null);
-        if (author == null) {
-            throw new DaoException(AUTHOR_NOT_EXIST, new RuntimeException());
+        if (author != null) {
+            authorRepository.delete(author);
         }
-        authorRepository.delete(author);
+
     }
 }

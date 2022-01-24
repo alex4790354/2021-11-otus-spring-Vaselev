@@ -21,50 +21,50 @@ public class GenreServiceImpl implements GenreService {
     private static final String GENRE_NOT_EXIST = "Didn't find genre";
 
 
-    @Transactional
-    @Override
-    public long create(String name) {
-        Genre genre = new Genre(0, name, new ArrayList<>());
-        return genreRepository.save(genre).getId();
-    }
-
     @Transactional(readOnly = true)
     @Override
-    public List<Genre> getGenres() {
+    public List<Genre> findAll() {
         return genreRepository.findAll();
     }
 
-    @SneakyThrows
+
     @Transactional(readOnly = true)
     @Override
-    public Genre getGenreById(long id) {
+    public Genre findById(long id) {
         Genre genreById = genreRepository.findById(id).orElse(null);
         if (genreById != null) {
             return genreById;
         }
-        throw new DaoException(GENRE_NOT_EXIST, new RuntimeException());
+        throw new DaoException(GENRE_NOT_EXIST);
     }
 
-    @SneakyThrows
+
     @Transactional
     @Override
-    public void update(long id, String name) {
+    public void save(long id, String name) {
         Genre genre = genreRepository.findById(id).orElse(null);
         if (genre == null) {
-            throw new DaoException(GENRE_NOT_EXIST, new RuntimeException());
+            throw new DaoException(GENRE_NOT_EXIST);
         }
         genre.setName(name);
         genreRepository.save(genre);
     }
 
-    @SneakyThrows
+
+    @Transactional
+    @Override
+    public long create(String name) {
+        Genre genre = new Genre(0, name);
+        return genreRepository.save(genre).getId();
+    }
+
+
     @Transactional
     @Override
     public void delete(long genreId) {
         Genre genre = genreRepository.findById(genreId).orElse(null);
-        if (genre == null) {
-            throw new DaoException(GENRE_NOT_EXIST, new RuntimeException());
+        if (genre != null) {
+            genreRepository.delete(genre);
         }
-        genreRepository.delete(genre);
     }
 }

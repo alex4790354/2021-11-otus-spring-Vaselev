@@ -1,15 +1,15 @@
 package ru.otus.spring.jpa.services;
 
 import ru.otus.spring.jpa.domain.Book;
-import ru.otus.spring.jpa.domain.Review;
+import ru.otus.spring.jpa.domain.Note;
 
 import java.util.List;
 
 public interface BookService {
 
-    Book getBookById(long id);
+    Book findById(long id);
 
-    List<Book> getAllBooks();
+    List<Book> findAll();
 
     Long getBooksCount();
 
@@ -19,6 +19,6 @@ public interface BookService {
 
     Book saveBook(Long id, String newTitle);
 
-    //List<Review> getReviewsByBookId(Long bookId);
+    //List<Note> getNotesByBookId(Long bookId);
 
 }

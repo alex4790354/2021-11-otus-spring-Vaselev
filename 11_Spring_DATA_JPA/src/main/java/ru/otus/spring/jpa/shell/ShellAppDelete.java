@@ -7,7 +7,7 @@ import org.springframework.shell.standard.ShellOption;
 import ru.otus.spring.jpa.services.AuthorService;
 import ru.otus.spring.jpa.services.BookService;
 import ru.otus.spring.jpa.services.GenreService;
-import ru.otus.spring.jpa.services.ReviewsService;
+import ru.otus.spring.jpa.services.NoteService;
 
 
 @RequiredArgsConstructor
@@ -17,7 +17,7 @@ public class ShellAppDelete {
     private final AuthorService authorService;
     private final GenreService genreService;
     private final BookService bookService;
-    private final ReviewsService reviewsService;
+    private final NoteService reviewsService;
 
 
     @ShellMethod(value = "delete author", key = {"delA"})
@@ -38,10 +38,10 @@ public class ShellAppDelete {
         System.out.println("Book with bookId = " + bookId + " was deleted");
     }
 
-    @ShellMethod(value = "delete books Reviews", key = {"delR"})
-    public void deleteBooksReviews(@ShellOption long reviewId) {
+    @ShellMethod(value = "delete books Notes", key = {"delN"})
+    public void deleteBooksNotes(@ShellOption long reviewId) {
         reviewsService.delete(reviewId);
-        System.out.println("Review with ID = " + reviewId + " was deleted.");
+        System.out.println("Note with ID = " + reviewId + " was deleted.");
     }
 
 }

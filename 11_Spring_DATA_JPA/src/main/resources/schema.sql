@@ -26,11 +26,11 @@ ALTER TABLE book ADD CONSTRAINT book_fk_01 FOREIGN KEY (author_id) REFERENCES au
 ALTER TABLE book ADD CONSTRAINT book_fk_02 FOREIGN KEY (genre_id)  REFERENCES genre  (id) ON DELETE CASCADE;
 
 
-DROP TABLE IF EXISTS review CASCADE;
-CREATE TABLE review(
+DROP TABLE IF EXISTS note CASCADE;
+CREATE TABLE note(
                        id BIGSERIAL,
                        book_id BIGINT NOT NULL,
-                       review CHARACTER VARYING(255),
-                       CONSTRAINT review_pk PRIMARY KEY (id)
+                       note CHARACTER VARYING(255),
+                       CONSTRAINT note_pk PRIMARY KEY (id)
 );
-ALTER TABLE review ADD CONSTRAINT book_note_fk_01 FOREIGN KEY (book_id) REFERENCES book (id) ON DELETE CASCADE;
+ALTER TABLE note ADD CONSTRAINT book_note_fk_01 FOREIGN KEY (book_id) REFERENCES book (id) ON DELETE CASCADE;

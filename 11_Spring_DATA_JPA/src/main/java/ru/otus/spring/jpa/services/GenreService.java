@@ -8,11 +8,11 @@ public interface GenreService {
 
     long create(String fullName);
 
-    List<Genre> getGenres();
+    List<Genre> findAll();
 
-    Genre getGenreById(long id);
+    Genre findById(long id);
 
-    void update(long id, String title);
+    void save(long id, String title);
 
     void delete(long id);
 
