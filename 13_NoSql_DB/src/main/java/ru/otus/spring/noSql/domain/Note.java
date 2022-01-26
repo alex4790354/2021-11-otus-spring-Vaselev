@@ -1,40 +1,29 @@
 package ru.otus.spring.noSql.domain;
 
-import lombok.*;
-
-import javax.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 import javax.validation.constraints.NotBlank;
 
-import static javax.persistence.FetchType.LAZY;
 
-/*
-@NamedEntityGraph(name = "comment-book-author-genre",
-                  attributeNodes = {@NamedAttributeNode(value = "book", subgraph = "book-subgraph")},
-                  subgraphs = {@NamedSubgraph(name = "book-subgraph",
-                                    attributeNodes = {@NamedAttributeNode("genre"),
-                                                      @NamedAttributeNode("author")})
-                              }
-                 )*/
 @Data
-@EqualsAndHashCode(exclude = "book")
-@AllArgsConstructor
 @NoArgsConstructor
-@Entity(name = "Note")
-@Table(name = "note")
+@AllArgsConstructor
+@Document(collection = "COMMENT")
 public class Note {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
-    private long id;
-
-    @ManyToOne(targetEntity = Book.class, fetch = LAZY)
-    @JoinColumn(name = "book_id")
-    @ToString.Exclude
-    private Book book;
+    private String id;
 
     @NotBlank
-    @Column(name = "note")
     private String note;
+
+    private String bookId;
+
+    public Note(String note, String bookId) {
+        this(null, note, bookId);
+    }
 
 }

@@ -3,23 +3,25 @@ package ru.otus.spring.noSql.domain;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 
-import javax.persistence.*;
-
+import javax.validation.constraints.NotNull;
 
 @Data
-@AllArgsConstructor
 @NoArgsConstructor
-@Entity(name = "Genre")
-@Table(name = "genre")
+@AllArgsConstructor
+@Document(collection = "GENRE")
 public class Genre {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
-    private long id;
+    private String id;
 
-    @Column(name = "name", nullable = false, unique = true)
+    @NotNull
     private String name;
+
+    public Genre(String name) {
+        this.name = name;
+    }
 
 }

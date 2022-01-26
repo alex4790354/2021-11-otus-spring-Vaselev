@@ -4,11 +4,11 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.shell.standard.ShellComponent;
 import org.springframework.shell.standard.ShellMethod;
 import org.springframework.shell.standard.ShellOption;
+import org.springframework.transaction.annotation.Transactional;
 import ru.otus.spring.noSql.domain.Book;
-import ru.otus.spring.noSql.services.AuthorService;
-import ru.otus.spring.noSql.services.BookService;
-import ru.otus.spring.noSql.services.GenreService;
-import ru.otus.spring.noSql.services.NoteService;
+import ru.otus.spring.noSql.service.AuthorService;
+import ru.otus.spring.noSql.service.BookService;
+import ru.otus.spring.noSql.service.GenreService;
 
 
 @ShellComponent
@@ -17,7 +17,7 @@ public class ShellAppAdd {
     private final BookService bookService;
     private final AuthorService authorService;
     private final GenreService genreService;
-    private final NoteService reviewsService;
+
 
 
     @ShellMethod(value = "add author", key = {"addA"})
@@ -34,19 +34,18 @@ public class ShellAppAdd {
 
     @ShellMethod(value = "add book", key = {"addB"})
     public void addBook(@ShellOption(defaultValue = "Title") String title,
-                        @ShellOption(defaultValue = "1") long authorId,
-                        @ShellOption(defaultValue = "1") long genreId) {
-        Book book = new Book(0L, authorService.findById(authorId), genreService.findById(genreId), title);
-        bookService.saveBook(book);
+                        @ShellOption(defaultValue = "1") String authorId,
+                        @ShellOption(defaultValue = "1") String genreId) {
+
+        bookService.addBook(title, authorId, genreId);
     }
 
 
-    @ShellMethod(value = "add books Note", key = {"addN"})
-    public void addNewNote(@ShellOption(defaultValue = "1") long bookId,
-                               @ShellOption(defaultValue = "good Book") String reviewContext) {
-        reviewsService.create(bookId, reviewContext + " - " + bookId);
-        System.out.println("New review was create.");
-
+    @ShellMethod(value = "add books comment", key = {"addBC"})
+    @Transactional
+    public void addBooksComment(@ShellOption(defaultValue = "Cool title 01") String title,
+                                @ShellOption(defaultValue = "Cool Book") String commentString) {
+        bookService.addBookComment(title, commentString);
     }
 
 }

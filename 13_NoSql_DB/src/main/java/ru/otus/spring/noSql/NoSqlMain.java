@@ -7,11 +7,11 @@ import org.springframework.context.ApplicationContext;
 
 
 @SpringBootApplication
-public class JpaMain {
+public class NoSqlMain {
 
     public static void main(String[] args) {
 
-        ApplicationContext context = SpringApplication.run(JpaMain.class);
+        ApplicationContext context = SpringApplication.run(NoSqlMain.class);
 
     }
 }

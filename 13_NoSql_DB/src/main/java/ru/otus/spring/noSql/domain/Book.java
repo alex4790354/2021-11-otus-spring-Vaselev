@@ -1,36 +1,47 @@
 package ru.otus.spring.noSql.domain;
 
-
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import javax.persistence.*;
+import lombok.ToString;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.DBRef;
+import org.springframework.data.mongodb.core.mapping.Document;
+
+import javax.validation.constraints.NotNull;
+import java.util.List;
+
 
 @Data
-@Entity(name = "Book")
-@AllArgsConstructor
+
 @NoArgsConstructor
-@NamedEntityGraph(name = "book-author-genre",
-        attributeNodes = {@NamedAttributeNode("author"),
-                          @NamedAttributeNode("genre")})
-@Table(name = "book")
+@AllArgsConstructor
+@Document(collection = "BOOK")
 public class Book {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
-    private long id;
+    private String id;
 
-    @ManyToOne(optional = false, targetEntity = Author.class, cascade = CascadeType.DETACH, fetch = FetchType.LAZY)
-    @JoinColumn(name = "author_id", nullable = false, referencedColumnName = "id")
-    private Author author;
-
-    @ManyToOne(optional = false, targetEntity = Genre.class, cascade = CascadeType.DETACH, fetch = FetchType.LAZY)
-    @JoinColumn(name = "genre_id", nullable = false, referencedColumnName = "id")
-    private Genre genre;
-
-    @Column(name = "title")
+    @NotNull
     private String title;
 
+    @DBRef
+    private Author author;
+
+    private Genre genre;
+
+    @ToString.Exclude
+    @DBRef
+    private List<Note> notes;
+
+    public Book(String title, Author author, Genre genre) {
+        this(null, title, author, genre, null);
+    }
+
+    public Book(String id, String title, Author author, Genre genre) {
+        this(id, title, author, genre, null);
+    }
 
 }
+
+

@@ -1,23 +1,19 @@
 package ru.otus.spring.noSql.repositories;
 
-import org.springframework.data.jpa.repository.EntityGraph;
-import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.repository.CrudRepository;
+import ru.otus.spring.noSql.domain.Author;
 import ru.otus.spring.noSql.domain.Book;
 
 import java.util.List;
 import java.util.Optional;
 
+public interface BookRepository extends CrudRepository<Book, Long>, CustomBookRepository {
 
-public interface BookRepository extends JpaRepository<Book, Long> {
+    Optional<Book> findById(String bookId);
 
-    @EntityGraph(value = "book-author-genre")
-    @Override
+    Optional<Book> findByTitle(String title);
+
     List<Book> findAll();
 
-
-    @EntityGraph(value = "book-author-genre")
-    @Override
-    Optional<Book> findById(Long id);
-
-
+    List<Book> findByAuthor(Author author);
 }
