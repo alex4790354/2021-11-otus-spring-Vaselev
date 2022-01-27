@@ -1,0 +1,22 @@
+logging:
+  level:
+    root: ERROR
+
+spring:
+  datasource:
+    url: jdbc:h2:mem:testdb
+
+  jpa:
+    generate-ddl: false
+    hibernate:
+      ddl-auto: validate
+
+    show-sql: true
+    #properties:
+      #hibernate:
+        #format_sql: true
+  sql:
+    init:
+      mode: always
+      data-locations: test-data.sql
+      #schema-locations: schema.sql
