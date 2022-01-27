@@ -1,6 +1,6 @@
-package ru.otus.spring.jpa.services;
+package ru.otus.spring.mvc.services;
 
-import ru.otus.spring.jpa.domain.Genre;
+import ru.otus.spring.mvc.domain.Genre;
 
 import java.util.List;
 

@@ -9,10 +9,15 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import ru.otus.spring.mvc.domain.Author;
 import ru.otus.spring.mvc.domain.Book;
+import ru.otus.spring.mvc.domain.Genre;
 import ru.otus.spring.mvc.domain.Person;
 import ru.otus.spring.mvc.repositories.PersonRepository;
+import ru.otus.spring.mvc.services.AuthorService;
 import ru.otus.spring.mvc.services.BookService;
+import ru.otus.spring.mvc.services.GenreService;
+import ru.otus.spring.mvc.services.NoteService;
 
 import javax.validation.Valid;
 import java.util.List;
@@ -20,23 +25,60 @@ import java.util.List;
 
 
 @Controller
-public class PersonController {
+public class BookController {
 
     private final PersonRepository repository;
+    private final AuthorService authorService;
+    private final GenreService genreService;
     private final BookService bookService;
+    private final NoteService noteService;
 
     @Autowired
-    public PersonController(PersonRepository repository, BookService bookService) {
+    public BookController(PersonRepository repository,
+                          AuthorService authorService,
+                          GenreService genreService,
+                          BookService bookService,
+                          NoteService noteService) {
         this.repository = repository;
+        this.authorService = authorService;
+        this.genreService = genreService;
         this.bookService = bookService;
+        this.noteService = noteService;
     }
 
     @GetMapping("/books")
     public String listBooks(Model model) {
         List<Book> books = bookService.findAll();
         model.addAttribute("books", books);
+        model.addAttribute("notes", books);
         return "books";
     }
+
+    @GetMapping("/editBook")
+    public String editBook(@RequestParam("id") long id, Model model) {
+        Book book = bookService.findById(id);
+        List<Author> authors = authorService.findAll();
+        List<Genre> genres = genreService.findAll();
+        model.addAttribute("book", book);
+        model.addAttribute("authors", authors);
+        model.addAttribute("genres", genres);
+        return "editBook";
+    }
+
+    @Validated
+    @PostMapping("/editBook")
+    public String saveBook(@Valid @ModelAttribute("book") Book book,
+                             BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            return "editBook";
+        }
+        bookService.saveBook(book);
+        return "redirect:/books";
+    }
+
+
+
+
 
     @GetMapping("/")
     public String listPage(Model model) {

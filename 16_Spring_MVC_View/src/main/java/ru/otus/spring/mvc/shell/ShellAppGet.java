@@ -1,17 +1,18 @@
-package ru.otus.spring.jpa.shell;
+package ru.otus.spring.mvc.shell;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.shell.standard.ShellComponent;
 import org.springframework.shell.standard.ShellMethod;
 import org.springframework.shell.standard.ShellOption;
-import ru.otus.spring.jpa.domain.Author;
-import ru.otus.spring.jpa.domain.Book;
-import ru.otus.spring.jpa.domain.Genre;
-import ru.otus.spring.jpa.domain.Note;
-import ru.otus.spring.jpa.services.AuthorService;
-import ru.otus.spring.jpa.services.BookService;
-import ru.otus.spring.jpa.services.GenreService;
-import ru.otus.spring.jpa.services.NoteService;
+import ru.otus.spring.mvc.domain.Author;
+import ru.otus.spring.mvc.domain.Book;
+import ru.otus.spring.mvc.domain.Genre;
+import ru.otus.spring.mvc.domain.Note;
+import ru.otus.spring.mvc.services.AuthorService;
+import ru.otus.spring.mvc.services.BookService;
+import ru.otus.spring.mvc.services.GenreService;
+import ru.otus.spring.mvc.services.NoteService;
+
 import java.util.List;
 
 

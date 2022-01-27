@@ -1,14 +1,14 @@
-package ru.otus.spring.jpa.services.impl;
+package ru.otus.spring.mvc.services.impl;
 
 
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import ru.otus.spring.jpa.customExceptions.DaoException;
-import ru.otus.spring.jpa.domain.Book;
-import ru.otus.spring.jpa.repositories.BookRepository;
-import ru.otus.spring.jpa.services.BookService;
+import ru.otus.spring.mvc.customExceptions.DaoException;
+import ru.otus.spring.mvc.domain.Book;
+import ru.otus.spring.mvc.repositories.BookRepository;
+import ru.otus.spring.mvc.services.BookService;
 import java.util.List;
 
 

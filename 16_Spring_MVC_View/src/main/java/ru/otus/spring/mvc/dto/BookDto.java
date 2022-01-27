@@ -1,36 +1,47 @@
-package ru.otus.spring.mvc.domain;
+package ru.otus.spring.mvc.dto;
 
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import javax.persistence.*;
+import org.springframework.beans.factory.annotation.Autowired;
+import ru.otus.spring.mvc.domain.Author;
+import ru.otus.spring.mvc.domain.Book;
+import ru.otus.spring.mvc.domain.Genre;
+import ru.otus.spring.mvc.repositories.NoteRepository;
+
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 
 @Data
-@Entity(name = "Book")
 @AllArgsConstructor
 @NoArgsConstructor
-@NamedEntityGraph(name = "book-author-genre",
-        attributeNodes = {@NamedAttributeNode("author"),
-                          @NamedAttributeNode("genre")})
-@Table(name = "book")
-public class Book {
+public class BookDto {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
     private long id;
 
-    @ManyToOne(optional = false, targetEntity = Author.class, cascade = CascadeType.DETACH, fetch = FetchType.LAZY)
-    @JoinColumn(name = "author_id", nullable = false, referencedColumnName = "id")
     private Author author;
 
-    @ManyToOne(optional = false, targetEntity = Genre.class, cascade = CascadeType.DETACH, fetch = FetchType.LAZY)
-    @JoinColumn(name = "genre_id", nullable = false, referencedColumnName = "id")
     private Genre genre;
 
-    @Column(name = "title")
+    @NotBlank(message = "{name-field-should-not-be-blank}")
+    @Size(min = 5, max = 200, message = "{name-field-should-has-expected-size}")
     private String title;
 
+    private long notesCount;
+
+    public BookDto(Author author, Genre genre, String title) {
+        this.author = author;
+        this.genre = genre;
+        this.title = title;
+    }
+
+    public Book toDomainObject() {
+        return new Book(this.id, this.author, this.genre, this.title);
+    }
+
+    public BookDto fromDomainObject(Book book, long bookCount) {
+        return new BookDto(book.getId(), book.getAuthor(), book.getGenre(), book.getTitle(), bookCount);
+    }
 
 }

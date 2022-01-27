@@ -1,4 +1,4 @@
-package ru.otus.spring.jpa.services.impl;
+package ru.otus.spring.mvc.services.impl;
 
 import lombok.val;
 import org.junit.jupiter.api.DisplayName;
@@ -7,14 +7,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 import org.springframework.context.annotation.Import;
-import ru.otus.spring.jpa.domain.Author;
-import ru.otus.spring.jpa.domain.Book;
-import ru.otus.spring.jpa.domain.Genre;
-import ru.otus.spring.jpa.domain.Note;
-import ru.otus.spring.jpa.repositories.BookRepository;
-import ru.otus.spring.jpa.repositories.NoteRepository;
-import javax.persistence.PersistenceException;
-import java.util.Arrays;
+import ru.otus.spring.mvc.domain.Author;
+import ru.otus.spring.mvc.domain.Book;
+import ru.otus.spring.mvc.domain.Genre;
+
 import java.util.List;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatCode;

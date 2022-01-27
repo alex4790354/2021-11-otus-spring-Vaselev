@@ -1,4 +1,4 @@
-package ru.otus.spring.controller;
+package ru.otus.spring.mvc.controller;
 
 class NotFoundException extends RuntimeException{
 

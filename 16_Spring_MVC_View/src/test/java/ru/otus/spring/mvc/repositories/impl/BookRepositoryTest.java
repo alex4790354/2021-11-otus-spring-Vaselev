@@ -1,14 +1,14 @@
-package ru.otus.spring.jpa.repositories.impl;
+package ru.otus.spring.mvc.repositories.impl;
 
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
-import ru.otus.spring.jpa.domain.Author;
-import ru.otus.spring.jpa.domain.Book;
-import ru.otus.spring.jpa.domain.Genre;
-import ru.otus.spring.jpa.repositories.BookRepository;
+import ru.otus.spring.mvc.domain.Author;
+import ru.otus.spring.mvc.domain.Book;
+import ru.otus.spring.mvc.domain.Genre;
+import ru.otus.spring.mvc.repositories.BookRepository;
 import java.util.List;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 

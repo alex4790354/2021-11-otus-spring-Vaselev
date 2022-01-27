@@ -46,3 +46,8 @@ INSERT INTO note(book_id, note) VALUES (10, 'Note-10.1 - Отель');
 INSERT INTO note(book_id, note) VALUES (10, 'Note-10.2 - Отель');
 INSERT INTO note(book_id, note) VALUES (10, 'Note-10.3 - Отель');
 INSERT INTO note(book_id, note) VALUES (10, 'Note-10.4 - Отель');
+
+-- TOTO: delete into person.
+INSERT INTO person(name) VALUES ('Pushkin');
+INSERT INTO person(name) VALUES ('Lermontov');
+INSERT INTO person(name) VALUES ('Rusov');

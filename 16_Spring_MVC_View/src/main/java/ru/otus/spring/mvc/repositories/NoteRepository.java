@@ -1,7 +1,8 @@
-package ru.otus.spring.jpa.repositories;
+package ru.otus.spring.mvc.repositories;
 
 import org.springframework.data.jpa.repository.JpaRepository;
-import ru.otus.spring.jpa.domain.Note;
+import ru.otus.spring.mvc.domain.Note;
+
 import java.util.List;
 
 

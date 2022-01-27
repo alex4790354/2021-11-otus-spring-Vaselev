@@ -3,8 +3,7 @@ package ru.otus.spring.mvc.dto;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
-import javax.persistence.*;
+import ru.otus.spring.mvc.domain.Genre;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
@@ -12,7 +11,7 @@ import javax.validation.constraints.Size;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Genre {
+public class GenreDto {
 
     private long id;
 
@@ -20,7 +19,16 @@ public class Genre {
     @Size(min = 5, max = 100, message = "{name-field-should-has-expected-size}")
     private String name;
 
-    public Genre(String name) {
+    public GenreDto(String name) {
         this.name = name;
     }
+
+    public Genre toDomainObject() {
+        return new Genre(this.id, this.name);
+    }
+
+    public GenreDto fromDomainObject(Genre genre) {
+        return new GenreDto(genre.getId(), genre.getName());
+    }
+
 }

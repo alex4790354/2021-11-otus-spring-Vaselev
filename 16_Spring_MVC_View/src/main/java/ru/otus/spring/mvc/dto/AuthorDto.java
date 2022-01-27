@@ -1,25 +1,36 @@
-package ru.otus.spring.mvc.domain;
+package ru.otus.spring.mvc.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import ru.otus.spring.mvc.domain.Author;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Entity(name = "Author")
-@Table(name = "author")
-public class Author {
+public class AuthorDto {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
     private long id;
 
-    @Column(name = "name", nullable = false, unique = true)
+    @NotBlank(message = "{name-field-should-not-be-blank}")
+    @Size(min = 5, max = 100, message = "{name-field-should-has-expected-size}")
     private String name;
+
+    public AuthorDto(String name) {
+        this.name = name;
+    }
+
+    public Author toDomainObject() {
+        return new Author(this.id, this.name);
+    }
+
+    public AuthorDto fromDomainObject(Author author) {
+        return new AuthorDto(author.getId(), author.getName());
+    }
 
 }

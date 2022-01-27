@@ -1,7 +1,6 @@
-package ru.otus.spring.jpa.services;
+package ru.otus.spring.mvc.services;
 
-import ru.otus.spring.jpa.domain.Book;
-import ru.otus.spring.jpa.domain.Note;
+import ru.otus.spring.mvc.domain.Book;
 
 import java.util.List;
 

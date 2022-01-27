@@ -56,16 +56,22 @@
     <thead>
     <tr>
         <th>ID</th>
-        <th>Name</th>
+        <th>Author</th>
+        <th>Genre</th>
+        <th>Title</th>
+        <th>Отзывы</th>
         <th>Action</th>
     </tr>
     </thead>
     <tbody>
-    <tr th:each="person : ${persons}">
-        <td th:text="${person.id}">1</td>
-        <td th:text="${person.name}">John Doe</td>
+    <tr th:each="book : ${books}">
+        <td th:text="${book.id}">1</td>
+        <td th:text="${book.author.name}">Джек Лондон</td>
+        <td th:text="${book.genre.name}">Приключения</td>
+        <td th:text="${book.title}">Одинокий волк</td>
+        <td>0</td>
         <td>
-            <a th:href="@{/edit(id=${person.id})}" href="edit.html" th:text="#{edit-button-caption}">Edit</a>
+            <a th:href="@{/editBook(id=${book.id})}" href="edit.html" th:text="#{edit-button-caption}">Edit</a>
         </td>
     </tr>
     </tbody>

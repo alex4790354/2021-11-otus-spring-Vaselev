@@ -1,14 +1,14 @@
-package ru.otus.spring.jpa.services.impl;
+package ru.otus.spring.mvc.services.impl;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
-import ru.otus.spring.jpa.customExceptions.DaoException;
-import ru.otus.spring.jpa.domain.Book;
-import ru.otus.spring.jpa.domain.Note;
-import ru.otus.spring.jpa.repositories.BookRepository;
-import ru.otus.spring.jpa.repositories.NoteRepository;
-import ru.otus.spring.jpa.services.NoteService;
+import ru.otus.spring.mvc.customExceptions.DaoException;
+import ru.otus.spring.mvc.domain.Book;
+import ru.otus.spring.mvc.domain.Note;
+import ru.otus.spring.mvc.repositories.BookRepository;
+import ru.otus.spring.mvc.repositories.NoteRepository;
+import ru.otus.spring.mvc.services.NoteService;
 
 
 import java.util.List;
@@ -41,7 +41,14 @@ public class NoteServiceImpl implements NoteService {
         return note;
     }
 
-    
+
+    @Transactional(readOnly = true)
+    @Override
+    public long count(long bookId) {
+        return noteRepository.count();
+    }
+
+
     @Transactional
     @Override
     public void save(long id, String newNote) {
