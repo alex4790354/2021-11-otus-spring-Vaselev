@@ -52,6 +52,8 @@
 
 <h3 th:text="#{persons-table-header}">Persons:</h3>
 
+
+
 <table class="persons">
     <thead>
     <tr>
@@ -59,19 +61,24 @@
         <th>Author</th>
         <th>Genre</th>
         <th>Title</th>
-        <th>Отзывы</th>
+        <th>Отзывов</th>
         <th>Action</th>
     </tr>
     </thead>
     <tbody>
-    <tr th:each="book : ${books}">
-        <td th:text="${book.id}">1</td>
-        <td th:text="${book.author.name}">Джек Лондон</td>
-        <td th:text="${book.genre.name}">Приключения</td>
-        <td th:text="${book.title}">Одинокий волк</td>
-        <td>0</td>
+    <tr th:each="bookDto : ${booksDto}">
+        <td th:text="${bookDto.id}">1</td>
+        <td th:text="${bookDto.author.name}">Джек Лондон</td>
+        <td th:text="${bookDto.genre.name}">Приключения</td>
+        <td th:text="${bookDto.title}">Одинокий волк</td>
         <td>
-            <a th:href="@{/editBook(id=${book.id})}" href="edit.html" th:text="#{edit-button-caption}">Edit</a>
+            <a href="bookNotes?bookId=1"
+               th:href="@{/bookNotes(bookId=${bookDto.id})}"
+               th:text="${bookDto.notesCount}"> 108
+            </a>
+        </td>
+        <td>
+            <a th:href="@{/editBook(id=${bookDto.id})}" href="edit.html" th:text="#{edit-button-caption}">Edit</a>
         </td>
     </tr>
     </tbody>

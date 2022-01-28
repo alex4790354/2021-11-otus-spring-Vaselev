@@ -45,7 +45,7 @@
 <body>
 
 <!-- Book edition -->
-<form id="edit-form" action="editBook.html" th:action="@{/editBook(id=${book.id})}" th:method="post" th:object="${book}">
+<form id="edit-form" action="editBook.html" th:action="@{/editBook(id=${bookDto.id})}" th:method="post" th:object="${bookDto}">
     <h3 th:text = "#{person-form-header}">Person Info:</h3>
 
     <div class="row">
@@ -59,7 +59,7 @@
         <select id="author-select" th:field="*{author}" name="author">
             <option th:each="eAuthor : ${authors}"
                     th:value="${eAuthor.id}"
-                    th:selected="${eAuthor.id == book.author.id}"
+                    th:selected="${eAuthor.id == bookDto.author.id}"
                     th:text="${eAuthor.name}">Author name
             </option>
         </select>
@@ -70,7 +70,7 @@
         <select id="genre-select" th:field="*{genre}" name="genre">
             <option th:each="eGenre : ${genres}"
                     th:value="${eGenre.id}"
-                    th:selected="${eGenre.id == book.author.id}"
+                    th:selected="${eGenre.id == bookDto.author.id}"
                     th:text="${eGenre.name}"> Genre name
             </option>
         </select>

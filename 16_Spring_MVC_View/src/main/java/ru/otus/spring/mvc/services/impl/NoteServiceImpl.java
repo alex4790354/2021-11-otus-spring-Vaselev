@@ -30,7 +30,12 @@ public class NoteServiceImpl implements NoteService {
         return noteRepository.findAll();
     }
 
-    
+    @Transactional(readOnly = true)
+    @Override
+    public List<Note> findByBookId(long bookId) {
+        return noteRepository.findByBookId(bookId);
+    }
+
     @Transactional(readOnly = true)
     @Override
     public Note findById(long id) {
@@ -57,6 +62,12 @@ public class NoteServiceImpl implements NoteService {
             throw new DaoException(NOTE_NOT_EXIST);
         }
         note.setNote(newNote);
+        noteRepository.save(note);
+    }
+
+
+    @Override
+    public void save(Note note) {
         noteRepository.save(note);
     }
 

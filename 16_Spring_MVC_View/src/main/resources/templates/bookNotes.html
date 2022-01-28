@@ -54,18 +54,23 @@
 
 <table class="persons">
     <thead>
+    <div>
+
+    </div>
     <tr>
-        <th>ID</th>
-        <th>Name</th>
+        <th>Book Title</th>
+        <th>noteId</th>
+        <th>Note</th>
         <th>Action</th>
     </tr>
     </thead>
     <tbody>
-    <tr th:each="person : ${persons}">
-        <td th:text="${person.id}">1</td>
-        <td th:text="${person.name}">John Doe</td>
+    <tr th:each="note : ${notes}">
+        <td th:text="${book.title}">The Lord of the Rings</td>
+        <td th:text="${note.id}">1</td>
+        <td th:text="${note.note}">Very good book</td>
         <td>
-            <a th:href="@{/edit(id=${person.id})}" href="edit.html" th:text="#{edit-button-caption}">Edit</a>
+            <a th:href="@{/editBookNote(noteId=${note.id})}" href="editBookNote.html?noteId=1" th:text="#{edit-button-caption}">Edit</a>
         </td>
     </tr>
     </tbody>

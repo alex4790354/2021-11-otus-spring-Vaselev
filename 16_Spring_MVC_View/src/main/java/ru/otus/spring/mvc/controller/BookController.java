@@ -12,12 +12,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import ru.otus.spring.mvc.domain.Author;
 import ru.otus.spring.mvc.domain.Book;
 import ru.otus.spring.mvc.domain.Genre;
-import ru.otus.spring.mvc.domain.Person;
-import ru.otus.spring.mvc.repositories.PersonRepository;
-import ru.otus.spring.mvc.services.AuthorService;
-import ru.otus.spring.mvc.services.BookService;
-import ru.otus.spring.mvc.services.GenreService;
-import ru.otus.spring.mvc.services.NoteService;
+import ru.otus.spring.mvc.dto.BookDto;
+import ru.otus.spring.mvc.services.*;
 
 import javax.validation.Valid;
 import java.util.List;
@@ -27,39 +23,42 @@ import java.util.List;
 @Controller
 public class BookController {
 
-    private final PersonRepository repository;
     private final AuthorService authorService;
     private final GenreService genreService;
     private final BookService bookService;
     private final NoteService noteService;
+    private final ConversionService conversionService;
+
 
     @Autowired
-    public BookController(PersonRepository repository,
-                          AuthorService authorService,
+    public BookController(AuthorService authorService,
                           GenreService genreService,
                           BookService bookService,
-                          NoteService noteService) {
-        this.repository = repository;
+                          NoteService noteService,
+                          ConversionService conversionService) {
         this.authorService = authorService;
         this.genreService = genreService;
         this.bookService = bookService;
         this.noteService = noteService;
+        this.conversionService = conversionService;
     }
 
-    @GetMapping("/books")
+    @GetMapping("/")
     public String listBooks(Model model) {
         List<Book> books = bookService.findAll();
-        model.addAttribute("books", books);
-        model.addAttribute("notes", books);
+        List<BookDto> booksDto = conversionService.fromDomain(books);
+        model.addAttribute("booksDto", booksDto);
         return "books";
     }
 
     @GetMapping("/editBook")
     public String editBook(@RequestParam("id") long id, Model model) {
         Book book = bookService.findById(id);
+        BookDto bookDto = conversionService.fromDomain(book);
+
         List<Author> authors = authorService.findAll();
         List<Genre> genres = genreService.findAll();
-        model.addAttribute("book", book);
+        model.addAttribute("bookDto", bookDto);
         model.addAttribute("authors", authors);
         model.addAttribute("genres", genres);
         return "editBook";
@@ -67,41 +66,21 @@ public class BookController {
 
     @Validated
     @PostMapping("/editBook")
-    public String saveBook(@Valid @ModelAttribute("book") Book book,
-                             BindingResult bindingResult) {
+    public String saveBook(@Valid @ModelAttribute("bookDto") BookDto bookDto,
+                           BindingResult bindingResult,
+                           Model model) {
         if (bindingResult.hasErrors()) {
+            List<Author> authors = authorService.findAll();
+            List<Genre> genres = genreService.findAll();
+
+            model.addAttribute("bookDto", bookDto);
+            model.addAttribute("authors", authors);
+            model.addAttribute("genres", genres);
             return "editBook";
         }
-        bookService.saveBook(book);
-        return "redirect:/books";
-    }
-
-
-
-
-
-    @GetMapping("/")
-    public String listPage(Model model) {
-        List<Person> persons = repository.findAll();
-        model.addAttribute("persons", persons);
-        return "list";
-    }
-
-    @GetMapping("/edit")
-    public String editPage(@RequestParam("id") long id, Model model) {
-        Person person = repository.findById(id).orElseThrow(NotFoundException::new);
-        model.addAttribute("person", person);
-        return "edit";
-    }
-
-    @Validated
-    @PostMapping("/edit")
-    public String savePerson(@Valid @ModelAttribute("person") Person person,
-                             BindingResult bindingResult, Model model) {
-        if (bindingResult.hasErrors()) {
-            return "edit";
-        }
-        repository.save(person);
+        bookService.saveBook(conversionService.fromDto(bookDto));
         return "redirect:/";
     }
+
+
 }

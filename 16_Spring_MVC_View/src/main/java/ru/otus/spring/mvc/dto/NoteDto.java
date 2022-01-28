@@ -3,12 +3,8 @@ package ru.otus.spring.mvc.dto;
 import lombok.*;
 import ru.otus.spring.mvc.domain.Book;
 import ru.otus.spring.mvc.domain.Note;
-
-import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
-
-import static javax.persistence.FetchType.LAZY;
 
 
 @Data
@@ -35,7 +31,7 @@ public class NoteDto {
         return new Note(this.id, this.book, this.note);
     }
 
-    public NoteDto fromDomainObject(Note note) {
+    public static NoteDto fromDomainObject(Note note) {
         return new NoteDto(note.getId(), note.getBook(), note.getNote());
     }
 

@@ -4,8 +4,6 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import ru.otus.spring.mvc.domain.Author;
-
-import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
@@ -29,7 +27,7 @@ public class AuthorDto {
         return new Author(this.id, this.name);
     }
 
-    public AuthorDto fromDomainObject(Author author) {
+    public static AuthorDto fromDomainObject(Author author) {
         return new AuthorDto(author.getId(), author.getName());
     }
 

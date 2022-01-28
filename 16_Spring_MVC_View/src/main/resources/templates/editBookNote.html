@@ -44,19 +44,22 @@
 </head>
 <body>
 
-<!-- Person edition -->
-<form id="edit-form" action="edit.html" th:action="@{/edit(id=${person.id})}" th:method="post" th:object="${person}">
-    <h3 th:text = "#{person-form-header}">Person Info:</h3>
+<!-- Book edition -->
+<form id="edit-form" action="editBook.html" th:action="@{/editBookNote(noteId=${noteDto.id})}" th:method="post" th:object="${noteDto}">
+    <h3 th:text = "#{person-form-header}">Note</h3>
+
+    <input type="hidden" name="book" th:field="*{book}"/>
 
     <div class="row">
         <label for="id-input">ID:</label>
-        <input id="id-input" type="text" readonly="readonly" th:value="*{id}" value="1"/>
+        <input id="id-input" name="id" type="text" readonly="readonly" th:value="*{id}" value="1"/>
     </div>
 
+
     <div class="row">
-        <label for="person-name-input">Name:</label>
-        <input id="person-name-input" name="name" type="text" th:value="*{name}" value="John Doe"/>
-        <div class="errors" th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Wrong person name error</div>
+        <label for="note-input">Review:</label>
+        <input id="note-input" name="note" type="text" th:value="${noteDto.note}" value="John Doe"/>
+        <div class="errors" th:if="${#fields.hasErrors('note')}" th:errors="${noteDto.note}">Note error</div>
     </div>
 
     <div class="row">

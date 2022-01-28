@@ -10,9 +10,13 @@ public interface NoteService {
 
     List<Note> findAll();
 
+    List<Note> findByBookId(long bookId);
+
     Note findById(long id);
 
     void save(long id, String newNote);
+
+    void save(Note note);
 
     void delete(long id);
 
