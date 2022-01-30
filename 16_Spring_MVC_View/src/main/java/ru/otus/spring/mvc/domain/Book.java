@@ -32,5 +32,4 @@ public class Book {
     @Column(name = "title")
     private String title;
 
-
 }

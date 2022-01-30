@@ -81,6 +81,7 @@ public class BookController {
             model.addAttribute("genres", genres);
             return "editBook";
         }
+
         bookService.saveBook(conversionService.fromDto(bookDto));
         return "redirect:/";
     }

@@ -2,24 +2,24 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8"/>
-    <title>List of all persons</title>
+    <title>List of books</title>
     <style type="text/css">
         body {
             padding: 50px;
         }
 
-        .persons {
+        .books {
             border: 1px solid steelblue;
             width: 300px;
             border-collapse: collapse;
         }
 
-        .persons tr td, th {
+        .books tr td, th {
             padding: 5px;
             border: 1px solid steelblue;
         }
 
-        .persons td:last-child, td:first-child {
+        .books td:last-child, td:first-child {
             width: 50px;
         }
 
@@ -54,7 +54,7 @@
 
 
 
-<table class="persons">
+<table class="books">
     <thead>
     <tr>
         <th th:text="#{table-header-id}">ID</th>

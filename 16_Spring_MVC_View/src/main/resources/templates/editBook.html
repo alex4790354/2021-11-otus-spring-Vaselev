@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8"/>
-    <title>Edit person</title>
+    <title>Edit book</title>
     <style type="text/css">
         body {
             padding: 50px;
@@ -87,6 +87,53 @@
         <a href="list.html" th:href="@{/}"><button type="button" th:text="#{cancel-button-caption}">Cancel</button></a>
     </div>
 </form>
+
+<br><br><br><br>
+<h3 th:text="#{table-header-book-new}">Book</h3>
+
+<!--new one: -->
+<form id="edit-form2" action="editBook.html" th:action="@{/editBook}" th:method="post" th:object="${bookDto}">
+
+    <div class="row">
+        <label for="id-input2" th:text="#{table-header-id}">ID_:</label>
+        <input id="id-input2" name="id" type="text" readonly="readonly" th:value="0" value="0"/>
+    </div>
+
+    <div class="row">
+        <label for="author-select2" th:text="#{table-header-author}">Author_</label>
+        <select id="author-select2" th:field="*{author}" name="author">
+            <option th:each="eAuthor : ${authors}"
+                    th:value="${eAuthor.id}"
+                    th:selected="${eAuthor.id == bookDto.author.id}"
+                    th:text="${eAuthor.name}">Author name
+            </option>
+        </select>
+    </div>
+
+    <div class="row">
+        <label for="genre-select2" th:text="#{table-header-genre}">Genre_</label>
+        <select id="genre-select2" th:field="*{genre}" name="genre">
+            <option th:each="eGenre : ${genres}"
+                    th:value="${eGenre.id}"
+                    th:selected="${eGenre.id == bookDto.author.id}"
+                    th:text="${eGenre.name}"> Genre name
+            </option>
+        </select>
+    </div>
+
+    <div class="row">
+        <label for="title-input2" th:text="#{table-header-title}">Title_:</label>
+        <input id="title-input2" name="title" type="text" value="write new name"/>
+        <div class="errors" th:if="${#fields.hasErrors('title')}" th:errors="*{title}">Wrong person name error</div>
+    </div>
+
+    <div class="row">
+        <button type="submit" th:text="#{save-button-caption}">Save</button>
+        <a href="list.html" th:href="@{/}"><button type="button" th:text="#{cancel-button-caption}">Cancel</button></a>
+    </div>
+</form>
+
+
 
 </body>
 </html>
