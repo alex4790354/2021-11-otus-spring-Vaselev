@@ -16,7 +16,7 @@ public class GenreDto {
     private long id;
 
     @NotBlank(message = "{name-field-should-not-be-blank}")
-    @Size(min = 5, max = 100, message = "{name-field-should-has-expected-size}")
+    @Size(min = 5, max = 50, message = "{genre-field-should-has-expected-size}")
     private String name;
 
     public GenreDto(String name) {

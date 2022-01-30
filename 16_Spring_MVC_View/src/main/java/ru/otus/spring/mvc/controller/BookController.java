@@ -69,10 +69,13 @@ public class BookController {
     public String saveBook(@Valid @ModelAttribute("bookDto") BookDto bookDto,
                            BindingResult bindingResult,
                            Model model) {
+
+
         if (bindingResult.hasErrors()) {
+            System.out.println(bindingResult.toString());
+
             List<Author> authors = authorService.findAll();
             List<Genre> genres = genreService.findAll();
-
             model.addAttribute("bookDto", bookDto);
             model.addAttribute("authors", authors);
             model.addAttribute("genres", genres);

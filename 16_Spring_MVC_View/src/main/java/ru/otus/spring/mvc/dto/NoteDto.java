@@ -19,13 +19,9 @@ public class NoteDto {
     private Book book;
 
     @NotBlank(message = "{name-field-should-not-be-blank}")
-    @Size(min = 5, max = 200, message = "{name-field-should-has-expected-size}")
+    @Size(min = 5, max = 100, message = "{note-field-should-has-expected-size}")
     private String note;
 
-    public NoteDto(Book book, String note) {
-        this.book = book;
-        this.note = note;
-    }
 
     public Note toDomainObject() {
         return new Note(this.id, this.book, this.note);

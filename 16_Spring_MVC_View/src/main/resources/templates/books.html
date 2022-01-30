@@ -24,20 +24,20 @@
         }
 
         h3 {
-            background-image: url("../static/listmark.png");
+            background-image: url("../static/book.png");
             background-repeat: no-repeat;
-            padding: 2px;
-            padding-left: 30px;
+            padding: 5px;
+            padding-left: 50px;
         }
 
     </style>
 
     <style type="text/css" th:inline="text">
         [[h3]] {
-            background-image: url([[@{/listmark.png}]]);
+            background-image: url([[@{/book.png}]]);
             background-repeat: no-repeat;
-            padding: 2px;
-            padding-left: 30px;
+            padding: 5px;
+            padding-left: 50px;
         }
 
     </style>
@@ -50,19 +50,19 @@
     <div><a href="#" th:href="@{/(lang=ru)}" th:text="#{ru-lang-switch-button-caption}">Language - RU</a></div>
 </div>
 
-<h3 th:text="#{persons-table-header}">Persons:</h3>
+<h3 th:text="#{table-header-books}">Books list:</h3>
 
 
 
 <table class="persons">
     <thead>
     <tr>
-        <th>ID</th>
-        <th>Author</th>
-        <th>Genre</th>
-        <th>Title</th>
-        <th>Отзывов</th>
-        <th>Action</th>
+        <th th:text="#{table-header-id}">ID</th>
+        <th th:text="#{table-header-author}">Author</th>
+        <th th:text="#{table-header-genre}">Genre</th>
+        <th th:text="#{table-header-title}">Title</th>
+        <th th:text="#{table-header-notes-count}">Отзывов</th>
+        <th th:text="#{table-header-action}">Action</th>
     </tr>
     </thead>
     <tbody>

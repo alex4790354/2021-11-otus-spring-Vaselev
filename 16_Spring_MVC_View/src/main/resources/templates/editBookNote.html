@@ -22,10 +22,10 @@
         }
 
         h3 {
-            background-image: url("../static/listmark.png");
+            background-image: url("../static/book.png");
             background-repeat: no-repeat;
-            padding: 2px;
-            padding-left: 30px;
+            padding: 5px;
+            padding-left: 50px;
         }
 
         .errors {
@@ -35,31 +35,32 @@
 
     <style type="text/css" th:inline="text">
         [[h3]] {
-            background-image: url([[@{/listmark.png}]]);
+            background-image: url([[@{/book.png}]]);
             background-repeat: no-repeat;
-            padding: 2px;
-            padding-left: 30px;
+            padding: 5px;
+            padding-left: 50px;
         }
     </style>
 </head>
 <body>
 
+<h3 th:text = "#{note-form-header}">Comment</h3>
+
 <!-- Book edition -->
-<form id="edit-form" action="editBook.html" th:action="@{/editBookNote(noteId=${noteDto.id})}" th:method="post" th:object="${noteDto}">
-    <h3 th:text = "#{person-form-header}">Note</h3>
+<form id="edit-form" action="editBookNote.html" th:action="@{/editBookNote(noteId=${noteDto.id})}" th:method="post" th:object="${noteDto}">
 
     <input type="hidden" name="book" th:field="*{book}"/>
 
     <div class="row">
-        <label for="id-input">ID:</label>
+        <label for="id-input" th:text="#{table-header-id}">ID:</label>
         <input id="id-input" name="id" type="text" readonly="readonly" th:value="*{id}" value="1"/>
     </div>
 
 
     <div class="row">
-        <label for="note-input">Review:</label>
-        <input id="note-input" name="note" type="text" th:value="${noteDto.note}" value="John Doe"/>
-        <div class="errors" th:if="${#fields.hasErrors('note')}" th:errors="${noteDto.note}">Note error</div>
+        <label for="note-input" th:text="#{table-header-note}">Review:</label>
+        <input id="note-input" name="note" type="text" th:value="*{note}" value="John Doe"/>
+        <div class="errors" th:if="${#fields.hasErrors('note')}" th:errors="*{note}">Note error</div>
     </div>
 
     <div class="row">

@@ -21,7 +21,7 @@ public class BookDto {
     private Genre genre;
 
     @NotBlank(message = "{name-field-should-not-be-blank}")
-    @Size(min = 5, max = 50, message = "{name-field-should-has-expected-size}")
+    @Size(min = 5, max = 100, message = "{book-field-should-has-expected-size}")
     private String title;
 
     private long notesCount;

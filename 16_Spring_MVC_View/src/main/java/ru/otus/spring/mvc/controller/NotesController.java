@@ -57,9 +57,7 @@ public class NotesController {
     @GetMapping("/editBookNote")
     public String editBook(@RequestParam("noteId") long noteId, Model model) {
         Note note = noteService.findById(noteId);
-        Book book = bookService.findById(note.getBook().getId());
         NoteDto noteDto = NoteDto.fromDomainObject(note);
-        model.addAttribute("book", book);
         model.addAttribute("noteDto", noteDto);
         return "editBookNote";
     }
@@ -72,16 +70,14 @@ public class NotesController {
                            Model model) {
 
         if (bindingResult.hasErrors()) {
-            Note note = noteService.findById(noteDto.getId());
-            Book book = bookService.findById(note.getBook().getId());
-            NoteDto noteDtoOld = NoteDto.fromDomainObject(note);
-            model.addAttribute("book", book);
-            model.addAttribute("noteDto", noteDtoOld);
+            System.out.println(bindingResult.toString());
+            model.addAttribute("noteDto", noteDto);
             return "editBookNote";
         }
 
         noteService.save(noteDto.toDomainObject());
-        return "redirect:/bookNotes?bookId=" + noteDto.getBook().getId();
+        //return "redirect:/bookNotes?bookId=" + noteDto.getBook().getId();
+        return "redirect:/";
     }
 
 

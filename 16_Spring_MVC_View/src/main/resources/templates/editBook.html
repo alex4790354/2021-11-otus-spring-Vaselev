@@ -22,10 +22,10 @@
         }
 
         h3 {
-            background-image: url("../static/listmark.png");
+            background-image: url("../static/book.png");
             background-repeat: no-repeat;
-            padding: 2px;
-            padding-left: 30px;
+            padding: 5px;
+            padding-left: 50px;
         }
 
         .errors {
@@ -35,27 +35,27 @@
 
     <style type="text/css" th:inline="text">
         [[h3]] {
-            background-image: url([[@{/listmark.png}]]);
+            background-image: url([[@{/book.png}]]);
             background-repeat: no-repeat;
-            padding: 2px;
-            padding-left: 30px;
+            padding: 5px;
+            padding-left: 50px;
         }
     </style>
 </head>
 <body>
 
+<h3 th:text="#{table-header-book}">Book</h3>
+
 <!-- Book edition -->
 <form id="edit-form" action="editBook.html" th:action="@{/editBook(id=${bookDto.id})}" th:method="post" th:object="${bookDto}">
-    <h3 th:text = "#{person-form-header}">Person Info:</h3>
 
     <div class="row">
-        <label for="id-input">ID:</label>
+        <label for="id-input" th:text="#{table-header-id}">ID_:</label>
         <input id="id-input" name="id" type="text" readonly="readonly" th:value="*{id}" value="1"/>
     </div>
 
-
     <div class="row">
-        <label for="author-select">Author</label>
+        <label for="author-select" th:text="#{table-header-author}">Author_</label>
         <select id="author-select" th:field="*{author}" name="author">
             <option th:each="eAuthor : ${authors}"
                     th:value="${eAuthor.id}"
@@ -66,7 +66,7 @@
     </div>
 
     <div class="row">
-        <label for="genre-select">Genre</label>
+        <label for="genre-select" th:text="#{table-header-genre}">Genre_</label>
         <select id="genre-select" th:field="*{genre}" name="genre">
             <option th:each="eGenre : ${genres}"
                     th:value="${eGenre.id}"
@@ -77,7 +77,7 @@
     </div>
 
     <div class="row">
-        <label for="title-input">Title:</label>
+        <label for="title-input" th:text="#{table-header-title}">Title_:</label>
         <input id="title-input" name="title" type="text" th:value="*{title}" value="John Doe"/>
         <div class="errors" th:if="${#fields.hasErrors('title')}" th:errors="*{title}">Wrong person name error</div>
     </div>
