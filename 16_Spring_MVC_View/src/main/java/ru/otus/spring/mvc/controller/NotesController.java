@@ -55,9 +55,17 @@ public class NotesController {
 
 
     @GetMapping("/editBookNote")
-    public String editBook(@RequestParam("noteId") long noteId, Model model) {
-        Note note = noteService.findById(noteId);
-        NoteDto noteDto = NoteDto.fromDomainObject(note);
+    public String editBook(@RequestParam("noteId") long noteId,
+                           @RequestParam("bookId") long bookId,
+                           Model model) {
+        NoteDto noteDto = null;
+        if (noteId > 0L) {
+            Note note = noteService.findById(noteId);
+            noteDto = NoteDto.fromDomainObject(note);
+        } else {
+            Book book = bookService.findById(bookId);
+            noteDto = new NoteDto(0, book, "Write new review here");
+        }
         model.addAttribute("noteDto", noteDto);
         return "editBookNote";
     }
@@ -65,7 +73,7 @@ public class NotesController {
 
     @Validated
     @PostMapping("/editBookNote")
-    public String saveBook(@Valid @ModelAttribute("NoteDto") NoteDto noteDto,
+    public String saveBook(@Valid @ModelAttribute("noteDto") NoteDto noteDto,
                            BindingResult bindingResult,
                            Model model) {
 

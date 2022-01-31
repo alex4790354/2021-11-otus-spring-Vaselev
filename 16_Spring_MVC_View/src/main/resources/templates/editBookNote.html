@@ -71,30 +71,31 @@
 
 
 <br><br><br>
-<h3 th:text = "#{table-header-note-new}">Comment</h3>
 
+<div th:if="${noteDto.id > 0}">
+<h3 th:text = "#{table-header-note-new}">New comment</h3>
 <!--new review: -->
-<form id="edit-form2" action="editBookNote.html" th:action="@{/editBookNote}" th:method="post" th:object="${noteDto}">
+    <form id="edit-form2" action="editBookNote.html" th:action="@{/editBookNote}" th:method="post" th:object="${noteDto}">
 
-    <input type="hidden" name="book" th:field="*{book}"/>
+        <input type="hidden" name="book" th:field="*{book}"/>
 
-    <div class="row">
-        <label for="id-input2" th:text="#{table-header-id}">ID:</label>
-        <input id="id-input2" name="id" type="text" readonly="readonly" th:value="0" value="0"/>
-    </div>
+        <div class="row">
+            <label for="id-input2" th:text="#{table-header-id}">ID:</label>
+            <input id="id-input2" name="id" type="text" readonly="readonly" th:value="0" value="0"/>
+        </div>
 
-    <div class="row">
-        <label for="note-input2" th:text="#{table-header-note}">Review:</label>
-        <input id="note-input2" name="note" type="text" value="Write new review"/>
-        <div class="errors" th:if="${#fields.hasErrors('note')}" th:errors="*{note}">Note error</div>
-    </div>
+        <div class="row">
+            <label for="note-input2" th:text="#{table-header-note}">Review:</label>
+            <input id="note-input2" name="note" type="text" value="Write new review"/>
+            <div class="errors" th:if="${#fields.hasErrors('note')}" th:errors="*{note}">Note error</div>
+        </div>
 
-    <div class="row">
-        <button type="submit" th:text="#{save-button-caption}">Save</button>
-        <a href="list.html" th:href="@{/}"><button type="button" th:text="#{cancel-button-caption}">Cancel</button></a>
-    </div>
-</form>
-
+        <div class="row">
+            <button type="submit" th:text="#{save-button-caption}">Save</button>
+            <a href="list.html" th:href="@{/}"><button type="button" th:text="#{cancel-button-caption}">Cancel</button></a>
+        </div>
+    </form>
+</div>
 
 
 </body>

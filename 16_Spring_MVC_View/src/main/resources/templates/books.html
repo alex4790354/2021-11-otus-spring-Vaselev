@@ -72,10 +72,18 @@
         <td th:text="${bookDto.genre.name}">Приключения</td>
         <td th:text="${bookDto.title}">Одинокий волк</td>
         <td>
-            <a href="bookNotes?bookId=1"
-               th:href="@{/bookNotes(bookId=${bookDto.id})}"
-               th:text="${bookDto.notesCount}"> 108
-            </a>
+            <div th:if="${bookDto.notesCount > 0}">
+                <a href="bookNotes?bookId=1"
+                   th:href="@{/bookNotes(bookId=${bookDto.id})}"
+                   th:text="${bookDto.notesCount}"> 108
+                </a>
+            </div>
+            <div th:if="${bookDto.notesCount == 0}">
+                <a href="bookNotes?bookId=100"
+                   th:href="@{/editBookNote(noteId=0, bookId=${bookDto.id})}"
+                   th:text="new"> 108
+                </a>
+            </div>
         </td>
         <td>
             <a th:href="@{/editBook(id=${bookDto.id})}" href="edit.html" th:text="#{edit-button-caption}">Edit</a>

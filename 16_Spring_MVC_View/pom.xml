@@ -9,6 +9,14 @@
     <artifactId>16_Spring_MVC_View</artifactId>
     <version>1.0-SNAPSHOT</version>
 
+    <!--As module: -->
+    <parent>
+        <groupId>ru.otus</groupId>
+        <artifactId>2021-11-otus_spring_Vasilev</artifactId>
+        <version>1.0</version>
+    </parent>
+
+    <!--for stand-alone run:-->
     <!--<parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>

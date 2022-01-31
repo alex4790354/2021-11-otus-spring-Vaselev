@@ -65,10 +65,12 @@
         <td th:text="${note.id}">1</td>
         <td th:text="${note.note}">Very good book</td>
         <td>
-            <a th:href="@{/editBookNote(noteId=${note.id})}" href="editBookNote.html?noteId=1" th:text="#{edit-button-caption}">Edit</a>
+            <a th:href="@{/editBookNote(noteId=${note.id}, bookId=${note.book.id})}" href="editBookNote.html?noteId=1" th:text="#{edit-button-caption}">Edit</a>
         </td>
     </tr>
     </tbody>
 </table>
+
+
 </body>
 </html>
