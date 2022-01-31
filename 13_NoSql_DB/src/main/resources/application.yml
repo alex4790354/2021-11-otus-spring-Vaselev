@@ -1,17 +1,10 @@
-logging:
-  level:
-    root: ERROR
-
 spring:
-  main:
-    allow-circular-references: true
   data:
     mongodb:
-      database: otus
       host: localhost
       port: 27017
+      database: bookDb
 
 mongock:
   runner-type: "InitializingBean"
-  change-logs-scan-package: ru.otus.spring.noSql.mongock
-
+  change-logs-scan-package: ru.otus.spring.mongoDb.changelog

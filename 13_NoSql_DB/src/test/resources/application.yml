@@ -1,23 +1,13 @@
-logging:
-  level:
-    root: ERROR
-
 spring:
-  mongodb:
-    embedded:
-      version: 3.5.5
   data:
     mongodb:
-      host: localhost
-      port: 27017
-      database: otus
+      port: 0
+      database: bookDb
 
 mongock:
-  runner-type: "InitializingBean"
-  change-logs-scan-package: ru.otus.spring.noSql.mongock
+  runner-type: "ApplicationRunner"
+  change-logs-scan-package: ru.otus.spring.mongoDb.changelog
 
-  mongo-db:
-    write-concern:
-      journal: false
-    read-concern: local
-
+logging:
+  level:
+    org.springframework.data.mongodb.core.MongoTemplate: DEBUG
