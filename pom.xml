@@ -24,8 +24,9 @@
 		<module>09_JPQL_Spring_ORM_JPA</module>
 		<module>11_Spring_DATA_JPA</module>		
 		<module>13_NoSql_DB</module>
-		<module>16_Spring_MVC_View</module>        
-		
+		<module>16_Spring_MVC_View</module>
+        <module>17_Spring_Jpa_Jquery_JS</module>
+
     </modules>
 
 </project>
