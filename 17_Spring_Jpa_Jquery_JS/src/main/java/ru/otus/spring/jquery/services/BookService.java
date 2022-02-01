@@ -1,6 +1,6 @@
-package jpa.services;
+package ru.otus.spring.jquery.services;
 
-import ru.otus.spring.jpa.domain.Book;
+import ru.otus.spring.jquery.domain.Book;
 
 import java.util.List;
 

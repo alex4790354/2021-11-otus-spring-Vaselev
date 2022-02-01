@@ -1,14 +1,14 @@
-package jpa.services.impl;
+package ru.otus.spring.jquery.services.impl;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
-import ru.otus.spring.jpa.customExceptions.DaoException;
-import ru.otus.spring.jpa.domain.Book;
-import ru.otus.spring.jpa.domain.Note;
-import ru.otus.spring.jpa.repositories.BookRepository;
-import ru.otus.spring.jpa.repositories.NoteRepository;
-import ru.otus.spring.jpa.services.NoteService;
+import ru.otus.spring.jquery.customExceptions.DaoException;
+import ru.otus.spring.jquery.domain.Book;
+import ru.otus.spring.jquery.domain.Note;
+import ru.otus.spring.jquery.repositories.BookRepository;
+import ru.otus.spring.jquery.repositories.NoteRepository;
+import ru.otus.spring.jquery.services.NoteService;
 
 import java.util.List;
 

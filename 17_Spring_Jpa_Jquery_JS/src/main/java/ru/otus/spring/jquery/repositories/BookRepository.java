@@ -1,8 +1,8 @@
-package jpa.repositories;
+package ru.otus.spring.jquery.repositories;
 
 import org.springframework.data.jpa.repository.EntityGraph;
 import org.springframework.data.jpa.repository.JpaRepository;
-import ru.otus.spring.jpa.domain.Book;
+import ru.otus.spring.jquery.domain.Book;
 
 import java.util.List;
 import java.util.Optional;

@@ -1,9 +1,11 @@
-package jpa.domain;
+package ru.otus.spring.jquery.domain;
 
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import javax.persistence.*;
 
 @Data
 @Entity(name = "Book")

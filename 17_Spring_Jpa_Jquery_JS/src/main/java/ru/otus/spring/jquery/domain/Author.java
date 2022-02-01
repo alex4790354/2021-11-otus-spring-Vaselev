@@ -1,16 +1,18 @@
-package jpa.domain;
+package ru.otus.spring.jquery.domain;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import javax.persistence.*;
+
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Entity(name = "Genre")
-@Table(name = "genre")
-public class Genre {
+@Entity(name = "Author")
+@Table(name = "author")
+public class Author {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
