@@ -3,9 +3,8 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-    
 
-    <groupId>org.example</groupId>
+    <groupId>ru.otus</groupId>
     <name>2021-11-otus_spring_Vasilev</name>
     <artifactId>2021-11-otus_spring_Vasilev</artifactId>
     <version>1.0-SNAPSHOT</version>
@@ -14,7 +13,15 @@
 
     <properties>
         <java.version>11</java.version>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
+
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>2.6.1</version>
+        <relativePath/>
+    </parent>
 
     <modules>
         <module>01_student_test</module>
@@ -26,7 +33,6 @@
 		<module>13_NoSql_DB</module>
 		<module>16_Spring_MVC_View</module>
         <module>17_Spring_Jpa_Jquery_JS</module>
-
     </modules>
 
 </project>
