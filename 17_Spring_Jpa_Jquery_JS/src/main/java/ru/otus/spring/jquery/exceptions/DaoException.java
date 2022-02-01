@@ -1,4 +1,4 @@
-package ru.otus.spring.jquery.customExceptions;
+package ru.otus.spring.jquery.exceptions;
 
 
 public class DaoException extends RuntimeException {

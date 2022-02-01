@@ -4,7 +4,7 @@ package ru.otus.spring.jquery.services.impl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import ru.otus.spring.jquery.customExceptions.DaoException;
+import ru.otus.spring.jquery.exceptions.DaoException;
 import ru.otus.spring.jquery.domain.Book;
 import ru.otus.spring.jquery.repositories.BookRepository;
 import ru.otus.spring.jquery.services.BookService;
