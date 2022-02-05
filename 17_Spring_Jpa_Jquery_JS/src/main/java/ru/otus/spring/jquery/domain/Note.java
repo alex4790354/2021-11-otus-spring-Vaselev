@@ -1,20 +1,25 @@
 package ru.otus.spring.jquery.domain;
 
 import lombok.*;
-
 import javax.persistence.*;
-import javax.validation.constraints.NotBlank;
-
 import static javax.persistence.FetchType.LAZY;
 
-/*
-@NamedEntityGraph(name = "comment-book-author-genre",
-                  attributeNodes = {@NamedAttributeNode(value = "book", subgraph = "book-subgraph")},
-                  subgraphs = {@NamedSubgraph(name = "book-subgraph",
-                                    attributeNodes = {@NamedAttributeNode("genre"),
-                                                      @NamedAttributeNode("author")})
-                              }
-                 )*/
+
+@NamedEntityGraph(
+        name = "note-book-author-genre",
+        attributeNodes = {
+                @NamedAttributeNode(value = "book", subgraph = "book-subgraph"),
+        },
+        subgraphs = {
+                @NamedSubgraph(
+                        name = "book-subgraph",
+                        attributeNodes = {
+                                @NamedAttributeNode("author"),
+                                @NamedAttributeNode("genre")
+                        }
+                )
+        }
+)
 @Data
 @EqualsAndHashCode(exclude = "book")
 @AllArgsConstructor
@@ -33,7 +38,6 @@ public class Note {
     @ToString.Exclude
     private Book book;
 
-    @NotBlank
     @Column(name = "note")
     private String note;
 

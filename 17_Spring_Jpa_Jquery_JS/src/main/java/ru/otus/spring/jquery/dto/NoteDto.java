@@ -1,17 +1,19 @@
-package ru.otus.spring.jquery.controller.dto;
+package ru.otus.spring.jquery.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
-public class CommentDto {
+public class NoteDto {
 
     private Long id;
 
-    private String text;
+    private String note;
 
     private Long bookId;
+
 }

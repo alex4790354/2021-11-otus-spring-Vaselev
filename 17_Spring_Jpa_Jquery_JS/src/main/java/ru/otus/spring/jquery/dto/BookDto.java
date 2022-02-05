@@ -1,4 +1,4 @@
-package ru.otus.spring.jquery.controller.dto;
+package ru.otus.spring.jquery.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -9,7 +9,7 @@ public class BookDto {
 
     private Long id;
 
-    private String name;
+    private String title;
 
     private Long authorId;
 

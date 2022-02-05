@@ -1,7 +1,6 @@
-package ru.otus.spring.jquery.services;
+package ru.otus.spring.jquery.service;
 
 import ru.otus.spring.jquery.domain.Note;
-
 import java.util.List;
 
 public interface NoteService {
@@ -10,9 +9,13 @@ public interface NoteService {
 
     List<Note> findAll();
 
+    List<Note> findByBookId(long bookId);
+
     Note findById(long id);
 
-    void save(long id, String newNote);
+    Note save(long id, String newNote);
+
+    Note save(Note newNote);
 
     void delete(long id);
 

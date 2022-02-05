@@ -1,14 +1,15 @@
-package ru.otus.spring.jquery.services.impl;
+package ru.otus.spring.jquery.service.impl;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
-import ru.otus.spring.jquery.exceptions.DaoException;
+import ru.otus.spring.jquery.exceptions.OtusException;
 import ru.otus.spring.jquery.domain.Book;
 import ru.otus.spring.jquery.domain.Note;
-import ru.otus.spring.jquery.repositories.BookRepository;
-import ru.otus.spring.jquery.repositories.NoteRepository;
-import ru.otus.spring.jquery.services.NoteService;
+import ru.otus.spring.jquery.repository.BookRepository;
+import ru.otus.spring.jquery.repository.NoteRepository;
+import ru.otus.spring.jquery.service.NoteService;
+
 
 import java.util.List;
 
@@ -35,30 +36,42 @@ public class NoteServiceImpl implements NoteService {
     public Note findById(long id) {
         Note note = noteRepository.findById(id).orElse(null);
         if (note == null) {
-            throw new DaoException(NOTE_NOT_EXIST);
+            throw new OtusException(NOTE_NOT_EXIST);
         }
         return note;
     }
 
-    
-    @Transactional
+
     @Override
-    public void save(long id, String newNote) {
-        Note note = findById(id);
-        if (note == null) {
-            throw new DaoException(NOTE_NOT_EXIST);
-        }
-        note.setNote(newNote);
-        noteRepository.save(note);
+    public List<Note> findByBookId(long bookId) {
+        return noteRepository.findByBookId(bookId);
     }
 
+    @Transactional
+    @Override
+    public Note save(long id, String newNote) {
+        Note note = findById(id);
+        if (note == null) {
+            throw new OtusException(NOTE_NOT_EXIST);
+        }
+        note.setNote(newNote);
+        return noteRepository.save(note);
+    }
+
+    @Override
+    public Note save(Note note) {
+        if (note == null) {
+            throw new OtusException(NOTE_NOT_EXIST);
+        }
+        return noteRepository.save(note);
+    }
 
     @Transactional
     @Override
     public long create(Long bookId, String noteStr) {
         Book book = bookRepository.findById(bookId).orElse(null);
         if (book == null) {
-            throw new DaoException(BOOK_NOT_EXIST);
+            throw new OtusException(BOOK_NOT_EXIST);
         }
         Note note = new Note(0, book, noteStr);
         return noteRepository.save(note).getId();

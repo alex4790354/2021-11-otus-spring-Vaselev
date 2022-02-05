@@ -4,10 +4,10 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import ru.otus.pk.spring.domain.Genre;
-import ru.otus.pk.spring.service.GenreService;
-
+import ru.otus.spring.jquery.domain.Genre;
+import ru.otus.spring.jquery.service.GenreService;
 import java.util.List;
+
 
 @RequiredArgsConstructor
 @RequestMapping("/api/v1")
@@ -20,4 +20,5 @@ public class GenreController {
     public List<Genre> finAll() {
         return service.findAll();
     }
+
 }
