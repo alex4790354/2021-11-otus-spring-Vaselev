@@ -1,4 +1,4 @@
-package ru.otus.spring.jquery.service.impl;
+package ru.otus.spring.jquery.services.impl;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.dao.EmptyResultDataAccessException;
@@ -8,51 +8,68 @@ import ru.otus.spring.jquery.domain.Genre;
 import ru.otus.spring.jquery.exceptions.RequestException;
 import ru.otus.spring.jquery.exceptions.ObjectNotFoundException;
 import ru.otus.spring.jquery.repository.GenreRepository;
-import ru.otus.spring.jquery.service.GenreService;
-
+import ru.otus.spring.jquery.services.GenreService;
 import java.util.List;
-
 import static java.lang.String.format;
 import static org.springframework.util.ObjectUtils.isEmpty;
+
 
 @RequiredArgsConstructor
 @Service
 public class GenreServiceImpl implements GenreService {
 
-    public static final String GENRE_NOT_FOUND = "Genre not found!!! id = %s";
-
-    private final GenreRepository repository;
+    public static final String GENRE_NOT_FOUND = "Genre not found. Id = %s";
+    private final GenreRepository genreRepository;
 
     @Transactional(readOnly = true)
     @Override
     public Long count() {
-        return repository.count();
+        return genreRepository.count();
     }
 
     @Transactional(readOnly = true)
     @Override
     public List<Genre> findAll() {
-        return repository.findAll();
+        return genreRepository.findAll();
     }
 
     @Transactional(readOnly = true)
     @Override
     public Genre findById(Long id) {
-        return repository.findById(id).orElseThrow(() -> new ObjectNotFoundException(format(GENRE_NOT_FOUND, id)));
+        return genreRepository.findById(id).orElseThrow(() -> new ObjectNotFoundException(format(GENRE_NOT_FOUND, id)));
     }
 
     @Transactional
     @Override
     public Genre save(Genre genre) {
         validate(genre);
-        return repository.save(genre);
+        return genreRepository.save(genre);
     }
+
+    @Transactional
+    @Override
+    public Genre save(String name) {
+        Genre genre = new Genre(0, name);
+        return genreRepository.save(genre);
+    }
+
+    @Transactional
+    @Override
+    public Genre save(long id, String name) {
+        Genre genre = genreRepository.findById(id).orElse(null);
+        if (genre == null) {
+            throw new ObjectNotFoundException(format(GENRE_NOT_FOUND, id));
+        }
+        genre.setName(name);
+        return genreRepository.save(genre);
+    }
+
 
     @Transactional
     @Override
     public void deleteById(Long id) {
         try {
-            repository.deleteById(id);
+            genreRepository.deleteById(id);
         } catch (EmptyResultDataAccessException e) {
             throw new ObjectNotFoundException(format(GENRE_NOT_FOUND, id), e);
         }

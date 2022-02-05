@@ -1,4 +1,4 @@
-package ru.otus.spring.jquery.service;
+package ru.otus.spring.jquery.services;
 
 import ru.otus.spring.jquery.domain.Author;
 
@@ -13,6 +13,10 @@ public interface AuthorService {
     Author findById(Long id);
 
     Author save(Author author);
+
+    Author save(String fullName);
+
+    void save(long id, String fullName);
 
     void deleteById(Long id);
 }

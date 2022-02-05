@@ -1,8 +1,8 @@
-package ru.otus.spring.jquery.service;
+package ru.otus.spring.jquery.services;
 
 import ru.otus.spring.jquery.domain.Book;
-
 import java.util.List;
+
 
 public interface BookService {
 

@@ -1,4 +1,4 @@
-package ru.otus.spring.jquery.service;
+package ru.otus.spring.jquery.services;
 
 import ru.otus.spring.jquery.domain.Note;
 import java.util.List;

@@ -1,58 +1,78 @@
-package ru.otus.spring.jquery.service.impl;
+package ru.otus.spring.jquery.services.impl;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.otus.spring.jquery.domain.Author;
+import ru.otus.spring.jquery.exceptions.OtusException;
 import ru.otus.spring.jquery.exceptions.RequestException;
 import ru.otus.spring.jquery.exceptions.ObjectNotFoundException;
 import ru.otus.spring.jquery.repository.AuthorRepository;
-import ru.otus.spring.jquery.service.AuthorService;
-
+import ru.otus.spring.jquery.services.AuthorService;
 import java.util.ArrayList;
 import java.util.List;
-
 import static java.lang.String.format;
 import static java.lang.String.join;
 import static org.springframework.util.ObjectUtils.isEmpty;
+
 
 @RequiredArgsConstructor
 @Service
 public class AuthorServiceImpl implements AuthorService {
 
-    public static final String AUTHOR_NOT_FOUND = "Author not found!!! id = %s";
+    public static final String AUTHOR_NOT_FOUND = "Author not found. Id = %s";
 
-    private final AuthorRepository repository;
+    private final AuthorRepository authorRepository;
 
     @Transactional(readOnly = true)
     @Override
     public Long count() {
-        return repository.count();
+        return authorRepository.count();
     }
 
     @Transactional(readOnly = true)
     @Override
     public List<Author> findAll() {
-        return repository.findAll();
+        return authorRepository.findAll();
     }
 
     @Transactional(readOnly = true)
     @Override
     public Author findById(Long id) {
-        return repository.findById(id).orElseThrow(() -> new ObjectNotFoundException(format(AUTHOR_NOT_FOUND, id)));
+        return authorRepository.findById(id).orElseThrow(() -> new ObjectNotFoundException(format(AUTHOR_NOT_FOUND, id)));
     }
 
+    @Transactional
+    @Override
     public Author save(Author author) {
         validate(author);
-        return repository.save(author);
+        return authorRepository.save(author);
+    }
+
+    @Transactional
+    @Override
+    public Author save(String fullName) {
+        Author author = new Author(0L, fullName);
+        return authorRepository.save(author);
+    }
+
+    @Transactional
+    @Override
+    public void save(long id, String fullName) {
+        Author author = authorRepository.findById(id).orElse(null);
+        if (author == null) {
+            throw new OtusException(AUTHOR_NOT_FOUND);
+        }
+        author.setName(fullName);
+        authorRepository.save(author);
     }
 
     @Transactional
     @Override
     public void deleteById(Long id) {
         try {
-            repository.deleteById(id);
+            authorRepository.deleteById(id);
         } catch (EmptyResultDataAccessException e) {
             throw new ObjectNotFoundException(format(AUTHOR_NOT_FOUND, id), e);
         }

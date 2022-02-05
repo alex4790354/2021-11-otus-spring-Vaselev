@@ -1,4 +1,4 @@
-package ru.otus.spring.jquery.service.impl;
+package ru.otus.spring.jquery.services.impl;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.dao.EmptyResultDataAccessException;
@@ -8,7 +8,7 @@ import ru.otus.spring.jquery.domain.Book;
 import ru.otus.spring.jquery.exceptions.RequestException;
 import ru.otus.spring.jquery.exceptions.ObjectNotFoundException;
 import ru.otus.spring.jquery.repository.BookRepository;
-import ru.otus.spring.jquery.service.BookService;
+import ru.otus.spring.jquery.services.BookService;
 
 import java.util.List;
 
@@ -19,40 +19,39 @@ import static org.springframework.util.ObjectUtils.isEmpty;
 @Service
 public class BookServiceImpl implements BookService {
 
-    public static final String BOOK_NOT_FOUND = "Book not found!!! id = %s";
-
-    private final BookRepository repository;
+    public static final String BOOK_NOT_FOUND = "Book not found. Id: %s";
+    private final BookRepository bookRepository;
 
     @Transactional(readOnly = true)
     @Override
     public Long count() {
-        return repository.count();
+        return bookRepository.count();
     }
 
     @Transactional(readOnly = true)
     @Override
     public List<Book> findAll() {
-        return repository.findAll();
+        return bookRepository.findAll();
     }
 
     @Transactional(readOnly = true)
     @Override
     public Book findById(Long id) {
-        return repository.findById(id).orElseThrow(() -> new ObjectNotFoundException(format(BOOK_NOT_FOUND, id)));
+        return bookRepository.findById(id).orElseThrow(() -> new ObjectNotFoundException(format(BOOK_NOT_FOUND, id)));
     }
 
     @Transactional
     @Override
     public Book save(Book book) {
         validate(book);
-        return repository.save(book);
+        return bookRepository.save(book);
     }
 
     @Transactional
     @Override
     public void deleteById(Long id) {
         try {
-            repository.deleteById(id);
+            bookRepository.deleteById(id);
         } catch (EmptyResultDataAccessException e) {
             throw new ObjectNotFoundException(format(BOOK_NOT_FOUND, id), e);
         }
@@ -61,13 +60,13 @@ public class BookServiceImpl implements BookService {
     @Transactional(readOnly = true)
     @Override
     public List<Book> findByAuthorId(Long authorId) {
-        return repository.findByAuthorId(authorId);
+        return bookRepository.findByAuthorId(authorId);
     }
 
     @Transactional(readOnly = true)
     @Override
     public List<Book> findByGenreId(Long genreId) {
-        return repository.findByGenreId(genreId);
+        return bookRepository.findByGenreId(genreId);
     }
 
     private void validate(Book book) {

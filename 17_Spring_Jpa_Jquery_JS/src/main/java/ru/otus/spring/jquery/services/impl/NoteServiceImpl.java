@@ -1,4 +1,4 @@
-package ru.otus.spring.jquery.service.impl;
+package ru.otus.spring.jquery.services.impl;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
@@ -8,7 +8,7 @@ import ru.otus.spring.jquery.domain.Book;
 import ru.otus.spring.jquery.domain.Note;
 import ru.otus.spring.jquery.repository.BookRepository;
 import ru.otus.spring.jquery.repository.NoteRepository;
-import ru.otus.spring.jquery.service.NoteService;
+import ru.otus.spring.jquery.services.NoteService;
 
 
 import java.util.List;

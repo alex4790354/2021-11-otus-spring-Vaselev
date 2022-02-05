@@ -1,4 +1,4 @@
-package ru.otus.spring.jquery.service;
+package ru.otus.spring.jquery.services;
 
 import ru.otus.spring.jquery.domain.Genre;
 
@@ -13,6 +13,10 @@ public interface GenreService {
     Genre findById(Long id);
 
     Genre save(Genre genre);
+
+    Genre save(String fullName);
+
+    Genre save(long id, String title);
 
     void deleteById(Long id);
 }

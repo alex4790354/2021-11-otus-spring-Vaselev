@@ -6,9 +6,9 @@ import ru.otus.spring.jquery.domain.Author;
 import ru.otus.spring.jquery.domain.Book;
 import ru.otus.spring.jquery.domain.Genre;
 import ru.otus.spring.jquery.dto.BookDto;
-import ru.otus.spring.jquery.service.AuthorService;
-import ru.otus.spring.jquery.service.BookService;
-import ru.otus.spring.jquery.service.GenreService;
+import ru.otus.spring.jquery.services.AuthorService;
+import ru.otus.spring.jquery.services.BookService;
+import ru.otus.spring.jquery.services.GenreService;
 import java.util.List;
 import static org.springframework.http.HttpStatus.CREATED;
 
