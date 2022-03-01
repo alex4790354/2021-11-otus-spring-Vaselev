@@ -8,7 +8,6 @@ import ru.otus.spring.mongoDb.domain.Genre;
 import ru.otus.spring.mongoDb.repository.AuthorRepository;
 import ru.otus.spring.mongoDb.repository.BookRepository;
 import ru.otus.spring.mongoDb.repository.GenreRepository;
-import ru.otus.spring.mongoDb.repository.NoteRepository;
 import ru.otus.spring.mongoDb.services.BookService;
 import java.util.List;
 import java.util.Optional;
@@ -21,7 +20,6 @@ public class BookServiceImpl implements BookService {
     private final BookRepository bookRepository;
     private final GenreRepository genreRepository;
     private final AuthorRepository authorRepository;
-    private final NoteRepository noteRepository;
 
     @Override
     public String create(String name, String authorName, String genreName) {
@@ -51,6 +49,7 @@ public class BookServiceImpl implements BookService {
 
     @Override
     public void deleteByName(String name) {
+        // TODO: add note delete. Or block if exist note.
         bookRepository.deleteByName(name);
     }
 

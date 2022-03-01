@@ -18,8 +18,8 @@ public class Note {
     }
 
     @Id
-    String id;
-    String bookId;
-    String content;
+    private String id;
+    private String bookId;
+    private String content;
 
 }

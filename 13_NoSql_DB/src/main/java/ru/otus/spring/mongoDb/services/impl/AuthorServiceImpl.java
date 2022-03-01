@@ -5,9 +5,9 @@ import org.springframework.stereotype.Service;
 import ru.otus.spring.mongoDb.domain.Author;
 import ru.otus.spring.mongoDb.repository.AuthorRepository;
 import ru.otus.spring.mongoDb.services.AuthorService;
-
 import java.util.List;
 import java.util.Optional;
+
 
 @Service
 @RequiredArgsConstructor
@@ -40,6 +40,7 @@ public class AuthorServiceImpl implements AuthorService {
 
     @Override
     public void deleteByName(String name) {
+        // TODO: add book delete. Or block if exist.
         authorRepository.deleteByName(name);
     }
 

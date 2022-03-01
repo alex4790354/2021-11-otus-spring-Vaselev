@@ -40,6 +40,7 @@ public class GenreServiceImpl implements GenreService {
 
     @Override
     public void deleteByName(String name) {
+        // TODO: add book delete. Or block if exist.
         genreRepository.deleteByName(name);
     }
 
