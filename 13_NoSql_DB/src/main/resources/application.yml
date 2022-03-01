@@ -1,0 +1,12 @@
+spring:
+  main:
+    allow-circular-references: true
+  data:
+    mongodb:
+      host: localhost
+      port: 27017
+      database: bookDb
+
+mongock:
+  runner-type: "InitializingBean"
+  change-logs-scan-package: ru.otus.spring.mongoDb.changelog

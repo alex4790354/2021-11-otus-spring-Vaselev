@@ -1,22 +1,16 @@
 package ru.otus.spring.jpa.services.impl;
 
-import lombok.val;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
-import org.springframework.context.annotation.Import;
 import ru.otus.spring.jpa.domain.Author;
 import ru.otus.spring.jpa.domain.Book;
 import ru.otus.spring.jpa.domain.Genre;
 import ru.otus.spring.jpa.domain.Note;
 import ru.otus.spring.jpa.repositories.NoteRepository;
-
-import java.util.Optional;
-
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 
 @DisplayName("ORM JPA Genres repository testing.")
