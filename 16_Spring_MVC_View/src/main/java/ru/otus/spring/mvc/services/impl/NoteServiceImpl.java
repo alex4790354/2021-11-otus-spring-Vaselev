@@ -9,8 +9,6 @@ import ru.otus.spring.mvc.domain.Note;
 import ru.otus.spring.mvc.repositories.BookRepository;
 import ru.otus.spring.mvc.repositories.NoteRepository;
 import ru.otus.spring.mvc.services.NoteService;
-
-
 import java.util.List;
 
 

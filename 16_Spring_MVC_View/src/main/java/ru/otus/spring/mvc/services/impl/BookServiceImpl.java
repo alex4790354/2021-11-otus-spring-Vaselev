@@ -1,8 +1,6 @@
 package ru.otus.spring.mvc.services.impl;
 
-
 import lombok.RequiredArgsConstructor;
-import lombok.SneakyThrows;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.otus.spring.mvc.customExceptions.DaoException;

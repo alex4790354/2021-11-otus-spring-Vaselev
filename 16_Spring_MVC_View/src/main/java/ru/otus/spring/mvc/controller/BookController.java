@@ -30,6 +30,9 @@ public class BookController {
     private final ConversionService conversionService;
 
 
+    // TODO: have to add 'Book-delete' functionality.
+
+
     @Autowired
     public BookController(AuthorService authorService,
                           GenreService genreService,
@@ -85,6 +88,5 @@ public class BookController {
         bookService.saveBook(conversionService.fromDto(bookDto));
         return "redirect:/";
     }
-
 
 }

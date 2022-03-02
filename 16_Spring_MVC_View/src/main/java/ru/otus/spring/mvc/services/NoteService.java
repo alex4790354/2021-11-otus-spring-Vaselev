@@ -1,8 +1,8 @@
 package ru.otus.spring.mvc.services;
 
 import ru.otus.spring.mvc.domain.Note;
-
 import java.util.List;
+
 
 public interface NoteService {
 

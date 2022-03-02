@@ -4,7 +4,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import ru.otus.spring.mvc.domain.Book;
 import ru.otus.spring.mvc.dto.BookDto;
-import ru.otus.spring.mvc.repositories.BookRepository;
 import ru.otus.spring.mvc.repositories.NoteRepository;
 import ru.otus.spring.mvc.services.ConversionService;
 import java.util.ArrayList;
@@ -29,6 +28,7 @@ public class ConversionServiceImpl implements ConversionService {
     @Override
     public BookDto fromDomain(Book book) {
         long count = noteRepository.countByBookId(book.getId());
+        // TODO:  for 1000 comments would be 1001 DB requests. Have to change it.
         return new BookDto(book.getId(), book.getAuthor(), book.getGenre(), book.getTitle(), count);
     }
 

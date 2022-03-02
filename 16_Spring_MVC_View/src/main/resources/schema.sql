@@ -35,11 +35,3 @@ CREATE TABLE note(
 );
 ALTER TABLE note ADD CONSTRAINT book_note_fk_01 FOREIGN KEY (book_id) REFERENCES book (id) ON DELETE CASCADE;
 
-
---TODO: delete this
-DROP TABLE IF EXISTS person CASCADE;
-CREATE TABLE person(
-                     id BIGSERIAL,
-                     name CHARACTER VARYING(255),
-                     CONSTRAINT person_pk PRIMARY KEY (id)
-);

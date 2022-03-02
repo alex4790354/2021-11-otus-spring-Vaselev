@@ -1,14 +1,12 @@
 package ru.otus.spring.mvc.services.impl;
 
 import lombok.RequiredArgsConstructor;
-import lombok.SneakyThrows;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 import ru.otus.spring.mvc.customExceptions.DaoException;
 import ru.otus.spring.mvc.domain.Genre;
 import ru.otus.spring.mvc.repositories.GenreRepository;
 import ru.otus.spring.mvc.services.GenreService;
-
 import java.util.List;
 
 
