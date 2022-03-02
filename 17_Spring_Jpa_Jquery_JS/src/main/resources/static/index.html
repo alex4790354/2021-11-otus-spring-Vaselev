@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <title>List of all books</title>
+    <style type="text/css">
+        body {
+            padding: 50px;
+        }
+
+        .books, .books td {
+            border: 1px solid lightgray;
+            padding: 5px;
+        }
+    </style>
+    <script src="js/jquery-3.6.0.min.js"></script>
+    <script src="js/books.js"></script>
+
+</head>
+<body>
+
+<span id="bookList">
+    <h1>Books:</h1>
+
+    <table class="books" id="books">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Title</th>
+            <th>Author</th>
+            <th>Genre</th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
+
+    <div>
+        <input type="button" onclick="showEditor()" value="Add Book">
+    </div>
+</span>
+
+<span id="bookEditor" hidden="hidden">
+    <table>
+        <tr>
+            <td colspan="2"><a href="#" onclick="showList()">List</a></td>
+        </tr>
+        <tr>
+            <td><label for="bookId">ID</label></td>
+            <td><input type="text" readonly id="bookId"></td>
+        </tr>
+        <tr>
+            <td><label for="bookTitle">Title</label></td>
+            <td><input type="text" id="bookTitle"></td>
+        </tr>
+        <tr>
+            <td><label for="bookAuthorId">Author</label></td>
+            <td><select id="bookAuthorId"></select></td>
+        </tr>
+        <tr>
+            <td><label for="bookGenreId">Genre</label></td>
+            <td><select id="bookGenreId"></select></td>
+        </tr>
+        <tr>
+            <td colspan="2"><input type="button" onclick="saveBook()" value="Save"></td>
+        </tr>
+    </table>
+
+    <br><br><br>
+    <!--TODO: would be better to make it accessible only dooring book editing..-->
+    <span id="noteList">
+        <table class="books" id="notes">
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>note</th>
+                <th>Actions</th>
+            </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+
+        <div>
+            <input type="text" id="noteText">
+            <input type="button" onclick="addNotes()" value="Add Comment">
+        </div>
+    </span>
+</span>
+
+<script>
+    $(document).ready(loadBooks());
+</script>
+
+</body>
+</html>

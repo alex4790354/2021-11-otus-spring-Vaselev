@@ -24,15 +24,15 @@
     </parent>
 
     <modules>
-      <module>01_student_test</module>
-  		<module>03_student_test_spring_boot</module>
-	  	<module>05_student_test_shell</module>
-		  <module>07_DAO_Spring_JDBC</module>
-		  <module>09_JPQL_Spring_ORM_JPA</module>
-		  <module>11_Spring_DATA_JPA</module>    
-		  <module>13_NoSql_DB</module>
-		  <module>16_Spring_MVC_View</module>
-      <module>17_Spring_Jpa_Jquery_JS</module>
+        <module>01_student_test</module>
+        <module>03_student_test_spring_boot</module>
+        <module>05_student_test_shell</module>
+        <module>07_DAO_Spring_JDBC</module>
+        <module>09_JPQL_Spring_ORM_JPA</module>
+        <module>11_Spring_DATA_JPA</module>
+        <module>13_NoSql_DB</module>
+        <module>16_Spring_MVC_View</module>
+        <module>17_Spring_Jpa_Jquery_JS</module>
     </modules>
 
 </project>
