@@ -20,16 +20,6 @@ public class NoteController {
 
     private final BookService bookService;
     private final NoteService noteService;
-    private final NoteMapper mapper;
-
-    @GetMapping("/book/{bookId}/notes")
-    public List<NoteDto> findByBookId(@PathVariable("bookId") Long bookId) {
-        List<Note> notes = noteService.findByBookId(bookId);
-        for (Note note : notes) {
-            System.out.println(note.getId() + " + " + note.getNote());
-        }
-        return noteService.findByBookId(bookId).stream().map(mapper::toDto).collect(toList());
-    }
 
     @ResponseStatus(CREATED)
     @PostMapping("/notes")
