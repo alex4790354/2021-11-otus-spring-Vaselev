@@ -7,7 +7,7 @@
     <groupId>ru.otus</groupId>
     <name>2021-11-otus_spring_Vasilev</name>
     <artifactId>2021-11-otus_spring_Vasilev</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <version>1.0</version>
     <description>Spring Boot Otus demo project</description>
     <packaging>pom</packaging>
 
@@ -18,7 +18,7 @@
 
     <parent>
         <groupId>org.springframework.boot</groupId>
-        <artifactId>spring-boot-starter-parent</artifactId>
+        <artifactId>spring-boot-starter-parent</artifactId>        
         <version>2.6.1</version>
         <relativePath/>
     </parent>
@@ -33,7 +33,6 @@
         <module>13_NoSql_DB</module>
         <module>16_Spring_MVC_View</module>
         <module>17_Spring_Jpa_Jquery_JS</module>
-
     </modules>
 
 </project>
