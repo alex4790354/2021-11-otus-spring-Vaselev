@@ -33,6 +33,7 @@
         <module>13_NoSql_DB</module>
         <module>16_Spring_MVC_View</module>
         <module>17_Spring_Jpa_Jquery_JS</module>
+        <module>20_Spring_WebFlux</module>
     </modules>
 
 </project>
