@@ -1,4 +1,4 @@
-package ru.otus.pk.spring.controller;
+package ru.otus.spring.webflux.controller;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -7,14 +7,14 @@ import org.springframework.boot.test.autoconfigure.web.reactive.WebFluxTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.web.reactive.server.WebTestClient;
-import ru.otus.spring.webflux.controller.AuthorController;
+import ru.otus.spring.webflux.controller.GenreController;
 import ru.otus.spring.webflux.repository.BookRepository;
 
 
-@DisplayName("Контроллер для работы с авторами должен ")
+@DisplayName("Контроллер для работы с жанрами должен ")
 @WebFluxTest
-@ContextConfiguration(classes = {AuthorController.class})
-class AuthorControllerTest {
+@ContextConfiguration(classes = {GenreController.class})
+class GenreControllerTest {
 
     @Autowired
     private WebTestClient webTestClient;
@@ -22,11 +22,11 @@ class AuthorControllerTest {
     @MockBean
     private BookRepository repository;
 
-    @DisplayName("возвращать список авторов")
+    @DisplayName("возвращать список жанров")
     @Test
     public void findAllTest() {
         webTestClient.get()
-                .uri("/authors")
+                .uri("/genres")
                 .exchange()
                 .expectStatus()
                 .isOk();

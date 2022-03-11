@@ -1,4 +1,4 @@
-package ru.otus.pk.spring.repository;
+package ru.otus.spring.webflux.repository;
 
 import lombok.SneakyThrows;
 import org.junit.jupiter.api.DisplayName;

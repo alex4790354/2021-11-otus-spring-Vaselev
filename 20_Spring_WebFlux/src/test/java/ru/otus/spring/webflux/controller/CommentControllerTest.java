@@ -1,4 +1,4 @@
-package ru.otus.pk.spring.controller;
+package ru.otus.spring.webflux.controller;
 
 import org.bson.types.ObjectId;
 import org.junit.jupiter.api.DisplayName;
