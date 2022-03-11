@@ -1,13 +1,13 @@
-package ru.otus.pk.spring.changelogs;
+package ru.otus.spring.webflux.changelogs;
 
 import com.github.cloudyrock.mongock.ChangeLog;
 import com.github.cloudyrock.mongock.ChangeSet;
 import com.github.cloudyrock.mongock.driver.mongodb.springdata.v3.decorator.impl.MongockTemplate;
 import org.bson.types.ObjectId;
-import ru.otus.pk.spring.domain.Author;
-import ru.otus.pk.spring.domain.Book;
-import ru.otus.pk.spring.domain.Comment;
-import ru.otus.pk.spring.domain.Genre;
+import ru.otus.spring.webflux.domain.Author;
+import ru.otus.spring.webflux.domain.Book;
+import ru.otus.spring.webflux.domain.Comment;
+import ru.otus.spring.webflux.domain.Genre;
 
 import java.util.List;
 

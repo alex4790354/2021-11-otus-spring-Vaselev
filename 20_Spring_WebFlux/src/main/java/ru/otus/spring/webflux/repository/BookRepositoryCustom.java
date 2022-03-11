@@ -1,8 +1,8 @@
-package ru.otus.pk.spring.repository;
+package ru.otus.spring.webflux.repository;
 
 import reactor.core.publisher.Flux;
-import ru.otus.pk.spring.domain.Author;
-import ru.otus.pk.spring.domain.Genre;
+import ru.otus.spring.webflux.domain.Author;
+import ru.otus.spring.webflux.domain.Genre;
 
 public interface BookRepositoryCustom {
     Flux<Author> findAllAuthors();

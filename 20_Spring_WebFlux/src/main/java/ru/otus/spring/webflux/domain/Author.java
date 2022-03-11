@@ -1,4 +1,4 @@
-package ru.otus.pk.spring.domain;
+package ru.otus.spring.webflux.domain;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

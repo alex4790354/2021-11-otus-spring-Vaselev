@@ -7,7 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.data.mongo.DataMongoTest;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import reactor.test.StepVerifier;
-import ru.otus.pk.spring.domain.Book;
+import ru.otus.spring.webflux.domain.Book;
+import ru.otus.spring.webflux.repository.CommentRepository;
+
 import java.util.Set;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;

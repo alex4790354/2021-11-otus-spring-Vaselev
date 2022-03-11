@@ -9,9 +9,10 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.web.reactive.server.WebTestClient;
 import reactor.core.publisher.Mono;
-import ru.otus.pk.spring.domain.Book;
-import ru.otus.pk.spring.repository.BookRepository;
-import ru.otus.pk.spring.repository.CommentRepository;
+import ru.otus.spring.webflux.controller.BookController;
+import ru.otus.spring.webflux.domain.Book;
+import ru.otus.spring.webflux.repository.BookRepository;
+import ru.otus.spring.webflux.repository.CommentRepository;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.BDDMockito.given;
 

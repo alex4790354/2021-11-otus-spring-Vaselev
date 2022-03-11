@@ -1,12 +1,12 @@
-package ru.otus.pk.spring.controller;
+package ru.otus.spring.webflux.controller;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
-import ru.otus.pk.spring.domain.Book;
-import ru.otus.pk.spring.repository.BookRepository;
-import ru.otus.pk.spring.repository.CommentRepository;
+import ru.otus.spring.webflux.domain.Book;
+import ru.otus.spring.webflux.repository.BookRepository;
+import ru.otus.spring.webflux.repository.CommentRepository;
 
 import static org.springframework.http.HttpStatus.CREATED;
 

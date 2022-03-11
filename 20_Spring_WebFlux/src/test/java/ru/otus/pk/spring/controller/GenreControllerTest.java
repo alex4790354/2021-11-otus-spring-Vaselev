@@ -7,7 +7,8 @@ import org.springframework.boot.test.autoconfigure.web.reactive.WebFluxTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.web.reactive.server.WebTestClient;
-import ru.otus.pk.spring.repository.BookRepository;
+import ru.otus.spring.webflux.controller.GenreController;
+import ru.otus.spring.webflux.repository.BookRepository;
 
 
 @DisplayName("Контроллер для работы с жанрами должен ")
