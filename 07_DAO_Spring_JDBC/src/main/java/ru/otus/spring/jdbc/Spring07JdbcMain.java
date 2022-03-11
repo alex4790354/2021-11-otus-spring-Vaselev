@@ -8,11 +8,11 @@ import ru.otus.spring.jdbc.customExceptions.DaoException;
 
 
 @SpringBootApplication
-public class SpringJdbcMain {
+public class Spring07JdbcMain {
 
     public static void main(String[] args) throws DaoException { //throws Exception {
 
-        ApplicationContext context = SpringApplication.run(SpringJdbcMain.class);
+        ApplicationContext context = SpringApplication.run(Spring07JdbcMain.class);
 
     }
 }

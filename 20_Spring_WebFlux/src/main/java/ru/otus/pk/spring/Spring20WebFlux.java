@@ -8,9 +8,9 @@ import org.springframework.boot.context.properties.EnableConfigurationProperties
 @EnableMongock
 @SpringBootApplication
 @EnableConfigurationProperties
-public class WebFluxMain {
+public class Spring20WebFlux {
 
     public static void main(String[] args) {
-        SpringApplication.run(WebFluxMain.class, args);
+        SpringApplication.run(Spring20WebFlux.class, args);
     }
 }

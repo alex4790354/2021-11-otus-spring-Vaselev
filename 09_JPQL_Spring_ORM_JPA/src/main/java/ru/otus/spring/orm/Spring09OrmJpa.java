@@ -8,11 +8,11 @@ import ru.otus.spring.orm.customExceptions.DaoException;
 
 
 @SpringBootApplication
-public class SpringOrmJpa09Main {
+public class Spring09OrmJpa {
 
     public static void main(String[] args) throws DaoException {
 
-        ApplicationContext context = SpringApplication.run(SpringOrmJpa09Main.class);
+        ApplicationContext context = SpringApplication.run(Spring09OrmJpa.class);
 
     }
 }

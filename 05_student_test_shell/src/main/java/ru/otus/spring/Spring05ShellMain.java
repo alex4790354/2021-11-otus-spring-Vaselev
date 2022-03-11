@@ -3,19 +3,18 @@ package ru.otus.spring;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
-import ru.otus.spring.service.interfaces.QuestionsService;
 
 
 import java.io.IOException;
 
 
 @SpringBootApplication
-public class Application {
+public class Spring05ShellMain {
 
 	public static void main(String[] args) throws IOException {
-		ApplicationContext context = SpringApplication.run(Application.class, args);
-		QuestionsService questionsServiceCsv = context.getBean(QuestionsService.class);
-		questionsServiceCsv.takeExam();
+
+		ApplicationContext context = SpringApplication.run(Spring05ShellMain.class, args);
+
 	}
 
 }
