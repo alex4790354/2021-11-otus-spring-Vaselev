@@ -1,0 +1,15 @@
+spring:
+  data:
+    mongodb:
+      host: localhost
+      port: 27017
+      database: bookDb
+
+mongock:
+  runner-type: "InitializingBean"
+  change-logs-scan-package:
+    - ru.otus.pk.spring.changelogs
+  mongo-db:
+    write-concern:
+      journal: false
+    read-concern: local

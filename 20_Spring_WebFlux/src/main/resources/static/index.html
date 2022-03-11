@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <title>List of all books</title>
+    <style type="text/css">
+        body {
+            padding: 50px;
+        }
+
+        .books, .books td {
+            border: 1px solid lightgray;
+            padding: 5px;
+        }
+    </style>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="js/books.js"></script>
+</head>
+<body>
+
+<span id="bookList">
+<h1>Books:</h1>
+
+<table class="books" id="books">
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Author</th>
+        <th>Genre</th>
+        <th>Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    </tbody>
+</table>
+
+<div>
+    <input type="button" onclick="showEditor()" value="Add Book">
+</div>
+
+</span>
+
+<span id="bookEditor" hidden="hidden">
+    <input id="bookJSON" type="hidden">
+
+<table>
+    <tr>
+        <td colspan="2"><a href="#" onclick="showList()">List</a></td>
+    </tr>
+    <tr>
+        <td><label for="bookId">ID</label></td>
+        <td><input type="text" readonly id="bookId"></td>
+    </tr>
+    <tr>
+        <td><label for="bookName">Name</label></td>
+        <td><input type="text" id="bookName"></td>
+    </tr>
+    <tr>
+        <td><label for="bookAuthorId">Author</label></td>
+        <td><select id="bookAuthorId"></select></td>
+    </tr>
+    <tr>
+        <td><label for="bookGenreId">Genre</label></td>
+        <td><select id="bookGenreId"></select></td>
+    </tr>
+    <tr>
+        <td colspan="2"><input type="button" onclick="saveBook()" value="Save"></td>
+    </tr>
+</table>
+
+<span id="commentList">
+    <table class="books" id="comments">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Text</th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
+
+    <div>
+        <input type="text" id="commentText">
+        <input type="button" onclick="addComment()" value="Add Comment">
+    </div>
+</span>
+
+</span>
+
+<script>
+    $(document).ready(loadBooks());
+</script>
+
+</body>
+</html>

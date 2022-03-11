@@ -2,19 +2,94 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-    <parent>
+    <modelVersion>4.0.0</modelVersion>
+
+    <!--As module: -->
+    <!--<parent>
         <artifactId>2021-11-otus_spring_Vasilev</artifactId>
         <groupId>ru.otus</groupId>
         <version>1.0</version>
-    </parent>
-    <modelVersion>4.0.0</modelVersion>
+    </parent>-->
 
-    <groupId>ru.otus.spring.webflux</groupId>
+    <!--for stand-alone run:-->
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <!--Version downgraded to .2.4.5 due to incompatibility with mongock-spring-v5-->
+        <version>2.4.5</version>
+    </parent>
+
+    <!--<groupId>ru.otus.pk.spring</groupId>-->
     <artifactId>20_Spring_WebFlux</artifactId>
+    <version>1.0-SNAPSHOT</version>
 
     <properties>
+        <java.version>11</java.version>
+        <mongock.version>4.3.8</mongock.version>
         <maven.compiler.source>11</maven.compiler.source>
         <maven.compiler.target>11</maven.compiler.target>
     </properties>
+
+    <dependencies>
+        <!-- Зависимости WebFlux -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-webflux</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-mongodb</artifactId>
+        </dependency>
+
+        <!-- Зависимости Reactive SpringData -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-mongodb-reactive</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>de.flapdoodle.embed</groupId>
+            <artifactId>de.flapdoodle.embed.mongo</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.github.cloudyrock.mongock</groupId>
+            <artifactId>mongock-spring-v5</artifactId>
+            <version>${mongock.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.github.cloudyrock.mongock</groupId>
+            <artifactId>mongodb-springdata-v3-driver</artifactId>
+            <version>${mongock.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <optional>true</optional>
+        </dependency>
+
+        <!-- Тестирование -->
+        <dependency>
+            <groupId>io.projectreactor</groupId>
+            <artifactId>reactor-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+        </plugins>
+    </build>
 
 </project>
