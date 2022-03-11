@@ -10,12 +10,12 @@ import java.io.IOException;
 
 
 @SpringBootApplication
-public class Application {
+public class Spring03SpringBoot {
 
 	public static void main(String[] args) throws IOException {
-
-		ApplicationContext context = SpringApplication.run(Application.class, args);
-
+		ApplicationContext context = SpringApplication.run(Spring03SpringBoot.class, args);
+		QuestionsService questionsServiceCsv = context.getBean(QuestionsService.class);
+		questionsServiceCsv.takeExam();
 	}
 
 }
