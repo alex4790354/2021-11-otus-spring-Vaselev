@@ -26,7 +26,8 @@ public class InitMongoDBDataChangeLog {
         Book book2 = template.save(new Book(null, "Book2", author2, genre2));
         template.save(new Book(null, "Book3", author1, genre1));
 
-        template.insertAll(List.of(new Comment(null, "Comment1", book1),
+        template.insertAll(List.of(
+                new Comment(null, "Comment1", book1),
                 new Comment(null, "Comment2", book2),
                 new Comment(null, "Comment3", book1)));
     }
