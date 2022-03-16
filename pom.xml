@@ -34,6 +34,7 @@
         <module>16_Spring_MVC_View</module>
         <module>17_Spring_Jpa_Jquery_JS</module>
         <module>20_Spring_WebFlux</module>
+        <module>23_Spring_Security_auth</module>
     </modules>
 
 </project>
