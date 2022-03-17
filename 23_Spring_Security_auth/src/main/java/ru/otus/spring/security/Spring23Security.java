@@ -7,11 +7,11 @@ import org.springframework.context.ApplicationContext;
 
 
 @SpringBootApplication
-public class Spring16Mvc {
+public class Spring23Security {
 
     public static void main(String[] args) {
 
-        ApplicationContext context = SpringApplication.run(Spring16Mvc.class);
+        ApplicationContext context = SpringApplication.run(Spring23Security.class);
 
     }
 

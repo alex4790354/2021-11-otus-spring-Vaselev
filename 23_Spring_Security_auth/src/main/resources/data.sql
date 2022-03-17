@@ -47,7 +47,11 @@ INSERT INTO note(book_id, note) VALUES (10, 'Note-10.2 - Отель');
 INSERT INTO note(book_id, note) VALUES (10, 'Note-10.3 - Отель');
 INSERT INTO note(book_id, note) VALUES (10, 'Note-10.4 - Отель');
 
--- TOTO: delete into person.
-INSERT INTO person(name) VALUES ('Pushkin');
-INSERT INTO person(name) VALUES ('Lermontov');
-INSERT INTO person(name) VALUES ('Rusov');
+
+INSERT INTO users (id, username, password, full_name, email)
+    values (1, 'user', '$2a$10$8.UnVuG9HHgffUDAlk8qfOuVGkqRzgVymGe07xd00DMxs.AQubh4a', 'User User', 'user@mail.com'),
+           (2, 'admin', '$2a$10$YJM9Yq0rYD2kHPzr9.6e9OzbOScIIQIDzBrAAgmWVEk5tfvLOlSiS', 'Admin Admin', 'admin@mail.com');
+
+INSERT INTO authority (id, user_id, authority)
+    values (1, 1, 'ROLE_USER'),
+           (2, 2, 'ROLE_ADMIN');
