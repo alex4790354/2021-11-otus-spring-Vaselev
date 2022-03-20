@@ -21,7 +21,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     public void configure(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests().antMatchers("/**").authenticated()
-                .and().formLogin().defaultSuccessUrl("/books");
+                .and().formLogin().defaultSuccessUrl("/");
     }
 
     @Bean

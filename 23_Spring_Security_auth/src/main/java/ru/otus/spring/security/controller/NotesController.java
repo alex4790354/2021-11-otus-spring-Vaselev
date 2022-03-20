@@ -13,7 +13,6 @@ import ru.otus.spring.security.domain.Book;
 import ru.otus.spring.security.domain.Note;
 import ru.otus.spring.security.dto.NoteDto;
 import ru.otus.spring.security.services.*;
-
 import javax.validation.Valid;
 import java.util.List;
 
@@ -21,28 +20,19 @@ import java.util.List;
 @Controller
 public class NotesController {
 
-    private final AuthorService authorService;
-    private final GenreService genreService;
     private final BookService bookService;
     private final NoteService noteService;
-    private final ConversionService conversionService;
-
 
     @Autowired
-    public NotesController(AuthorService authorService,
-                           GenreService genreService,
-                           BookService bookService,
-                           NoteService noteService,
-                           ConversionService conversionService) {
-        this.authorService = authorService;
-        this.genreService = genreService;
+    public NotesController(BookService bookService,
+                           NoteService noteService) {
         this.bookService = bookService;
         this.noteService = noteService;
-        this.conversionService = conversionService;
     }
 
-    @GetMapping("/bookNotes")
-    public String listBooks(@RequestParam("bookId") long bookId, Model model) {
+    @GetMapping("/notes/bookNotes")
+    public String listBooks(@RequestParam("bookId") long bookId,
+                            Model model) {
         Book book = bookService.findById(bookId);
         List<Note> notes = noteService.findByBookId(bookId);
         model.addAttribute("book", book);
@@ -51,10 +41,10 @@ public class NotesController {
     }
 
 
-    @GetMapping("/editBookNote")
-    public String editBook(@RequestParam("noteId") long noteId,
-                           @RequestParam("bookId") long bookId,
-                           Model model) {
+    @GetMapping("/notes/editBookNote")
+    public String editBookNote(@RequestParam("noteId") long noteId,
+                               @RequestParam("bookId") long bookId,
+                               Model model) {
         NoteDto noteDto = null;
         if (noteId > 0L) {
             Note note = noteService.findById(noteId);
@@ -69,10 +59,10 @@ public class NotesController {
 
 
     @Validated
-    @PostMapping("/editBookNote")
-    public String saveBook(@Valid @ModelAttribute("noteDto") NoteDto noteDto,
-                           BindingResult bindingResult,
-                           Model model) {
+    @PostMapping("/notes/editBookNote")
+    public String save(@Valid @ModelAttribute("noteDto") NoteDto noteDto,
+                       BindingResult bindingResult,
+                       Model model) {
 
         if (bindingResult.hasErrors()) {
             System.out.println(bindingResult.toString());
@@ -81,9 +71,20 @@ public class NotesController {
         }
 
         noteService.save(noteDto.toDomainObject());
-        //return "redirect:/bookNotes?bookId=" + noteDto.getBook().getId();
-        return "redirect:/";
+        if (noteDto != null && noteDto.getBook() != null) {
+            return "redirect:/notes/bookNotes?bookId=" + noteDto.getBook().getId();
+        } else {
+            return "redirect:/books";
+        }
     }
 
+    @PostMapping("/notes/delete")
+    public String delete(@RequestParam("id") Long id
+                        ,@RequestParam("bookId") Long bookId ) {
+
+        noteService.delete(id);
+        return "redirect:/notes/bookNotes?bookId=" + bookId;
+        //return "redirect:/books";
+    }
 
 }

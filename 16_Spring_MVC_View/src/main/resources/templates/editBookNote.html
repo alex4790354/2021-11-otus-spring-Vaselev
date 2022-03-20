@@ -48,7 +48,7 @@
 <h3 th:text = "#{note-form-header}">Comment</h3>
 
 <!-- Book edition -->
-<form id="edit-form" action="editBookNote.html" th:action="@{/editBookNote(noteId=${noteDto.id})}" th:method="post" th:object="${noteDto}">
+<form id="edit-form" action="editBookNote.html" th:action="@{/notes/editBookNote(noteId=${noteDto.id})}" th:method="post" th:object="${noteDto}">
 
     <input type="hidden" name="book" th:field="*{book}"/>
 
@@ -75,7 +75,7 @@
 <div th:if="${noteDto.id > 0}">
 <h3 th:text = "#{table-header-note-new}">New comment</h3>
 <!--new review: -->
-    <form id="edit-form2" action="editBookNote.html" th:action="@{/editBookNote}" th:method="post" th:object="${noteDto}">
+    <form id="edit-form2" action="editBookNote.html" th:action="@{/notes/editBookNote}" th:method="post" th:object="${noteDto}">
 
         <input type="hidden" name="book" th:field="*{book}"/>
 

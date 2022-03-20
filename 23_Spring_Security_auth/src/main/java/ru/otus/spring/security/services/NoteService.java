@@ -14,9 +14,9 @@ public interface NoteService {
 
     Note findById(long id);
 
-    void save(long id, String newNote);
+    Note save(long id, String newNote);
 
-    void save(Note note);
+    Note save(Note note);
 
     void delete(long id);
 

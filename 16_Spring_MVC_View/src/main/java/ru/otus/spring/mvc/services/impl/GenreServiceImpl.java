@@ -1,7 +1,7 @@
 package ru.otus.spring.mvc.services.impl;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.otus.spring.mvc.customExceptions.DaoException;
 import ru.otus.spring.mvc.domain.Genre;
@@ -10,7 +10,7 @@ import ru.otus.spring.mvc.services.GenreService;
 import java.util.List;
 
 
-@Component
+@Service
 @RequiredArgsConstructor
 public class GenreServiceImpl implements GenreService {
 

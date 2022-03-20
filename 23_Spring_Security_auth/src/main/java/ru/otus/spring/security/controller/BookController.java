@@ -1,5 +1,6 @@
 package ru.otus.spring.security.controller;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,39 +15,21 @@ import ru.otus.spring.security.domain.Book;
 import ru.otus.spring.security.domain.Genre;
 import ru.otus.spring.security.dto.BookDto;
 import ru.otus.spring.security.services.*;
-
 import javax.validation.Valid;
 import java.util.List;
 
 
-
+@RequiredArgsConstructor
 @Controller
 public class BookController {
 
     private final AuthorService authorService;
     private final GenreService genreService;
     private final BookService bookService;
-    private final NoteService noteService;
     private final ConversionService conversionService;
 
 
-    // TODO: have to add 'Book-delete' functionality.
-
-
-    @Autowired
-    public BookController(AuthorService authorService,
-                          GenreService genreService,
-                          BookService bookService,
-                          NoteService noteService,
-                          ConversionService conversionService) {
-        this.authorService = authorService;
-        this.genreService = genreService;
-        this.bookService = bookService;
-        this.noteService = noteService;
-        this.conversionService = conversionService;
-    }
-
-    @GetMapping("/")
+    @GetMapping({"/", "/books"})
     public String listBooks(Model model) {
         List<Book> books = bookService.findAll();
         List<BookDto> booksDto = conversionService.fromDomain(books);
@@ -54,7 +37,7 @@ public class BookController {
         return "books";
     }
 
-    @GetMapping("/editBook")
+    @GetMapping("/books/editBook")
     public String editBook(@RequestParam("id") long id, Model model) {
         Book book = bookService.findById(id);
         BookDto bookDto = conversionService.fromDomain(book);
@@ -68,7 +51,7 @@ public class BookController {
     }
 
     @Validated
-    @PostMapping("/editBook")
+    @PostMapping("/books/editBook")
     public String saveBook(@Valid @ModelAttribute("bookDto") BookDto bookDto,
                            BindingResult bindingResult,
                            Model model) {
@@ -86,7 +69,13 @@ public class BookController {
         }
 
         bookService.saveBook(conversionService.fromDto(bookDto));
-        return "redirect:/";
+        return "redirect:/books";
+    }
+
+    @PostMapping("/books/delete")
+    public String delete(@RequestParam("id") Long id) {
+        bookService.deleteBook(id);
+        return "redirect:/books";
     }
 
 }
