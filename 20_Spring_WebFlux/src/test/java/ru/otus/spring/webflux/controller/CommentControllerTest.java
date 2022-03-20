@@ -1,4 +1,4 @@
-package ru.otus.pk.spring.controller;
+package ru.otus.spring.webflux.controller;
 
 import org.bson.types.ObjectId;
 import org.junit.jupiter.api.DisplayName;
@@ -9,8 +9,9 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.web.reactive.server.WebTestClient;
 import reactor.core.publisher.Mono;
-import ru.otus.pk.spring.domain.Comment;
-import ru.otus.pk.spring.repository.CommentRepository;
+import ru.otus.spring.webflux.controller.CommentController;
+import ru.otus.spring.webflux.domain.Comment;
+import ru.otus.spring.webflux.repository.CommentRepository;
 import static java.lang.String.format;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.BDDMockito.given;

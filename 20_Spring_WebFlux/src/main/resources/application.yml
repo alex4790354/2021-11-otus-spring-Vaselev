@@ -7,8 +7,7 @@ spring:
 
 mongock:
   runner-type: "InitializingBean"
-  change-logs-scan-package:
-    - ru.otus.pk.spring.changelogs
+  change-logs-scan-package: ru.otus.spring.webflux.changelogs
   mongo-db:
     write-concern:
       journal: false

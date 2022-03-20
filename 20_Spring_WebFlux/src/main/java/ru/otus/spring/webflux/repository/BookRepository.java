@@ -1,7 +1,7 @@
-package ru.otus.pk.spring.repository;
+package ru.otus.spring.webflux.repository;
 
 import org.springframework.data.mongodb.repository.ReactiveMongoRepository;
-import ru.otus.pk.spring.domain.Book;
+import ru.otus.spring.webflux.domain.Book;
 
 public interface BookRepository extends ReactiveMongoRepository<Book, String>, BookRepositoryCustom {
 }

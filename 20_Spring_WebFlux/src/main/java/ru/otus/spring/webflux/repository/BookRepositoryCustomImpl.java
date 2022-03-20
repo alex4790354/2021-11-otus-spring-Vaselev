@@ -1,12 +1,12 @@
-package ru.otus.pk.spring.repository;
+package ru.otus.spring.webflux.repository;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.mongodb.core.ReactiveMongoOperations;
 import org.springframework.data.mongodb.core.aggregation.AggregationOperation;
 import reactor.core.publisher.Flux;
-import ru.otus.pk.spring.domain.Author;
-import ru.otus.pk.spring.domain.Book;
-import ru.otus.pk.spring.domain.Genre;
+import ru.otus.spring.webflux.domain.Author;
+import ru.otus.spring.webflux.domain.Book;
+import ru.otus.spring.webflux.domain.Genre;
 
 import java.util.List;
 

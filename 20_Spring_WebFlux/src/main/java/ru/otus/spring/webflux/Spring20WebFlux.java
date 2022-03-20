@@ -1,4 +1,4 @@
-package ru.otus.pk.spring;
+package ru.otus.spring.webflux;
 
 import com.github.cloudyrock.spring.v5.EnableMongock;
 import org.springframework.boot.SpringApplication;
@@ -13,4 +13,5 @@ public class Spring20WebFlux {
     public static void main(String[] args) {
         SpringApplication.run(Spring20WebFlux.class, args);
     }
+
 }
