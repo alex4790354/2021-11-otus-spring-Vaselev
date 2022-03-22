@@ -13,7 +13,6 @@ import org.springframework.test.web.servlet.MockMvc;
 import ru.otus.spring.acl.domain.*;
 import ru.otus.spring.acl.dto.BookDto;
 import ru.otus.spring.acl.services.*;
-
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.BDDMockito.given;
@@ -46,17 +45,19 @@ class NotesControllerTest {
     private BookService bookService;
 
     @MockBean
+    private NoteService noteService;
+
+
+    ///
+    @MockBean
     private AuthorService authorService;
 
     @MockBean
     private GenreService genreService;
 
     @MockBean
-    private NoteService noteService;
-
-
-    @MockBean
     private ConversionService conversionService;
+
 
     @DisplayName("для авторизованного сохранять комментарий")
     @WithMockUser(username = "user", authorities = {"ROLE_USER"})

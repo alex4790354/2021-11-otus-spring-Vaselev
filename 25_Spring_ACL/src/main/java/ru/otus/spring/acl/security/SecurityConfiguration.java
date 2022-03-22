@@ -22,7 +22,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     public void configure(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests().antMatchers("/", "/books", "/books/editBook", "/notes/bookNotes").permitAll()
-                .and().authorizeRequests().antMatchers("/notes/editBookNote**", "/notes/delete**").authenticated()
+                .and().authorizeRequests().antMatchers("/notes/editBookNote**", "/notes/saveBookNote**","/notes/delete**").authenticated()
                 .and().authorizeRequests().antMatchers("/books/saveBook**", "/books/delete**").hasAnyRole("ADMIN")
                 .and().authorizeRequests().antMatchers("/**").denyAll()
                 .and().formLogin().defaultSuccessUrl("/books")
