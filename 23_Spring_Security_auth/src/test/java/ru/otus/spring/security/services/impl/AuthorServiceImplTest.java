@@ -9,8 +9,6 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 import org.springframework.context.annotation.Import;
 import ru.otus.spring.security.domain.Author;
 import ru.otus.spring.security.services.AuthorService;
-import ru.otus.spring.security.services.impl.AuthorServiceImpl;
-
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatCode;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -81,7 +79,5 @@ class AuthorServiceImplTest {
         assertThatCode(() -> authorService.findById(AUTHOR_ONE_ID))
                 .isInstanceOf(RuntimeException.class);
     }
-
-
 
 }

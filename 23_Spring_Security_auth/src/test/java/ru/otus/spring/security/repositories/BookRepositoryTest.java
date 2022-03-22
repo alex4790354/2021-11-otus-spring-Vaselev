@@ -1,5 +1,4 @@
-package ru.otus.spring.security.repositories.impl;
-
+package ru.otus.spring.security.repositories;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -8,7 +7,7 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import ru.otus.spring.security.domain.Author;
 import ru.otus.spring.security.domain.Book;
 import ru.otus.spring.security.domain.Genre;
-import ru.otus.spring.security.repositories.BookRepository;
+
 import java.util.List;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -48,6 +47,5 @@ class BookRepositoryTest {
         Book book = bookRepository.getById(BOOK_ID);
         assertEquals(BOOK_ONE.getId(), book.getId());
     }
-
 
 }

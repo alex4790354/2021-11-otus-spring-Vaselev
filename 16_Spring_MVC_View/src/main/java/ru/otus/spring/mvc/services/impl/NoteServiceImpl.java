@@ -1,7 +1,7 @@
 package ru.otus.spring.mvc.services.impl;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.otus.spring.mvc.customExceptions.DaoException;
 import ru.otus.spring.mvc.domain.Book;
@@ -12,7 +12,7 @@ import ru.otus.spring.mvc.services.NoteService;
 import java.util.List;
 
 
-@Component
+@Service
 @RequiredArgsConstructor
 public class NoteServiceImpl implements NoteService {
 
@@ -28,11 +28,13 @@ public class NoteServiceImpl implements NoteService {
         return noteRepository.findAll();
     }
 
+
     @Transactional(readOnly = true)
     @Override
     public List<Note> findByBookId(long bookId) {
         return noteRepository.findByBookId(bookId);
     }
+
 
     @Transactional(readOnly = true)
     @Override
@@ -54,19 +56,19 @@ public class NoteServiceImpl implements NoteService {
 
     @Transactional
     @Override
-    public void save(long id, String newNote) {
+    public Note save(long id, String newNote) {
         Note note = findById(id);
         if (note == null) {
             throw new DaoException(NOTE_NOT_EXIST);
         }
         note.setNote(newNote);
-        noteRepository.save(note);
+        return noteRepository.save(note);
     }
 
 
     @Override
-    public void save(Note note) {
-        noteRepository.save(note);
+    public Note save(Note note) {
+        return noteRepository.save(note);
     }
 
 
@@ -85,8 +87,6 @@ public class NoteServiceImpl implements NoteService {
     @Transactional
     @Override
     public void delete(long id) {
-        Note note = findById(id);
-        noteRepository.delete(note);
+        noteRepository.deleteById(id);
     }
-
 }

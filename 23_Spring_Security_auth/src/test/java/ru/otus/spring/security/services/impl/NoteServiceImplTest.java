@@ -9,17 +9,14 @@ import ru.otus.spring.security.domain.Book;
 import ru.otus.spring.security.domain.Genre;
 import ru.otus.spring.security.domain.Note;
 import ru.otus.spring.security.repositories.NoteRepository;
-
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 
 @DisplayName("ORM JPA Genres repository testing.")
 @DataJpaTest
 class NoteServiceImplTest {
 
-    private final static int EXPECTED_NOTES_COUNT = 27;
     private final static long NOTE_ONE_ID = 1L;
     private final static String NOTE_ONE_CONTEXT = "Note-01.1 - Мастер";
     private final static String NOTE_ONE_CONTEXT_NEW = "Note-01.1 - Мастер - New";
@@ -39,27 +36,6 @@ class NoteServiceImplTest {
         assertEquals(NOTE_ONE_ID, genre.getId());
         assertEquals(NOTE_ONE_CONTEXT, genre.getNote());
     }
-
-    /*@DisplayName("Should find all Note")
-    @Test
-    void ShouldGetAllGenres() {
-        val genres = noteRepository.getAllNote();
-        assertThat(genres).isNotNull().hasSize(EXPECTED_NOTES_COUNT)
-                .allMatch(s -> s.getId() > 0)
-                .allMatch(s -> !s.getNote().equals(""));
-    }*/
-
-    /*@DisplayName("Should be able to delete a Genre:")
-    @Test
-    void shouldDeletefirstGenre() {
-        Optional<Note> note = noteRepository.getNoteById(NOTE_ONE_ID);
-        assertNotNull(note.get());
-        assertEquals(NOTE_ONE_CONTEXT, note.get().getNote());
-        // DELETE:
-        noteRepository.delete(note.get());
-        Optional<Note> noteAfterDelete = noteRepository.getNoteById(NOTE_ONE_ID);
-        assertEquals(Optional.empty(), noteAfterDelete);
-    }*/
 
     @DisplayName("Should be able to insert a Genre-1 after deletions")
     @Test

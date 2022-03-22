@@ -9,7 +9,6 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 import org.springframework.context.annotation.Import;
 import ru.otus.spring.security.domain.Genre;
 import ru.otus.spring.security.services.GenreService;
-import ru.otus.spring.security.services.impl.GenreServiceImpl;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatCode;
@@ -20,7 +19,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 @DataJpaTest
 @Import(GenreServiceImpl.class)
 class GenreServiceImplTest {
-
     private final static int EXPECTED_GENRES_COUNT = 4;
     private final static long GENRE_ONE_ID = 1L;
     private final static String GENRE_ONE_NAME = "Роман";
@@ -68,7 +66,7 @@ class GenreServiceImplTest {
         assertThatCode(() -> genreService.findById(GENRE_ONE_ID))
                 .isInstanceOf(RuntimeException.class);
     }
-    
+
     @DisplayName("Should be able to insert a Genre-1 after deletions")
     @Test
     void shouldAddNewGenre() {
@@ -76,7 +74,6 @@ class GenreServiceImplTest {
         assertThat(savedGenreId).isGreaterThan(0);
         assertEquals(GENRE_ONE_NAME_NEW, genreService.findById(savedGenreId).getName());
     }
-
 
 
 }

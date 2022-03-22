@@ -7,17 +7,16 @@ import javax.validation.constraints.NotBlank;
 
 import static javax.persistence.FetchType.LAZY;
 
-/*
 @NamedEntityGraph(name = "comment-book-author-genre",
-                  attributeNodes = {@NamedAttributeNode(value = "book", subgraph = "book-subgraph")},
-                  subgraphs = {@NamedSubgraph(name = "book-subgraph",
-                                    attributeNodes = {@NamedAttributeNode("genre"),
-                                                      @NamedAttributeNode("author")})
-                              }
-                 )*/
+        attributeNodes = {@NamedAttributeNode(value = "book", subgraph = "book-subgraph")},
+        subgraphs = {@NamedSubgraph(name = "book-subgraph",
+                attributeNodes = {@NamedAttributeNode("genre"),
+                        @NamedAttributeNode("author")})
+        }
+)
 @Data
+//@ToString(exclude = {"book"})
 @EqualsAndHashCode(exclude = "book")
-@AllArgsConstructor
 @NoArgsConstructor
 @Entity(name = "Note")
 @Table(name = "note")
@@ -36,5 +35,11 @@ public class Note {
     @NotBlank
     @Column(name = "note")
     private String note;
+
+    public Note(long id, Book book, String note) {
+        this.id = id;
+        this.book = book;
+        this.note = note;
+    }
 
 }

@@ -9,8 +9,6 @@ import org.springframework.context.annotation.Import;
 import ru.otus.spring.security.domain.Author;
 import ru.otus.spring.security.domain.Book;
 import ru.otus.spring.security.domain.Genre;
-import ru.otus.spring.security.services.impl.BookServiceImpl;
-
 import java.util.List;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatCode;
@@ -19,11 +17,9 @@ import static org.junit.jupiter.api.Assertions.*;
 
 @DisplayName("ORM JPA books repository testing.")
 @DataJpaTest
-@Import({BookServiceImpl.class})
-class BookServiceImplTest {
+@Import({BookServiceImpl.class})class BookServiceImplTest {
 
     // TODO: add test controller
-
     private final static int EXPECTED_BOOKS_COUNT = 10;
     private final static Long LONG_ONE = 1L;
     private final static Author AUTHOR_ONE = new Author(LONG_ONE, "Михаил Булгаков-test");
@@ -47,7 +43,7 @@ class BookServiceImplTest {
                 .matches(b -> b.getTitle().equals(BOOK_ONE.getTitle()))
                 .matches(b -> b.getGenre().equals(GENRE_ONE))
                 .matches(b -> b.getAuthor().equals(AUTHOR_ONE))
-                ;
+        ;
     }
 
 
