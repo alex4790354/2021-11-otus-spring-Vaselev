@@ -1,4 +1,4 @@
-INSERT INTO author(name) VALUES ('Михаил Булгаков');
+INSERT INTO author(name) VALUES ('Михаил Булгаков-test');
 INSERT INTO author(name) VALUES ('Антуан де Сент-Экзюпери');
 INSERT INTO author(name) VALUES ('Александр Дюма');
 INSERT INTO author(name) VALUES ('Аркадий и Борис Стругацкие');
@@ -49,9 +49,9 @@ INSERT INTO note(book_id, note) VALUES (10, 'Note-10.4 - Отель');
 
 
 INSERT INTO users (id, username, password, full_name, email)
-    values (1, 'user', '$2a$10$8.UnVuG9HHgffUDAlk8qfOuVGkqRzgVymGe07xd00DMxs.AQubh4a', 'User User', 'user@mail.com'),
-           (2, 'admin', '$2a$10$YJM9Yq0rYD2kHPzr9.6e9OzbOScIIQIDzBrAAgmWVEk5tfvLOlSiS', 'Admin Admin', 'admin@mail.com');
+values (1, 'user', '$2a$10$8.UnVuG9HHgffUDAlk8qfOuVGkqRzgVymGe07xd00DMxs.AQubh4a', 'User User', 'user@mail.com'),
+       (2, 'admin', '$2a$10$YJM9Yq0rYD2kHPzr9.6e9OzbOScIIQIDzBrAAgmWVEk5tfvLOlSiS', 'Admin Admin', 'admin@mail.com');
 
 INSERT INTO authority (id, user_id, authority)
-    values (1, 1, 'ROLE_USER'),
-           (2, 2, 'ROLE_ADMIN');
+values (1, 1, 'ROLE_USER'),
+       (2, 2, 'ROLE_ADMIN');

@@ -2,12 +2,11 @@ package ru.otus.spring.acl.domain;
 
 import lombok.*;
 import org.springframework.security.core.userdetails.UserDetails;
-
 import javax.persistence.*;
 import java.util.Set;
-
 import static javax.persistence.FetchType.EAGER;
 import static javax.persistence.GenerationType.IDENTITY;
+
 
 @AllArgsConstructor
 @NoArgsConstructor

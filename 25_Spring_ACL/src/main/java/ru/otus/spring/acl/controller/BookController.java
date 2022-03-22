@@ -55,7 +55,7 @@ public class BookController {
     }
 
     @Validated
-    @PostMapping("/books/editBook")
+    @PostMapping("/books/saveBook")
     public String saveBook(@Valid @ModelAttribute("bookDto") BookDto bookDto,
                            BindingResult bindingResult,
                            Model model) {

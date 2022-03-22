@@ -2,10 +2,10 @@ package ru.otus.spring.acl.domain;
 
 import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
-
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
+
 
 @AllArgsConstructor
 @NoArgsConstructor

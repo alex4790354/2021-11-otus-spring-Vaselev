@@ -14,7 +14,6 @@ import ru.otus.spring.acl.domain.Note;
 import ru.otus.spring.acl.dto.NoteDto;
 import ru.otus.spring.acl.services.BookService;
 import ru.otus.spring.acl.services.NoteService;
-
 import javax.validation.Valid;
 import java.util.List;
 
@@ -61,7 +60,7 @@ public class NotesController {
 
 
     @Validated
-    @PostMapping("/notes/editBookNote")
+    @PostMapping("/notes/saveBookNote")
     public String save(@Valid @ModelAttribute("noteDto") NoteDto noteDto,
                        BindingResult bindingResult,
                        Model model) {

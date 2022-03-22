@@ -47,7 +47,7 @@
 <h3 th:text="#{table-header-book}">Book</h3>
 
 <!-- Book edition -->
-<form id="edit-form" action="editBook.html" th:action="@{/books/editBook(id=${bookDto.id})}" th:method="post" th:object="${bookDto}">
+<form id="edit-form" action="editBook.html" th:action="@{/books/saveBook(id=${bookDto.id})}" th:method="post" th:object="${bookDto}">
 
     <div class="row">
         <label for="id-input" th:text="#{table-header-id}">ID_:</label>
@@ -92,7 +92,7 @@
 <h3 th:text="#{table-header-book-new}">Book</h3>
 
 <!--new one: -->
-<form id="edit-form2" action="editBook.html" th:action="@{/books/editBook}" th:method="post" th:object="${bookDto}">
+<form id="edit-form2" action="editBook.html" th:action="@{/books/saveBook}" th:method="post" th:object="${bookDto}">
 
     <div class="row">
         <label for="id-input2" th:text="#{table-header-id}">ID_:</label>

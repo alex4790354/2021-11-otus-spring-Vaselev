@@ -11,6 +11,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
+
 @RequiredArgsConstructor
 @EnableWebSecurity
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
@@ -20,8 +21,13 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Override
     public void configure(HttpSecurity http) throws Exception {
         http
-                .authorizeRequests().antMatchers("/**").authenticated()
-                .and().formLogin().defaultSuccessUrl("/");
+                .authorizeRequests().antMatchers("/", "/books", "/books/editBook", "/notes/bookNotes").permitAll()
+                .and().authorizeRequests().antMatchers("/notes/editBookNote**", "/notes/delete**").authenticated()
+                .and().authorizeRequests().antMatchers("/books/saveBook**", "/books/delete**").hasAnyRole("ADMIN")
+                .and().authorizeRequests().antMatchers("/**").denyAll()
+                .and().formLogin().defaultSuccessUrl("/books")
+                .and().logout().logoutSuccessUrl("/books").permitAll()
+                .and().exceptionHandling().accessDeniedPage("/error403");
     }
 
     @Bean
