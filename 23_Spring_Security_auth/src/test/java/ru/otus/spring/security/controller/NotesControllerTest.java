@@ -33,7 +33,6 @@ class NotesControllerTest {
     private static final Genre GENRE = new Genre(1L, "Genre1");
     private static final Book BOOK = new Book(1L, AUTHOR, GENRE, "Book1");
     private static final Note NOTE = new Note(1L, BOOK, "Note1");
-    private static final NoteDto NOTE_DTO = new NoteDto(1L, BOOK, "Note1");
 
     @Autowired
     private MockMvc mockMvc;

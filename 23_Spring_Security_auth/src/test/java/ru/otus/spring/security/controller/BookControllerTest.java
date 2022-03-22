@@ -14,10 +14,8 @@ import org.springframework.test.web.servlet.MockMvc;
 import ru.otus.spring.security.domain.Author;
 import ru.otus.spring.security.domain.Book;
 import ru.otus.spring.security.domain.Genre;
-import ru.otus.spring.security.domain.Note;
 import ru.otus.spring.security.dto.BookDto;
 import ru.otus.spring.security.services.*;
-
 import java.util.List;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyLong;
@@ -38,7 +36,7 @@ class BookControllerTest {
     private static final Genre GENRE = new Genre(1L, "Genre1");
     private static final Book BOOK = new Book(1L, AUTHOR, GENRE, "Title1");
     private static final BookDto BOOK_DTO = new BookDto(1L, AUTHOR, GENRE, "Title1", 0);
-    private static final Note NOTE = new Note(1L, BOOK, "Comment1");
+
 
     @Autowired
     private MockMvc mockMvc;
@@ -54,9 +52,6 @@ class BookControllerTest {
 
     @MockBean
     private GenreService genreService;
-
-    @MockBean
-    private NoteService noteService;
 
     @MockBean
     private ConversionService conversionService;
@@ -76,9 +71,6 @@ class BookControllerTest {
     void edit() throws Exception {
         given(bookService.findById(anyLong())).willReturn(BOOK);
         given(conversionService.fromDomain(BOOK)).willReturn(BOOK_DTO);
-        given(authorService.findAll()).willReturn(List.of(AUTHOR));
-        given(genreService.findAll()).willReturn(List.of(GENRE));
-        given(noteService.findByBookId(anyLong())).willReturn(List.of(NOTE));
 
         this.mockMvc.perform(get("/books/editBook?id=" + BOOK
                 .getId())).andDo(print())
@@ -86,7 +78,6 @@ class BookControllerTest {
     }
 
     @DisplayName("для авторизованного пользователя возвращать ответ 302 (REDIRECTION) при сохранении книги")
-    //@WithMockUser
     @Test
     void save() throws Exception {
         given(bookService.saveBook(any(Book.class))).willReturn(BOOK);
@@ -94,16 +85,11 @@ class BookControllerTest {
         this.mockMvc.perform(post("/books/editBook")
                 .with(csrf())
                 .param("id", "1")
-                /*.param("author.id", "1")
-                .param("author.name", "Author1")
-                .param("genre.id", "1")
-                .param("genre.name", "Genre1")*/
                 .param("title", "Title1"))
                 .andExpect(status().isFound());
     }
 
     @DisplayName("для авторизованного пользователя возвращать ответ 302 (REDIRECTION) при удалении книги")
-    @WithMockUser
     @Test
     void delete() throws Exception {
         doNothing().when(bookService).deleteBook(anyLong());
@@ -126,10 +112,6 @@ class BookControllerTest {
     @Test
     void editForbidden() throws Exception {
         given(bookService.findById(anyLong())).willReturn(BOOK);
-        given(authorService.findAll()).willReturn(List.of(AUTHOR));
-        given(genreService.findAll()).willReturn(List.of(GENRE));
-        given(noteService.findByBookId(anyLong())).willReturn(List.of(NOTE));
-
         this.mockMvc.perform(get("/books/edit?id=" + BOOK.getId())).andDo(print()).andExpect(status().isFound());
     }
 
