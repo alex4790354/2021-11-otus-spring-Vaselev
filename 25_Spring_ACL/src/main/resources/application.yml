@@ -1,0 +1,28 @@
+logging:
+  level:
+    root: ERROR
+
+
+spring:
+  datasource:
+    #url: jdbc:h2:mem:testdb
+    url: jdbc:postgresql://localhost:5432/myDB
+    username: admin
+    password: admin
+  sql:
+    init:
+      mode: always
+      #data-locations: data.sql
+  jpa:
+    generate-ddl: false
+    hibernate:
+      ddl-auto: validate
+
+    show-sql: true
+
+    properties:
+      hibernate:
+        format_sql: false
+
+  messages:
+    encoding: UTF-8

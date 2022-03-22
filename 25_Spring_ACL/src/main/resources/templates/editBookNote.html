@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Edit book note</title>
+
+    <style type="text/css">
+        body {
+            padding: 50px;
+        }
+
+        label {
+            display: inline-block;
+            width: 100px;
+        }
+
+        input:read-only {
+            background: lightgray;
+        }
+
+        .row {
+            margin-top: 10px;
+        }
+
+        h3 {
+            background-image: url("../static/book.png");
+            background-repeat: no-repeat;
+            padding: 5px;
+            padding-left: 50px;
+        }
+
+        .errors {
+            color: red;
+        }
+    </style>
+
+    <style type="text/css" th:inline="text">
+        [[h3]] {
+            background-image: url([[@{/book.png}]]);
+            background-repeat: no-repeat;
+            padding: 5px;
+            padding-left: 50px;
+        }
+    </style>
+</head>
+<body>
+
+<h3 th:text = "#{note-form-header}">Comment</h3>
+
+<!-- Book edition -->
+<form id="edit-form" action="editBookNote.html" th:action="@{/notes/editBookNote(noteId=${noteDto.id})}" th:method="post" th:object="${noteDto}">
+
+    <input type="hidden" name="book" th:field="*{book}"/>
+
+    <div class="row">
+        <label for="id-input" th:text="#{table-header-id}">ID:</label>
+        <input id="id-input" name="id" type="text" readonly="readonly" th:value="*{id}" value="1"/>
+    </div>
+
+    <div class="row">
+        <label for="note-input" th:text="#{table-header-note}">Review:</label>
+        <input id="note-input" name="note" type="text" th:value="*{note}" value="John Doe"/>
+        <div class="errors" th:if="${#fields.hasErrors('note')}" th:errors="*{note}">Note error</div>
+    </div>
+
+    <div class="row">
+        <button type="submit" th:text="#{save-button-caption}">Save</button>
+        <a href="list.html" th:href="@{/}"><button type="button" th:text="#{cancel-button-caption}">Cancel</button></a>
+    </div>
+</form>
+
+
+<br><br><br>
+
+<div th:if="${noteDto.id > 0}">
+<h3 th:text = "#{table-header-note-new}">New comment</h3>
+<!--new review: -->
+    <form id="edit-form2" action="editBookNote.html" th:action="@{/notes/editBookNote}" th:method="post" th:object="${noteDto}">
+
+        <input type="hidden" name="book" th:field="*{book}"/>
+
+        <div class="row">
+            <label for="id-input2" th:text="#{table-header-id}">ID:</label>
+            <input id="id-input2" name="id" type="text" readonly="readonly" th:value="0" value="0"/>
+        </div>
+
+        <div class="row">
+            <label for="note-input2" th:text="#{table-header-note}">Review:</label>
+            <input id="note-input2" name="note" type="text" value="Write new review"/>
+            <div class="errors" th:if="${#fields.hasErrors('note')}" th:errors="*{note}">Note error</div>
+        </div>
+
+        <div class="row">
+            <button type="submit" th:text="#{save-button-caption}">Save</button>
+            <a href="list.html" th:href="@{/}"><button type="button" th:text="#{cancel-button-caption}">Cancel</button></a>
+        </div>
+    </form>
+</div>
+
+
+</body>
+</html>
