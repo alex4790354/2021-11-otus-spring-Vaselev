@@ -19,9 +19,9 @@ public class InitMongoDBDataChangeLog {
 
     @ChangeSet(order = "001", id = "init", author = "pk", runAlways = true)
     public void init(MongockTemplate template) {
-        MongoAuthor author1 = new MongoAuthor(ObjectId.get().toString(), "AuthorF1", "AuthorL1");
-        MongoAuthor author2 = new MongoAuthor(ObjectId.get().toString(), "AuthorF2", "AuthorL2");
-        MongoAuthor author3 = new MongoAuthor(ObjectId.get().toString(), "AuthorF3", "AuthorL3");
+        MongoAuthor author1 = new MongoAuthor(ObjectId.get().toString(), "Author1_FN", "Author1_LN");
+        MongoAuthor author2 = new MongoAuthor(ObjectId.get().toString(), "Author2_FN", "Author2_LN");
+        MongoAuthor author3 = new MongoAuthor(ObjectId.get().toString(), "Author3_FN", "Author3_LN");
 
         MongoGenre genre1 = new MongoGenre(ObjectId.get().toString(), "Genre1");
         MongoGenre genre2 = new MongoGenre(ObjectId.get().toString(), "Genre2");
@@ -30,7 +30,7 @@ public class InitMongoDBDataChangeLog {
         MongoBook book1 = template.save(new MongoBook(null, "Book1", author1, genre1));
         MongoBook book2 = template.save(new MongoBook(null, "Book2", author2, genre2));
         template.save(new MongoBook(null, "Book11", author1, genre1));
-        template.save(new MongoBook(null, "Book3", author3, genre3));
+        template.save(new MongoBook(null, "Book3",  author3, genre3));
         template.save(new MongoBook(null, "Book33", author3, genre3));
         template.save(new MongoBook(null, "Book22", author2, genre2));
 

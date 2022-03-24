@@ -39,9 +39,6 @@ public class Comment {
     @Column(name = "text", nullable = false)
     private String text;
 
-    @Column(name = "time", nullable = false)
-    private LocalDateTime time = now();
-
     @ManyToOne(fetch = LAZY)
     private Book book;
 

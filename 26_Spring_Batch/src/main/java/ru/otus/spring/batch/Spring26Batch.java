@@ -11,4 +11,5 @@ public class Spring26Batch {
     public static void main(String[] args) {
         SpringApplication.run(Spring26Batch.class, args);
     }
+
 }

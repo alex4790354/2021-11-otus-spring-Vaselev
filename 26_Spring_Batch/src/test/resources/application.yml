@@ -5,6 +5,15 @@ spring:
   batch:
     job:
       enabled: false
+  shell:
+    interactive:
+      enabled: false
+
+  datasource:
+    url: jdbc:h2:mem:testdb
+    driverClassName: org.h2.Driver
+    username: sa
+    password:
 
   mongodb:
     embedded:
@@ -13,19 +22,8 @@ spring:
   data:
     mongodb:
       host: localhost
-      port: 27017
-      database: bookDb
-
-  datasource:
-    url: jdbc:h2:mem:testdb
-    driverClassName: org.h2.Driver
-    username: sa
-    password:
-
-  h2:
-    console:
-      enabled: true
-      path: /h2-console
+      port: 0
+      database: test
 
 mongock:
   runner-type: "InitializingBean"

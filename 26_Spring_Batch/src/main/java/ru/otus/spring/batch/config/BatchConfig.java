@@ -6,13 +6,16 @@ import org.springframework.batch.core.configuration.support.JobRegistryBeanPostP
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+
 @EnableBatchProcessing
 @Configuration
 public class BatchConfig {
+
     @Bean
     public JobRegistryBeanPostProcessor postProcessor(JobRegistry jobRegistry) {
         var processor = new JobRegistryBeanPostProcessor();
         processor.setJobRegistry(jobRegistry);
         return processor;
     }
+
 }

@@ -21,17 +21,18 @@ import org.springframework.lang.NonNull;
 import ru.otus.spring.batch.batch.BookItemWriter;
 import ru.otus.spring.batch.batch.CommentItemWriter;
 import ru.otus.spring.batch.batch.TransformationService;
+import ru.otus.spring.batch.domain.jdbc.JdbcComment;
+import ru.otus.spring.batch.domain.jdbc.JdbcBook;
 import ru.otus.spring.batch.domain.mongo.*;
 import ru.otus.spring.batch.domain.sql.*;
 import ru.otus.spring.batch.repository.AuthorRepository;
 import ru.otus.spring.batch.repository.BookRepository;
 import ru.otus.spring.batch.repository.GenreRepository;
-
 import javax.persistence.EntityManagerFactory;
 import java.util.HashMap;
 import java.util.List;
-
 import static org.slf4j.LoggerFactory.getLogger;
+
 
 @Configuration
 public class JobConfig {
@@ -68,10 +69,10 @@ public class JobConfig {
 
                     @Override
                     public void afterJob(@NonNull JobExecution jobExecution) {
-                        logger.info("Конец job");
+                        logger.info("Job END");
                         System.out.println("********* Migrated: **********");
 
-                        var books = jdbcTemplate.query("select * from book join mongo_book on book_id = id ", new BeanPropertyRowMapper<>(ru.otus.spring.batch.jdbc.Book.class));
+                        var books = jdbcTemplate.query("select * from book join mongo_book on book_id = id ", new BeanPropertyRowMapper<>(JdbcBook.class));
                         books.forEach(System.out::println);
 
                         var authors = jdbcTemplate.query("select * from author join mongo_author on author_id = id ", new BeanPropertyRowMapper<>(Author.class));
@@ -80,7 +81,7 @@ public class JobConfig {
                         var genres = jdbcTemplate.query("select * from genre join mongo_genre on genre_id = id ", new BeanPropertyRowMapper<>(Genre.class));
                         genres.forEach(System.out::println);
 
-                        var comments = jdbcTemplate.query("select * from comment ", new BeanPropertyRowMapper<>(ru.otus.spring.batch.jdbc.Comment.class));
+                        var comments = jdbcTemplate.query("select * from comment ", new BeanPropertyRowMapper<>(JdbcComment.class));
                         comments.forEach(System.out::println);
                     }
                 })
@@ -97,41 +98,41 @@ public class JobConfig {
                 .writer(bookWriter)
                 .listener(new ItemReadListener<>() {
                     public void beforeRead() {
-                        logger.info("Book: Начало чтения");
+                        logger.info("Book: Read-START");
                     }
 
                     public void afterRead(@NonNull MongoBook o) {
-                        logger.info("Book: Конец чтения");
+                        logger.info("Book: Read-END");
                     }
 
                     public void onReadError(@NonNull Exception e) {
-                        logger.info("Book: Ошибка чтения");
+                        logger.info("Book: Reading-ERROR");
                     }
                 })
                 .listener(new ItemWriteListener<>() {
                     public void beforeWrite(@NonNull List list) {
-                        logger.info("Book: Начало записи");
+                        logger.info("Book: Recording-START");
                     }
 
                     public void afterWrite(@NonNull List list) {
-                        logger.info("Book: Конец записи");
+                        logger.info("Book: Recording-END");
                     }
 
                     public void onWriteError(@NonNull Exception e, @NonNull List list) {
-                        logger.info("Ошибка записи");
+                        logger.info("Recording-ERROR");
                     }
                 })
                 .listener(new ChunkListener() {
                     public void beforeChunk(@NonNull ChunkContext chunkContext) {
-                        logger.info("Book: Начало пачки");
+                        logger.info("Book: Pack-START");
                     }
 
                     public void afterChunk(@NonNull ChunkContext chunkContext) {
-                        logger.info("Book: Конец пачки");
+                        logger.info("Book: Pack-END");
                     }
 
                     public void afterChunkError(@NonNull ChunkContext chunkContext) {
-                        logger.info("Book: Ошибка пачки");
+                        logger.info("Book: Pack-ERROR");
                     }
                 })
                 .build();
@@ -170,41 +171,41 @@ public class JobConfig {
                 .writer(commentWriter)
                 .listener(new ItemReadListener<>() {
                     public void beforeRead() {
-                        logger.info("Comment: Начало чтения");
+                        logger.info("Comment: Reading-START");
                     }
 
                     public void afterRead(@NonNull MongoComment o) {
-                        logger.info("Comment: Конец чтения");
+                        logger.info("Comment: Reading-END");
                     }
 
                     public void onReadError(@NonNull Exception e) {
-                        logger.info("Comment: Ошибка чтения");
+                        logger.info("Comment: Reading-ERROR");
                     }
                 })
                 .listener(new ItemWriteListener<>() {
                     public void beforeWrite(@NonNull List list) {
-                        logger.info("Comment: Начало записи");
+                        logger.info("Comment: Writing-START");
                     }
 
                     public void afterWrite(@NonNull List list) {
-                        logger.info("Comment: Конец записи");
+                        logger.info("Comment: Writing-END");
                     }
 
                     public void onWriteError(@NonNull Exception e, @NonNull List list) {
-                        logger.info("Comment: Ошибка записи");
+                        logger.info("Comment: Writing-ERROR");
                     }
                 })
                 .listener(new ChunkListener() {
                     public void beforeChunk(@NonNull ChunkContext chunkContext) {
-                        logger.info("Comment: Начало пачки");
+                        logger.info("Comment: Pack-START");
                     }
 
                     public void afterChunk(@NonNull ChunkContext chunkContext) {
-                        logger.info("Comment: Конец пачки");
+                        logger.info("Comment: Pack-END");
                     }
 
                     public void afterChunkError(@NonNull ChunkContext chunkContext) {
-                        logger.info("Comment: Ошибка пачки");
+                        logger.info("Comment: Pack_ERROR");
                     }
                 })
                 .build();
