@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>List of books</title>
+    <style type="text/css">
+        body {
+            padding: 50px;
+        }
+
+        .books {
+            border: 1px solid steelblue;
+            width: 300px;
+            border-collapse: collapse;
+        }
+
+        .books tr td, th {
+            padding: 5px;
+            border: 1px solid steelblue;
+        }
+
+        .books td:last-child, td:first-child {
+            width: 50px;
+        }
+
+        h3 {
+            background-image: url("../static/book.png");
+            background-repeat: no-repeat;
+            padding: 5px;
+            padding-left: 50px;
+        }
+
+    </style>
+
+    <style type="text/css" th:inline="text">
+        [[h3]] {
+            background-image: url([[@{/book.png}]]);
+            background-repeat: no-repeat;
+            padding: 5px;
+            padding-left: 50px;
+        }
+
+    </style>
+</head>
+<body>
+
+<h3 th:text="#{lang-switcher-header}">Select language</h3>
+<div>
+    <div><a href="#" th:href="@{/(lang=en)}" th:text="#{en-lang-switch-button-caption}">Language - EN</a></div>
+    <div><a href="#" th:href="@{/(lang=ru)}" th:text="#{ru-lang-switch-button-caption}">Language - RU</a></div>
+</div>
+
+<h3 th:text="#{table-header-books}">Books list:</h3>
+
+
+
+<table class="books">
+    <thead>
+    <tr>
+        <th th:text="#{table-header-id}">ID</th>
+        <th th:text="#{table-header-author}">Author</th>
+        <th th:text="#{table-header-genre}">Genre</th>
+        <th th:text="#{table-header-title}">Title</th>
+        <th th:text="#{table-header-notes-count}">Отзывов</th>
+        <th th:text="#{table-header-delete-action}">Action</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="bookDto : ${booksDto}">
+        <td th:text="${bookDto.id}">1</td>
+        <td th:text="${bookDto.author.name}">Джек Лондон</td>
+        <td th:text="${bookDto.genre.name}">Приключения</td>
+        <td>
+            <a th:href="@{/books/editBook(id=${bookDto.id})}" href="edit.html" th:text="${bookDto.title}">Одинокий волк</a>
+        </td>
+        <td>
+            <div th:if="${bookDto.notesCount > 0}">
+                <a href="bookNotes?bookId=1"
+                   th:href="@{/notes/bookNotes(bookId=${bookDto.id})}"
+                   th:text="${bookDto.notesCount}"> 108
+                </a>
+            </div>
+            <div th:if="${bookDto.notesCount == 0}">
+                <a href="bookNotes?bookId=100"
+                   th:href="@{/notes/editBookNote(noteId=0, bookId=${bookDto.id})}"
+                   th:text="new"> 108
+                </a>
+            </div>
+        </td>
+        <td>
+            <form th:action="@{/books/delete(id=${bookDto.id})}" th:method="post" action="books.html">
+                <button type="submit" onclick="return confirm('Are you sure you want to delete this book?');">Delete</button>
+            </form>
+        </td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>
