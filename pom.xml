@@ -38,6 +38,7 @@
         <module>25_Spring_ACL</module>
         <module>26_Spring_Batch</module>
         <module>29_Spring_Integration</module>
+        <module>30_Spring_Boot_Actuator</module>
     </modules>
 
 </project>
