@@ -18,3 +18,21 @@ spring:
     properties:
       hibernate:
         format_sql: false
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "health, logfile, metrics"
+  endpoint:
+    health:
+      show-details: always
+  health:
+    defaults:
+      enabled: true
+
+logging:
+  level:
+    root: info
+  file:
+    name: logs/app.log
