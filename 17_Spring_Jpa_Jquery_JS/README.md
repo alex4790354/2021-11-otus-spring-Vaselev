@@ -1,4 +1,6 @@
 # 2021-11-otus-spring-Vaselev
+doesn't work in Chrome, but working correctly in Explorer 
+
 Otus Spring Sandbox
 
 
